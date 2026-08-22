@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://2oskjl4j124s"]
+
+[ext_resource type="Texture2D" uid="uid://dleurslwjlqt0" path="res://Microgames/lluvia-de-notas/assets/sprites/knight.png" id="1_7uk5q"]
+[ext_resource type="Script" uid="uid://fnpc6g8t1744" path="res://Microgames/lluvia-de-notas/scripts/player_movement.gd" id="1_cc1bj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cc1bj"]
+atlas = ExtResource("1_7uk5q")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htic7"]
+atlas = ExtResource("1_7uk5q")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6ymp"]
+atlas = ExtResource("1_7uk5q")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iomsp"]
+atlas = ExtResource("1_7uk5q")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e2yoh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cc1bj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htic7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6ymp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iomsp")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xepy2"]
+radius = 5.0
+
+[node name="player" type="CharacterBody2D" unique_id=1823944776 groups=["player"]]
+script = ExtResource("1_cc1bj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=372009832]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_e2yoh")
+animation = &"idle"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.40550247
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=863605770]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_xepy2")

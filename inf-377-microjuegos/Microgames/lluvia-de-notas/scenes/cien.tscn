@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://c2mn3t63de22x"]
+
+[ext_resource type="Texture2D" uid="uid://c0y35slu0s558" path="res://Microgames/lluvia-de-notas/assets/sprites/fruit.png" id="1_7aslm"]
+[ext_resource type="Script" uid="uid://dirrso03ts3hr" path="res://Microgames/lluvia-de-notas/scripts/cien.gd" id="1_xfydj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0q5u0"]
+atlas = ExtResource("1_7aslm")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xfydj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0q5u0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7bhy1"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xfydj"]
+radius = 4.0
+
+[node name="cien" type="Node2D" unique_id=1670947645]
+script = ExtResource("1_xfydj")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=1774153046]
+mass = 0.013
+gravity_scale = 0.1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D" unique_id=867014171]
+position = Vector2(0, -3)
+sprite_frames = SubResource("SpriteFrames_xfydj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=425740184]
+shape = SubResource("CircleShape2D_7bhy1")
+
+[node name="Area2D" type="Area2D" parent="RigidBody2D" unique_id=674428953]
+collision_layer = 2
+
+[node name="collision" type="CollisionShape2D" parent="RigidBody2D/Area2D" unique_id=662508897]
+shape = SubResource("CircleShape2D_xfydj")
+debug_color = Color(1, 0.19215687, 0.8509804, 0.41960785)
+
+[connection signal="body_entered" from="RigidBody2D/Area2D" to="." method="_on_area_2d_body_entered"]
