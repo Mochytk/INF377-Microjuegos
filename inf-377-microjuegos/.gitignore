@@ -8,6 +8,10 @@ export.cfg
 export_credentials.cfg
 *.tmp
 
+Microgames/lluvia-de-notas/assets/fonts/
+Microgames/lluvia-de-notas/assets/music/
+Microgames/lluvia-de-notas/assets/sounds/
+
 # Imported translations (automatically generated from CSV files)
 *.translation
 

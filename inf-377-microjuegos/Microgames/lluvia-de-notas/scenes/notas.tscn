@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://7g3lka24sjbn"]
+
+[ext_resource type="Script" uid="uid://c1euwny0h3mkp" path="res://Microgames/lluvia-de-notas/scripts/spawn-notas.gd" id="1_psuot"]
+[ext_resource type="PackedScene" uid="uid://jlbrvcoe5ycl" path="res://Microgames/lluvia-de-notas/scenes/cero.tscn" id="2_l5flu"]
+[ext_resource type="PackedScene" uid="uid://c2mn3t63de22x" path="res://Microgames/lluvia-de-notas/scenes/cien.tscn" id="3_0q5u0"]
+
+[node name="notas" type="Node2D" unique_id=564376256]
+script = ExtResource("1_psuot")
+
+[node name="cero" parent="." unique_id=92391435 instance=ExtResource("2_l5flu")]
+position = Vector2(12.867575, 1.4482279)
+
+[node name="cien" parent="." unique_id=1670947645 instance=ExtResource("3_0q5u0")]
+
+[connection signal="colision_cero" from="cero" to="." method="_on_cero_colision_cero"]

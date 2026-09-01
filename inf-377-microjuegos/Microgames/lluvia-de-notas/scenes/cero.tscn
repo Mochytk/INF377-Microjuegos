@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://jlbrvcoe5ycl"]
+
+[ext_resource type="Script" uid="uid://c8bjln4g4q7aq" path="res://Microgames/lluvia-de-notas/scripts/cero.gd" id="1_vho2w"]
+[ext_resource type="Texture2D" uid="uid://c0y35slu0s558" path="res://Microgames/lluvia-de-notas/assets/sprites/fruit.png" id="1_yeblp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7djk"]
+atlas = ExtResource("1_yeblp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5flu"]
+atlas = ExtResource("1_yeblp")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vho2w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7djk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5flu")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lx1j3"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xepy2"]
+radius = 4.0
+
+[node name="cero" type="Node2D" unique_id=92391435]
+script = ExtResource("1_vho2w")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=2054159472]
+mass = 0.009
+gravity_scale = 0.1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D" unique_id=1366227434]
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_vho2w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=1176201470]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_lx1j3")
+
+[node name="Area2D" type="Area2D" parent="RigidBody2D" unique_id=1944378838]
+position = Vector2(-12, -2)
+collision_layer = 2
+
+[node name="collision" type="CollisionShape2D" parent="RigidBody2D/Area2D" unique_id=2092414695]
+position = Vector2(12, 3)
+shape = SubResource("CircleShape2D_xepy2")
+debug_color = Color(1, 0.19215687, 0.8509804, 0.41960785)
+
+[connection signal="body_entered" from="RigidBody2D" to="." method="_on_rigid_body_2d_body_entered"]
+[connection signal="body_entered" from="RigidBody2D/Area2D" to="." method="_on_area_2d_body_entered"]
