@@ -37,4 +37,5 @@ func spawn():
 
 func _on_cero_colision_cero() -> void:
 	valid = false
+	get_tree().change_scene_to_file("res://Microgames/lluvia-de-notas/scenes/game_over.tscn")
 	print("perdiste")

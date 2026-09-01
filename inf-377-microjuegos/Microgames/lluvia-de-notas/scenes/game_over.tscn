@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://08fgbci7ghia"]
+
+[ext_resource type="Texture2D" uid="uid://bii8uabs7o680" path="res://Microgames/lluvia-de-notas/assets/sprites/hoja-papel.jpg" id="1_wf7sd"]
+[ext_resource type="Texture2D" uid="uid://ykl56kx4uw55" path="res://Microgames/lluvia-de-notas/assets/sprites/mesa.png" id="2_x2ed6"]
+
+[node name="game-over" type="Node2D" unique_id=1590447958]
+
+[node name="papel2" type="Sprite2D" parent="." unique_id=945814569]
+z_index = -1
+position = Vector2(592.99994, 263.99994)
+scale = Vector2(3.0098612, 1.6739973)
+texture = ExtResource("1_wf7sd")
+
+[node name="Mesa" type="Sprite2D" parent="." unique_id=653430420]
+position = Vector2(595, 773.99994)
+scale = Vector2(1.7866664, 0.85254437)
+texture = ExtResource("2_x2ed6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1414673809]
+offset_left = 445.0
+offset_top = 218.0
+offset_right = 736.0
+offset_bottom = 298.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 50
+text = "GAME OVER"
