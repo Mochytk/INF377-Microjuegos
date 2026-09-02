@@ -1,3 +1,94 @@
 [gd_scene format=3 uid="uid://drjpup85pqric"]
 
-[node name="Core" type="Node2D" unique_id=967643892]
+[ext_resource type="Script" uid="uid://dwvnjtviw0hc" path="res://Core/core.gd" id="1_7wmpk"]
+[ext_resource type="Texture2D" uid="uid://diiwkbqft2t4w" path="res://Shared_Assets/png-transparent-simon-clone-game-modern-flat-escape-android-game-video-game-android-removebg-preview.png" id="2_1oq05"]
+[ext_resource type="Texture2D" uid="uid://cim7amyjk0sr1" path="res://Shared_Assets/lluvia_numeros.png" id="3_tjgqf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p1uti"]
+font_size = 80
+
+[node name="Core" type="Control" unique_id=309319848]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7wmpk")
+
+[node name="TransitionUI" type="ColorRect" parent="." unique_id=1857654034]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 15.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="InstructionLabel" type="Label" parent="TransitionUI" unique_id=1681848990]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.49
+anchor_bottom = 0.50100005
+offset_top = 1.0
+offset_right = 588.66
+offset_bottom = 325.33197
+grow_horizontal = 2
+grow_vertical = 2
+text = "MicroJuegos"
+label_settings = SubResource("LabelSettings_p1uti")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TransitionUI" unique_id=672621087]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = 7.0
+offset_right = -6.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IconSimon" type="TextureRect" parent="TransitionUI/HBoxContainer" unique_id=1387835927]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("2_1oq05")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="BordeRojo" type="ReferenceRect" parent="TransitionUI/HBoxContainer/IconSimon" unique_id=1164100601]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+border_width = 5.0
+editor_only = false
+
+[node name="IconLluvia" type="TextureRect" parent="TransitionUI/HBoxContainer" unique_id=213811936]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("3_tjgqf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BordeRojo" type="ReferenceRect" parent="TransitionUI/HBoxContainer/IconLluvia" unique_id=1430963069]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+border_width = 5.0
+editor_only = false

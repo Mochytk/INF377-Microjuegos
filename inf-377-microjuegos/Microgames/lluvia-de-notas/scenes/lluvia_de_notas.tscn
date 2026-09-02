@@ -7,15 +7,20 @@
 [sub_resource type="GDScript" id="GDScript_xo5yo"]
 script/source = "extends Node2D
 
+var game_ended: bool = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	# Tiempo límite de supervivencia al estilo WarioWare
+	await get_tree().create_timer(4.0).timeout
+	if not game_ended:
+		game_ended = true
+		get_parent().end_microgame(true)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+# Esta función la llamará el spawner si chocamos con un \"cero\"
+func game_over() -> void:
+	if not game_ended:
+		game_ended = true
+		get_parent().end_microgame(false)
 "
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8dto7"]

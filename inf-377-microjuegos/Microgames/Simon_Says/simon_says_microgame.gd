@@ -75,18 +75,10 @@ func _on_button_pressed(index: int) -> void:
 
 func win_game() -> void:
 	is_player_turn = false
-	print("¡GANASTE!")
+	# get_parent() llama al Core y ejecuta su función
+	get_parent().end_microgame(true) 
 
 func lose_game() -> void:
 	is_player_turn = false
-	game_over_ui.show()
-	
-	# Animación del corazón parpadeando (cambiando su opacidad/color)
-	for i in range(3):
-		heart_icon.modulate = Color(1, 1, 1, 0) # Invisible
-		await get_tree().create_timer(0.2).timeout
-		heart_icon.modulate = Color(1, 1, 1, 1) # Visible
-		await get_tree().create_timer(0.2).timeout
-		
-	# Corazón vacío (oscurecido o puedes cambiar la textura aquí)
-	heart_icon.modulate = Color(0.2, 0.2, 0.2, 1)
+	# get_parent() llama al Core y ejecuta su función
+	get_parent().end_microgame(false)
