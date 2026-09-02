@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://2oskjl4j124s" path="res://Microgames/lluvia-de-notas/scenes/player.tscn" id="1_jq66b"]
 [ext_resource type="PackedScene" uid="uid://7g3lka24sjbn" path="res://Microgames/lluvia-de-notas/scenes/notas.tscn" id="1_xo5yo"]
 [ext_resource type="Texture2D" uid="uid://cqmkcaki4yw5" path="res://Microgames/lluvia-de-notas/assets/sprites/world_tileset.png" id="2_1n2t3"]
+[ext_resource type="Texture2D" uid="uid://bii8uabs7o680" path="res://Microgames/lluvia-de-notas/assets/sprites/hoja-papel.jpg" id="4_qfr8d"]
+[ext_resource type="Texture2D" uid="uid://ykl56kx4uw55" path="res://Microgames/lluvia-de-notas/assets/sprites/mesa.png" id="5_fudlk"]
 
 [sub_resource type="GDScript" id="GDScript_xo5yo"]
 script/source = "extends Node2D
@@ -184,3 +186,14 @@ position = Vector2(0, -1)
 tile_set = SubResource("TileSet_qc24j")
 format = 2
 layer_0/tile_data = PackedInt32Array(196598, 1, 0, 196599, 1, 0, 196600, 1, 0, 196601, 1, 0, 196602, 1, 0, 196603, 1, 0, 196604, 1, 0, 196605, 1, 0, 196606, 1, 0, 196607, 1, 0, 131072, 1, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 131079, 1, 0, 131080, 1, 0, 131081, 1, 0)
+
+[node name="papel" type="Sprite2D" parent="." unique_id=296037800]
+z_index = -1
+position = Vector2(-4.5000153, -1)
+scale = Vector2(0.7837838, 0.575)
+texture = ExtResource("4_qfr8d")
+
+[node name="Mesa" type="Sprite2D" parent="." unique_id=519279742]
+position = Vector2(5.0000005, 217.00002)
+scale = Vector2(0.51, 0.51)
+texture = ExtResource("5_fudlk")

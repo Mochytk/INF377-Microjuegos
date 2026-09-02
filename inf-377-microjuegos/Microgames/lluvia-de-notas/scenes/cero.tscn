@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c8bjln4g4q7aq" path="res://Microgames/lluvia-de-notas/scripts/cero.gd" id="1_vho2w"]
 [ext_resource type="Texture2D" uid="uid://c0y35slu0s558" path="res://Microgames/lluvia-de-notas/assets/sprites/fruit.png" id="1_yeblp"]
+[ext_resource type="Texture2D" uid="uid://blopdbvjsk7fy" path="res://Microgames/lluvia-de-notas/assets/sprites/pixil-frame-0.png" id="2_lx1j3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h7djk"]
 atlas = ExtResource("1_yeblp")
@@ -11,6 +12,10 @@ region = Rect2(0, 0, 16, 16)
 atlas = ExtResource("1_yeblp")
 region = Rect2(0, 32, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vuctl"]
+atlas = ExtResource("2_lx1j3")
+region = Rect2(0, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_vho2w"]
 animations = [{
 "frames": [{
@@ -19,6 +24,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l5flu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vuctl")
 }],
 "loop": 1,
 "name": &"default",
@@ -26,10 +34,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lx1j3"]
-radius = 4.0
+radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xepy2"]
-radius = 4.0
+radius = 7.0
 
 [node name="cero" type="Node2D" unique_id=92391435]
 script = ExtResource("1_vho2w")
@@ -38,8 +46,13 @@ script = ExtResource("1_vho2w")
 mass = 0.009
 gravity_scale = 0.1
 
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" unique_id=842579231]
+position = Vector2(0, 2)
+texture = ExtResource("2_lx1j3")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D" unique_id=1366227434]
-position = Vector2(0, -2)
+visible = false
+position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_vho2w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=1176201470]
