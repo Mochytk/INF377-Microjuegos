@@ -12,6 +12,7 @@ config_version=5
 
 config/name="INF377-Microjuegos"
 run/main_scene="uid://dp1pybakcmlfh"
+run/main_scene="uid://drjpup85pqric"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
