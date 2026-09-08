@@ -17,23 +17,26 @@ func _process(delta: float) -> void:
 func win_game():
 	if game_finished:
 		return
-	
 	game_finished = true
 	$Timer.stop()
-	
 	$CharacterBody2D.show_win_sprite()
-	
 	print("Ganaste!")
 	
+	# Pausa breve para ver la animación, luego avisar al Core
+	await get_tree().create_timer(1.0).timeout
+	get_parent().end_microgame(true)
+
 func lose_game():
 	if game_finished:
 		return
 	game_finished = true
 	$Timer.stop()
-	
 	$CharacterBody2D.show_lose_sprite()
-	
 	print("Perdiste")
+	
+	# Pausa breve para ver la animación, luego avisar al Core
+	await get_tree().create_timer(1.0).timeout
+	get_parent().end_microgame(false)
 
 
 func _on_timer_timeout() -> void:

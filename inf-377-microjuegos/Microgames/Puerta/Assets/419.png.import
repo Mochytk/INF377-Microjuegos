@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ciwsh5kfm7la"
-path="res://.godot/imported/419.png-b7c1b4673d56c61e28aec7034b07502c.ctex"
+path="res://.godot/imported/419.png-3113b1002f16c627cc81483c4de365ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/419.png"
-dest_files=["res://.godot/imported/419.png-b7c1b4673d56c61e28aec7034b07502c.ctex"]
+source_file="res://Microgames/Puerta/Assets/419.png"
+dest_files=["res://.godot/imported/419.png-3113b1002f16c627cc81483c4de365ee.ctex"]
 
 [params]
 

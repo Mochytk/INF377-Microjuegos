@@ -2,13 +2,15 @@ extends Control
 
 @onready var transition_ui = $TransitionUI
 @onready var instruction_label = $TransitionUI/InstructionLabel
-# Asigna aquí las rutas correctas a tus nodos ReferenceRect en el editor
+# Rutas a los tres bordes de la ruleta
 @onready var border_simon = $TransitionUI/HBoxContainer/IconSimon/BordeRojo
 @onready var border_lluvia = $TransitionUI/HBoxContainer/IconLluvia/BordeRojo
+@onready var border_puerta = $TransitionUI/HBoxContainer/IconPuerta/BordeRojo
 
 var microgames: Array[String] = [
 	"res://Microgames/Simon_Says/simon_says_microgame.tscn",
-    "res://Microgames/lluvia-de-notas/scenes/lluvia_de_notas.tscn"
+	"res://Microgames/lluvia-de-notas/scenes/lluvia_de_notas.tscn",
+    "res://Microgames/Puerta/Microgame_02.tscn"
 ]
 
 var score: int = 0
@@ -22,7 +24,7 @@ func start_roulette() -> void:
 	transition_ui.show()
 	instruction_label.text = "Micro Juegos"
 	
-	var borders = [border_simon, border_lluvia]
+	var borders = [border_simon, border_lluvia, border_puerta]
 	# El número de saltos ahora es aleatorio (entre 5 y 15 veces)
 	var loops = randi_range(5, 15) 
 	var delay = 0.15 
