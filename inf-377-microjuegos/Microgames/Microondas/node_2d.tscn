@@ -1,0 +1,205 @@
+[gd_scene format=3 uid="uid://bljxf24iu2e64"]
+
+[ext_resource type="Script" uid="uid://bxu0g04cqbkae" path="res://secuencia_boton.gd" id="1_0hol4"]
+[ext_resource type="Texture2D" uid="uid://vwvtk474vpg2" path="res://assets/up.png" id="2_q6r6c"]
+[ext_resource type="Script" uid="uid://chcyedj65sx0m" path="res://character_body_2d.gd" id="3_kdubu"]
+[ext_resource type="Texture2D" uid="uid://dxcit6pnx24nt" path="res://assets/Unarmed_Idle_with_shadow.png" id="4_d21ai"]
+[ext_resource type="Texture2D" uid="uid://bilbhos1rdiap" path="res://assets/Wallfloordoorw First Spritesheet 1.png" id="4_rj586"]
+[ext_resource type="Texture2D" uid="uid://cwl0icl8p43h8" path="res://assets/Cafeteria First Spritesheet 1.png" id="5_4d7sh"]
+[ext_resource type="Texture2D" uid="uid://c436l4n2dvyl6" path="res://assets/Cafeteria Second Spritesheet 1.png" id="6_ir8iy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbtoy"]
+bg_color = Color(0.2665752, 0.26657522, 0.26657507, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_no7n2"]
+atlas = ExtResource("4_rj586")
+region = Rect2(452, 53, 252, 155)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jc1g"]
+atlas = ExtResource("4_rj586")
+region = Rect2(411, 733, 252, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghvu2"]
+atlas = ExtResource("5_4d7sh")
+region = Rect2(38, 80, 349, 196)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pj8ja"]
+atlas = ExtResource("6_ir8iy")
+region = Rect2(34, 102, 119, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7gp8v"]
+atlas = ExtResource("4_d21ai")
+region = Rect2(88, 150, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kl58s"]
+atlas = ExtResource("4_d21ai")
+region = Rect2(344, 150, 15, 25)
+
+[node name="Node2D" type="Node2D" unique_id=284379815]
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1641071423]
+top_level = true
+script = ExtResource("3_kdubu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=214445701]
+
+[node name="SecuenciaBoton" type="CanvasLayer" parent="." unique_id=419305749]
+layer = 3
+script = ExtResource("1_0hol4")
+
+[node name="PanelContainer" type="PanelContainer" parent="SecuenciaBoton" unique_id=40610783]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 78.0
+offset_top = 185.0
+offset_right = 558.0
+offset_bottom = 305.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xbtoy")
+
+[node name="MarginContainer" type="MarginContainer" parent="SecuenciaBoton/PanelContainer" unique_id=201343106]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="buttonBox" type="HBoxContainer" parent="SecuenciaBoton/PanelContainer/MarginContainer" unique_id=1422918157]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="SecuenciaBoton/PanelContainer/MarginContainer/buttonBox" unique_id=2044108795]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+texture = ExtResource("2_q6r6c")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="SecuenciaBoton/PanelContainer/MarginContainer/buttonBox" unique_id=275059911]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+texture = ExtResource("2_q6r6c")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="SecuenciaBoton/PanelContainer/MarginContainer/buttonBox" unique_id=655537325]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+texture = ExtResource("2_q6r6c")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="SecuenciaBoton/PanelContainer/MarginContainer/buttonBox" unique_id=1599334899]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+texture = ExtResource("2_q6r6c")
+expand_mode = 1
+
+[node name="TextureRect5" type="TextureRect" parent="SecuenciaBoton/PanelContainer/MarginContainer/buttonBox" unique_id=696324576]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+texture = ExtResource("2_q6r6c")
+expand_mode = 1
+
+[node name="timeLabel" type="Label" parent="SecuenciaBoton" unique_id=1791665970]
+unique_name_in_owner = true
+offset_left = 1000.0
+offset_top = 417.0
+offset_right = 1080.0
+offset_bottom = 513.0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 70
+text = "10"
+
+[node name="successLabel" type="Label" parent="SecuenciaBoton" unique_id=1685437903]
+unique_name_in_owner = true
+offset_left = 703.0
+offset_top = 331.0
+offset_right = 907.0
+offset_bottom = 468.0
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/font_size = 100
+text = "FAIL"
+
+[node name="Timer" type="Timer" parent="SecuenciaBoton" unique_id=1899331421]
+unique_name_in_owner = true
+process_mode = 3
+wait_time = 5.0
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1451371750]
+
+[node name="piso" type="Sprite2D" parent="CanvasLayer" unique_id=591291659]
+z_index = -5
+texture_filter = 1
+position = Vector2(584, 429)
+scale = Vector2(4.6130953, 2.8145158)
+texture = SubResource("AtlasTexture_no7n2")
+
+[node name="pared" type="Sprite2D" parent="CanvasLayer" unique_id=117959272]
+texture_filter = 1
+position = Vector2(583, -51.000004)
+scale = Vector2(4.589286, 2.540476)
+texture = SubResource("AtlasTexture_5jc1g")
+
+[node name="mesa" type="Sprite2D" parent="CanvasLayer" unique_id=530331447]
+texture_filter = 1
+position = Vector2(912, 195)
+scale = Vector2(1.2077364, 1.3367347)
+texture = SubResource("AtlasTexture_ghvu2")
+
+[node name="microondas" type="Sprite2D" parent="CanvasLayer" unique_id=1849292983]
+texture_filter = 1
+position = Vector2(915.99994, 65.00001)
+scale = Vector2(1.4579831, 1.5545454)
+texture = SubResource("AtlasTexture_pj8ja")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1245005840]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer2" unique_id=830582722]
+texture_filter = 1
+position = Vector2(397.00003, 245.00003)
+scale = Vector2(8.966666, 7.1)
+texture = SubResource("AtlasTexture_7gp8v")
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasLayer2" unique_id=363007957]
+texture_filter = 1
+position = Vector2(320.00003, 350.00003)
+scale = Vector2(8.966666, 7.1)
+texture = SubResource("AtlasTexture_7gp8v")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer2" unique_id=1739396063]
+texture_filter = 1
+position = Vector2(496, 323.00003)
+scale = Vector2(8.966666, 7.1)
+texture = SubResource("AtlasTexture_7gp8v")
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasLayer2" unique_id=770057804]
+texture_filter = 1
+position = Vector2(616, 245)
+scale = Vector2(8.966666, 7.1)
+texture = SubResource("AtlasTexture_7gp8v")
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasLayer2" unique_id=497379773]
+texture_filter = 1
+position = Vector2(750, 314.99997)
+scale = Vector2(8.966666, 7.1)
+texture = SubResource("AtlasTexture_7gp8v")
+
+[node name="Sprite2D6" type="Sprite2D" parent="CanvasLayer2" unique_id=650207994]
+texture_filter = 1
+position = Vector2(112, 291)
+scale = Vector2(8.766666, 7.38)
+texture = SubResource("AtlasTexture_kl58s")
+
+[connection signal="timeout" from="SecuenciaBoton/Timer" to="SecuenciaBoton" method="_on_timer_timeout"]
