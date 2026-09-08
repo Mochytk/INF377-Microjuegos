@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://bbrgsf20lbpwb"]
+
+[ext_resource type="Script" uid="uid://bxle8qhmg5hfo" path="res://character_body_2d.gd" id="1_7h2oo"]
+[ext_resource type="Texture2D" uid="uid://cunccjwm8yas" path="res://Assets/Dor_sprite.jpg" id="1_fiy6g"]
+[ext_resource type="Script" uid="uid://dwh8p7c2ax0fs" path="res://main.gd" id="1_ry0by"]
+[ext_resource type="Texture2D" uid="uid://brhraxyjpo3uv" path="res://Assets/None.png" id="2_k3nym"]
+[ext_resource type="Script" uid="uid://lb82josdkt17" path="res://door_detector.gd" id="3_mj8py"]
+[ext_resource type="Script" uid="uid://bobjxekhf4fx" path="res://door.gd" id="4_fiy6g"]
+[ext_resource type="Texture2D" uid="uid://cmqch6pqsma11" path="res://Assets/Floatzel_win.png" id="5_pk4h7"]
+[ext_resource type="Texture2D" uid="uid://ddwssrloediol" path="res://Assets/Floatzel.png" id="5_ry0by"]
+[ext_resource type="Texture2D" uid="uid://b1773f7pg2kyu" path="res://Assets/Floatzel_lose.png" id="6_k3nym"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_drsw1"]
+size = Vector2(392, 665)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8upip"]
+size = Vector2(177, 401.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ry0by"]
+font_size = 50
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Node2D" unique_id=1802160437]
+position = Vector2(-3, 458)
+script = ExtResource("1_ry0by")
+
+[node name="None" type="Sprite2D" parent="." unique_id=240651173]
+position = Vector2(-18, -362.00003)
+rotation = 3.1415927
+scale = Vector2(1.8816041, -1.2686907)
+texture = ExtResource("2_k3nym")
+
+[node name="None2" type="Sprite2D" parent="." unique_id=1798155364]
+position = Vector2(8286, -362.00003)
+rotation = 3.1415927
+scale = Vector2(1.8816041, -1.2686907)
+texture = ExtResource("2_k3nym")
+
+[node name="Door1" type="Area2D" parent="." unique_id=83298512 groups=["doors"]]
+script = ExtResource("4_fiy6g")
+
+[node name="Sprite2D" type="Sprite2D" parent="Door1" unique_id=1048142121]
+position = Vector2(1036, -372)
+scale = Vector2(1.305, 1.305)
+texture = ExtResource("1_fiy6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door1" unique_id=914195670]
+position = Vector2(1239, -50.5)
+shape = SubResource("RectangleShape2D_drsw1")
+
+[node name="Door2" type="Area2D" parent="." unique_id=2047162269 groups=["doors"]]
+position = Vector2(1174, 0)
+script = ExtResource("4_fiy6g")
+door_number = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Door2" unique_id=1368639785]
+position = Vector2(1036, -372)
+scale = Vector2(1.305, 1.305)
+texture = ExtResource("1_fiy6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door2" unique_id=994598137]
+position = Vector2(1239, -50.5)
+shape = SubResource("RectangleShape2D_drsw1")
+
+[node name="Door3" type="Area2D" parent="." unique_id=1085169966 groups=["doors"]]
+position = Vector2(2348, 0)
+script = ExtResource("4_fiy6g")
+door_number = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Door3" unique_id=2011647240]
+position = Vector2(1036, -372)
+scale = Vector2(1.305, 1.305)
+texture = ExtResource("1_fiy6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door3" unique_id=317871768]
+position = Vector2(1239, -50.5)
+shape = SubResource("RectangleShape2D_drsw1")
+
+[node name="Door4" type="Area2D" parent="." unique_id=696602472 groups=["doors"]]
+position = Vector2(3521, 0)
+script = ExtResource("4_fiy6g")
+door_number = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Door4" unique_id=308349900]
+position = Vector2(1036, -372)
+scale = Vector2(1.305, 1.305)
+texture = ExtResource("1_fiy6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door4" unique_id=1304591342]
+position = Vector2(1239, -50.5)
+shape = SubResource("RectangleShape2D_drsw1")
+
+[node name="Door5" type="Area2D" parent="." unique_id=1409870535 groups=["doors"]]
+position = Vector2(4694, 0)
+script = ExtResource("4_fiy6g")
+door_number = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Door5" unique_id=1985223915]
+position = Vector2(1036, -372)
+scale = Vector2(1.305, 1.305)
+texture = ExtResource("1_fiy6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door5" unique_id=792434500]
+position = Vector2(1239, -50.5)
+shape = SubResource("RectangleShape2D_drsw1")
+
+[node name="Door6" type="Area2D" parent="." unique_id=1102489651 groups=["doors"]]
+position = Vector2(5862, 0)
+script = ExtResource("4_fiy6g")
+door_number = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="Door6" unique_id=1789618421]
+position = Vector2(1036, -372)
+scale = Vector2(1.305, 1.305)
+texture = ExtResource("1_fiy6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door6" unique_id=2078098352]
+position = Vector2(1239, -50.5)
+shape = SubResource("RectangleShape2D_drsw1")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1547412674]
+position = Vector2(-699, -27)
+script = ExtResource("1_7h2oo")
+win_sprite = ExtResource("5_pk4h7")
+lose_sprite = ExtResource("6_k3nym")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1989809635]
+position = Vector2(0, 29)
+texture = ExtResource("5_ry0by")
+
+[node name="DoorDetector" type="Area2D" parent="CharacterBody2D" unique_id=289202822]
+script = ExtResource("3_mj8py")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/DoorDetector" unique_id=1128410997]
+position = Vector2(120.5, -14.75)
+shape = SubResource("RectangleShape2D_8upip")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=844563407]
+position = Vector2(786, -314)
+scale = Vector2(0.1717208, 0.24280806)
+zoom = Vector2(0.61, 0.61)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1916587891]
+
+[node name="InstructionLabel" type="Label" parent="UI" unique_id=760695798]
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_ry0by")
+
+[node name="Timer" type="Timer" parent="." unique_id=1877439277]
+wait_time = 8.0
+one_shot = true
+
+[connection signal="area_entered" from="CharacterBody2D/DoorDetector" to="CharacterBody2D/DoorDetector" method="_on_area_entered"]
+[connection signal="area_exited" from="CharacterBody2D/DoorDetector" to="CharacterBody2D/DoorDetector" method="_on_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
