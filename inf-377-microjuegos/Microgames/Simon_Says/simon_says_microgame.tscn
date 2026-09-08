@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://bm44488j8uxuv"]
+
+[ext_resource type="Script" uid="uid://clapu3s4ph3am" path="res://Microgames/Simon_Says/simon_says_microgame.gd" id="1_qn4h8"]
+
+[sub_resource type="Environment" id="Environment_p1uti"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 1.54
+glow_bloom = 0.11
+
+[node name="SimonSaysMicrogame" type="Control" unique_id=900250134]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qn4h8")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=942863412]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 29.05)
+columns = 3
+
+[node name="Boton 1" type="Button" parent="GridContainer" unique_id=1551624183]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Boton 2" type="Button" parent="GridContainer" unique_id=1298149697]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Boton 3" type="Button" parent="GridContainer" unique_id=116316766]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Boton 4" type="Button" parent="GridContainer" unique_id=2012670993]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Boton 5" type="Button" parent="GridContainer" unique_id=2034060818]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Boton 6" type="Button" parent="GridContainer" unique_id=529227110]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Boton 7" type="Button" parent="GridContainer" unique_id=1402597637]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Boton 8" type="Button" parent="GridContainer" unique_id=980379561]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Boton 9" type="Button" parent="GridContainer" unique_id=879108239]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=339634108]
+environment = SubResource("Environment_p1uti")
+
+[node name="GameOverUI" type="Control" parent="." unique_id=1403461262]
+visible = false
+anchors_preset = 0
+offset_right = 1154.0
+offset_bottom = 641.0
+
+[node name="GameOver" type="TextureRect" parent="GameOverUI" unique_id=1685103798]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HeartIcon" type="TextureRect" parent="GameOverUI" unique_id=1782577528]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1747353785]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 27.0
+grow_horizontal = 2
+show_percentage = false
