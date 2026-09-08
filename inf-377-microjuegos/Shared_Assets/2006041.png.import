@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwl0icl8p43h8"
-path="res://.godot/imported/Cafeteria First Spritesheet 1.png-8f91ae4399e01fa5e85ed0618012d483.ctex"
+uid="uid://d0ngubotgugdu"
+path="res://.godot/imported/2006041.png-5570462dcec46a53a08165df6b75d083.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Microgames/Microondas/assets/Cafeteria First Spritesheet 1.png"
-dest_files=["res://.godot/imported/Cafeteria First Spritesheet 1.png-8f91ae4399e01fa5e85ed0618012d483.ctex"]
+source_file="res://Shared_Assets/2006041.png"
+dest_files=["res://.godot/imported/2006041.png-5570462dcec46a53a08165df6b75d083.ctex"]
 
 [params]
 

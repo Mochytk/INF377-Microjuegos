@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d3hci7cy3hw87"
-path="res://.godot/imported/right.png-58eb2791d49b1886c746c33e7d808c7a.ctex"
+path="res://.godot/imported/right.png-fef6713eea213c3cf973fd7c0d63f7d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/right.png"
-dest_files=["res://.godot/imported/right.png-58eb2791d49b1886c746c33e7d808c7a.ctex"]
+source_file="res://Microgames/Microondas/assets/right.png"
+dest_files=["res://.godot/imported/right.png-fef6713eea213c3cf973fd7c0d63f7d2.ctex"]
 
 [params]
 

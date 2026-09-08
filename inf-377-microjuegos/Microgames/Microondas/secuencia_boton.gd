@@ -6,10 +6,10 @@ extends CanvasLayer
 @onready var timer: Timer = %Timer
 
 var ButtonSelection = [
-	{"action": "ui_down", "icon": preload("res://assets/down.png")},
-	{"action": "ui_left", "icon": preload("res://assets/left.png")},
-	{"action": "ui_right", "icon": preload("res://assets/right.png")},
-	{"action": "ui_up", "icon": preload("res://assets/up.png")},
+	{"action": "ui_down", "icon": preload("res://Microgames/Microondas/assets/down.png")},
+	{"action": "ui_left", "icon": preload("res://Microgames/Microondas/assets/left.png")},
+	{"action": "ui_right", "icon": preload("res://Microgames/Microondas/assets/right.png")},
+	{"action": "ui_up", "icon": preload("res://Microgames/Microondas/assets/up.png")},
 ]
 
 var ActionSequence = []
@@ -56,13 +56,15 @@ func _reset_all() -> void:
 signal finished(success: bool)
 
 func _on_timer_timeout() -> void:
-	var success = timer.time_left
-	
+	var success = timer.time_left > 0
 	_update_success_label(success)
-	
 	get_tree().paused = false
 	
-	finished.emit(success)
+	# Pausa para que el jugador alcance a ver el mensaje de EXITO o FAIL
+	await get_tree().create_timer(1.0).timeout
+	
+	# Notificamos al Core. get_parent() es Node2D, el siguiente es Core.
+	get_parent().get_parent().end_microgame(success)
 
 func _update_success_label(success: bool) -> void:
 	successLabel.show()

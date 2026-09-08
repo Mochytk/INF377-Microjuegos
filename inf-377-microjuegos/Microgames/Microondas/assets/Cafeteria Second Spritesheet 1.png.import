@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c436l4n2dvyl6"
-path="res://.godot/imported/Cafeteria Second Spritesheet 1.png-02620b2622cf53b0aa2260125a3cf04d.ctex"
+path="res://.godot/imported/Cafeteria Second Spritesheet 1.png-af92c6b2b039767ec2be71a204c34dbf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Cafeteria Second Spritesheet 1.png"
-dest_files=["res://.godot/imported/Cafeteria Second Spritesheet 1.png-02620b2622cf53b0aa2260125a3cf04d.ctex"]
+source_file="res://Microgames/Microondas/assets/Cafeteria Second Spritesheet 1.png"
+dest_files=["res://.godot/imported/Cafeteria Second Spritesheet 1.png-af92c6b2b039767ec2be71a204c34dbf.ctex"]
 
 [params]
 
