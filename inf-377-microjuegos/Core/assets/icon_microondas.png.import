@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0ngubotgugdu"
-path="res://.godot/imported/2006041.png-5570462dcec46a53a08165df6b75d083.ctex"
+path="res://.godot/imported/icon_microondas.png-1c8b1195629f090fe9dd52b26918cefb.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Core/assets/icon_microondas.png"
-dest_files=["res://.godot/imported/2006041.png-5570462dcec46a53a08165df6b75d083.ctex"]
+dest_files=["res://.godot/imported/icon_microondas.png-1c8b1195629f090fe9dd52b26918cefb.ctex"]
 
 [params]
 

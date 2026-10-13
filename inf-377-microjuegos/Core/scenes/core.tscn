@@ -9,6 +9,18 @@
 [sub_resource type="LabelSettings" id="LabelSettings_p1uti"]
 font_size = 80
 
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font_size = 110
+font_color = Color(1, 0.85, 0.2, 1)
+outline_size = 10
+outline_color = Color(0.7, 0.1, 0.1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_head"]
+font_size = 56
+
+[sub_resource type="LabelSettings" id="LabelSettings_body"]
+font_size = 30
+
 [node name="Core" type="Control" unique_id=309319848]
 layout_mode = 3
 anchors_preset = 15
@@ -40,7 +52,7 @@ offset_right = 588.66
 offset_bottom = 325.33197
 grow_horizontal = 2
 grow_vertical = 2
-text = "MicroJuegos"
+text = "ReMechón!"
 label_settings = SubResource("LabelSettings_p1uti")
 horizontal_alignment = 1
 
@@ -133,3 +145,200 @@ grow_horizontal = 2
 grow_vertical = 2
 border_width = 5.0
 editor_only = false
+
+[node name="StatsLabel" type="Label" parent="TransitionUI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -90.0
+offset_right = 400.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+text = ""
+label_settings = SubResource("LabelSettings_body")
+horizontal_alignment = 1
+
+[node name="LandingUI" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.05, 0.12, 1)
+
+[node name="Center" type="CenterContainer" parent="LandingUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="LandingUI/Center"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Titulo" type="Label" parent="LandingUI/Center/VBox"]
+layout_mode = 2
+text = "ReMechón!"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+
+[node name="BtnJugar" type="Button" parent="LandingUI/Center/VBox"]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Jugar"
+
+[node name="BtnTabla" type="Button" parent="LandingUI/Center/VBox"]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Tabla"
+
+[node name="BtnCreditos" type="Button" parent="LandingUI/Center/VBox"]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Créditos"
+
+[node name="TablaUI" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.05, 0.12, 1)
+
+[node name="Center" type="CenterContainer" parent="TablaUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="TablaUI/Center"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Titulo" type="Label" parent="TablaUI/Center/VBox"]
+layout_mode = 2
+text = "Tabla de posiciones"
+label_settings = SubResource("LabelSettings_head")
+horizontal_alignment = 1
+
+[node name="ScoresLabel" type="Label" parent="TablaUI/Center/VBox"]
+layout_mode = 2
+text = ""
+label_settings = SubResource("LabelSettings_body")
+horizontal_alignment = 1
+
+[node name="BtnVolver" type="Button" parent="TablaUI/Center/VBox"]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Volver"
+
+[node name="CreditosUI" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.05, 0.12, 1)
+
+[node name="Center" type="CenterContainer" parent="CreditosUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="CreditosUI/Center"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Titulo" type="Label" parent="CreditosUI/Center/VBox"]
+layout_mode = 2
+text = "Créditos"
+label_settings = SubResource("LabelSettings_head")
+horizontal_alignment = 1
+
+[node name="Texto" type="Label" parent="CreditosUI/Center/VBox"]
+layout_mode = 2
+text = "ReMechón!\nINF377 - Microjuegos\n\nEquipo de desarrollo:\n(agrega aquí los nombres)"
+label_settings = SubResource("LabelSettings_body")
+horizontal_alignment = 1
+
+[node name="BtnVolver" type="Button" parent="CreditosUI/Center/VBox"]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Volver"
+
+[node name="GameOverUI" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.05, 0.12, 1)
+
+[node name="Center" type="CenterContainer" parent="GameOverUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="GameOverUI/Center"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Titulo" type="Label" parent="GameOverUI/Center/VBox"]
+layout_mode = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+
+[node name="LabelPuntaje" type="Label" parent="GameOverUI/Center/VBox"]
+layout_mode = 2
+text = "Puntaje: 0"
+label_settings = SubResource("LabelSettings_head")
+horizontal_alignment = 1
+
+[node name="Pregunta" type="Label" parent="GameOverUI/Center/VBox"]
+layout_mode = 2
+text = "Ingresa tus 3 iniciales"
+label_settings = SubResource("LabelSettings_body")
+horizontal_alignment = 1
+
+[node name="Iniciales" type="LineEdit" parent="GameOverUI/Center/VBox"]
+custom_minimum_size = Vector2(320, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+placeholder_text = "AAA"
+alignment = 1
+max_length = 3
+
+[node name="BtnGuardar" type="Button" parent="GameOverUI/Center/VBox"]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Guardar"
