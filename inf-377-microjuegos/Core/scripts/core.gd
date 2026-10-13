@@ -25,9 +25,25 @@ const MIN_PERFORMANCE := 0.25
 
 @onready var carrusel = $TransitionUI/Carrusel
 @onready var nombre_label = $TransitionUI/NombreLabel
+@onready var controles = $TransitionUI/Controles
+@onready var controles_iconos = $TransitionUI/Controles/Iconos
+@onready var controles_texto = $TransitionUI/Controles/Texto
+
+const ICON_MOUSE := preload("res://Core/assets/controles/mouse.png")
+const ICON_IZQ := preload("res://Core/assets/controles/flecha_left.png")
+const ICON_DER := preload("res://Core/assets/controles/flecha_right.png")
+const ICON_ARR := preload("res://Core/assets/controles/flecha_up.png")
+const ICON_ABA := preload("res://Core/assets/controles/flecha_down.png")
 
 # Orden igual al de los iconos del carrusel.
 var game_names: Array[String] = ["Simon Dice", "Puerta", "Lluvia de Notas", "Microondas"]
+# Controles de cada juego (mismo orden): iconos y texto que se muestran en "¡PREPÁRATE!".
+var game_controls: Array[Dictionary] = [
+	{"icons": [ICON_MOUSE], "text": "Haz clic en los botones con el mouse"},
+	{"icons": [ICON_MOUSE], "text": "Haz clic con el mouse para entrar a la puerta"},
+	{"icons": [ICON_IZQ, ICON_DER], "text": "Muévete con las flechas (Espacio salta)"},
+	{"icons": [ICON_ARR, ICON_ABA, ICON_IZQ, ICON_DER], "text": "Presiona las flechas del teclado"},
+]
 var microgames: Array[String] = [
 	"res://Microgames/simon_says/scenes/simon_says.tscn",
 	"res://Microgames/puerta/scenes/puerta.tscn",
@@ -93,6 +109,8 @@ func start_roulette() -> void:
 	instruction_label.text = "ReMechón!"
 	stats_label.text = "Vidas: %d     Puntaje: %s (+%s)     Nivel: %s" % [lives, _fmt(score), _fmt(last_points), _fmt(difficulty)]
 	nombre_label.text = ""
+	controles.hide()
+	carrusel.show()
 
 	# Se elige el juego de la bolsa y el carrusel gira frenando hasta caer en él.
 	var target: int = pending_games.pop_back()
@@ -100,11 +118,29 @@ func start_roulette() -> void:
 	nombre_label.text = game_names[target]
 
 	instruction_label.text = "¡PREPÁRATE!"
-	await get_tree().create_timer(0.8).timeout
+	_show_controls(target)
+	await get_tree().create_timer(1.8).timeout
+	controles.hide()
+	carrusel.show()
 
 	transition_ui.hide()
 	current_game_instance = load(microgames[target]).instantiate()
 	add_child(current_game_instance)
+
+# Reemplaza el carrusel por los iconos de los controles del juego elegido.
+func _show_controls(game: int) -> void:
+	for child in controles_iconos.get_children():
+		child.queue_free()
+	for tex in game_controls[game]["icons"]:
+		var rect := TextureRect.new()
+		rect.texture = tex
+		rect.custom_minimum_size = Vector2(130, 130)
+		rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		controles_iconos.add_child(rect)
+	controles_texto.text = game_controls[game]["text"]
+	carrusel.hide()
+	controles.show()
 
 # performance: 0.0 a 1.0 (1.0 = perfecto). Los juegos sin medición de rendimiento usan 1.0.
 func end_microgame(won: bool, performance: float = 1.0) -> void:
