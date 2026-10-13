@@ -77,7 +77,9 @@ func _on_timer_timeout() -> void:
 	await get_tree().create_timer(1.0).timeout
 	
 	# Notificamos al Core. get_parent() es Node2D, el siguiente es Core.
-	get_parent().get_parent().end_microgame(success)
+	var core = get_parent().get_parent()
+	var used_ratio := 1.0 - timer.time_left / timer.wait_time
+	core.end_microgame(success, core.time_performance(used_ratio))
 
 func _update_success_label(success: bool) -> void:
 	successLabel.show()
