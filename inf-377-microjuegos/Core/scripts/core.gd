@@ -23,8 +23,11 @@ const MIN_PERFORMANCE := 0.25
 @onready var iniciales = $GameOverUI/Center/VBox/Iniciales
 @onready var btn_guardar = $GameOverUI/Center/VBox/BtnGuardar
 
-# Orden igual al de los iconos del carrusel en TransitionUI/HBoxContainer.
-@onready var icons: Array[Node] = $TransitionUI/HBoxContainer.get_children()
+@onready var carrusel = $TransitionUI/Carrusel
+@onready var nombre_label = $TransitionUI/NombreLabel
+
+# Orden igual al de los iconos del carrusel.
+var game_names: Array[String] = ["Simon Dice", "Puerta", "Lluvia de Notas", "Microondas"]
 var microgames: Array[String] = [
 	"res://Microgames/simon_says/scenes/simon_says.tscn",
 	"res://Microgames/puerta/scenes/puerta.tscn",
@@ -89,24 +92,15 @@ func start_roulette() -> void:
 	_show_only(transition_ui)
 	instruction_label.text = "ReMechón!"
 	stats_label.text = "Vidas: %d     Puntaje: %s (+%s)     Nivel: %s" % [lives, _fmt(score), _fmt(last_points), _fmt(difficulty)]
-	for icon in icons:
-		icon.get_node("BordeRojo").hide()
+	nombre_label.text = ""
 
 	# Se elige el juego de la bolsa y el carrusel gira frenando hasta caer en él.
 	var target: int = pending_games.pop_back()
-	var n := icons.size()
-	var total_steps := randi_range(2, 3) * n + target
-	var delay := 0.05
-	for i in range(total_steps + 1):
-		for icon in icons:
-			icon.get_node("BordeRojo").hide()
-		icons[i % n].get_node("BordeRojo").show()
-		await get_tree().create_timer(delay).timeout
-		delay += 0.012
+	await carrusel.spin_to(target)
+	nombre_label.text = game_names[target]
 
 	instruction_label.text = "¡PREPÁRATE!"
 	await get_tree().create_timer(0.8).timeout
-	icons[target].get_node("BordeRojo").hide()
 
 	transition_ui.hide()
 	current_game_instance = load(microgames[target]).instantiate()
