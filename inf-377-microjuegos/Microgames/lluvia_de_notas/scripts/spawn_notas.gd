@@ -5,8 +5,20 @@ const ceroo = preload("res://Microgames/lluvia_de_notas/scenes/cero.tscn")
 var random = RandomNumberGenerator.new()
 var valid = true
 var game_ended = true
+
+# Ajustes según dificultad. Nivel 1: cae poco, pocos ceros y con calma.
+var spawn_interval := 0.8
+var zero_chance := 0.35
+var fall_gravity := 0.08
+
 func _ready() -> void:
 	random.randomize()
+	var core = get_parent().get_parent()
+	var d: float = core.difficulty if "difficulty" in core else 1.0
+	var level := clampf(d - 1.0, 0.0, 6.0)
+	spawn_interval = maxf(0.5, 0.8 - 0.05 * level)
+	zero_chance = minf(0.5, 0.35 + 0.025 * level)
+	fall_gravity = 0.08 + 0.01 * level
 	# Eliminamos el retraso de 3 segundos para que inicie de inmediato
 	spawn()
 
@@ -16,19 +28,19 @@ func GetRandomPos() -> Vector2:
 
 func spawn():
 	while valid:
-		var i = random.randi_range(0, 1)
-		if i == 0:
+		if random.randf() < zero_chance:
 			var cero_spawn = ceroo.instantiate()
 			cero_spawn.position = GetRandomPos()
+			cero_spawn.get_node("RigidBody2D").gravity_scale = fall_gravity
 			cero_spawn.colision_cero.connect(_on_cero_colision_cero)
 			add_child(cero_spawn)
 		else:
 			var cien_spawn = cienn.instantiate()
 			cien_spawn.position = GetRandomPos()
+			cien_spawn.get_node("RigidBody2D").gravity_scale = fall_gravity
 			add_child(cien_spawn)
 			
-		# Reducido de 5.0 a 0.5 segundos para que sea un desafío rápido
-		await get_tree().create_timer(0.5).timeout 
+		await get_tree().create_timer(spawn_interval).timeout
 
 func _on_cero_colision_cero() -> void:
 	valid = false

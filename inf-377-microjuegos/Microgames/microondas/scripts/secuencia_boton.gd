@@ -16,12 +16,25 @@ var ActionSequence = []
 var SequenceIndex = 0
 
 func _ready() -> void:
+	_apply_difficulty()
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	timer.process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().paused = true
 	successLabel.hide()
 	_set_random_sequence()
 	timer.start()
+
+# Nivel 1: 3 flechas y 7s. Cada 2 niveles se agrega una flecha (máx. 5) y baja el tiempo.
+func _apply_difficulty() -> void:
+	var core = get_parent().get_parent()
+	var d: float = core.difficulty if "difficulty" in core else 1.0
+	var level := clampf(d - 1.0, 0.0, 6.0)
+	var arrows := 3 + int(level / 2.0)
+	timer.wait_time = maxf(4.0, 7.0 - 0.3 * level)
+	var children := buttonBox.get_children()
+	for i in range(arrows, children.size()):
+		buttonBox.remove_child(children[i]) # inmediato, para que no cuente en la secuencia
+		children[i].queue_free()
 
 func _set_random_sequence() -> void:
 	for node in buttonBox.get_children():
