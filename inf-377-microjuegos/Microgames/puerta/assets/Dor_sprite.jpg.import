@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cunccjwm8yas"
-path="res://.godot/imported/Dor_sprite.jpg-a71c20b749b63a731376ac8a157d9fcf.ctex"
+path="res://.godot/imported/Dor_sprite.jpg-b96513aca0bb5c50c00c403f070d6a79.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Microgames/puerta/assets/Dor_sprite.jpg"
-dest_files=["res://.godot/imported/Dor_sprite.jpg-a71c20b749b63a731376ac8a157d9fcf.ctex"]
+source_file="res://Microgames/Puerta/assets/Dor_sprite.jpg"
+dest_files=["res://.godot/imported/Dor_sprite.jpg-b96513aca0bb5c50c00c403f070d6a79.ctex"]
 
 [params]
 
