@@ -17,6 +17,12 @@ var microgames: Array[String] = [
 
 var score: int = 0
 var lives: int = 3
+# Dificultad global que leen los microjuegos (1.0 = nivel inicial, el más fácil).
+# Sube +1 cada vez que se ganan GAMES_PER_ROUND juegos, y baja 0.5 al perder uno.
+var difficulty: float = 1.0
+var wins_in_round: int = 0
+const GAMES_PER_ROUND := 4
+const MIN_DIFFICULTY := 1.0
 var current_game_instance: Node = null
 
 func _ready() -> void:
@@ -61,9 +67,15 @@ func end_microgame(won: bool) -> void:
 		
 	if won:
 		score += 1
+		wins_in_round += 1
+		if wins_in_round >= GAMES_PER_ROUND:
+			wins_in_round = 0
+			difficulty += 1.0
+			print("¡Sube la dificultad! Nivel: ", difficulty)
 		print("¡Minijuego superado! Puntaje: ", score)
 	else:
 		lives -= 1
+		difficulty = maxf(MIN_DIFFICULTY, difficulty - 0.5)
 		print("¡Fallaste! Vidas restantes: ", lives)
 		
 	if lives > 0:
