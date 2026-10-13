@@ -279,7 +279,7 @@ horizontal_alignment = 1
 
 [node name="Texto" type="Label" parent="CreditosUI/Center/VBox"]
 layout_mode = 2
-text = "ReMechón!\nINF377 - Microjuegos\n\nEquipo de desarrollo:\n\nSergio Rojas: Core, Simon Dice\nIsidora Sarmiento: Lluvia de Notas\nCristobal Pino: Microondas\nBejnamin Ponce: Puertas"
+text = "ReMechón!\nINF377 - Microjuegos\n\nEquipo de desarrollo:\n\nSergio Rojas: Core, Simon Dice\nIsidora Sarmiento: Lluvia de Notas\nCristobal Pino: Microondas\nBenjamin Ponce: Puertas"
 label_settings = SubResource("LabelSettings_body")
 horizontal_alignment = 1
 
