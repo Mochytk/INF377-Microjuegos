@@ -4,6 +4,12 @@ const SCORES_PATH := "user://scores.json"
 const MAX_SCORES := 10
 const MIN_DIFFICULTY := 1.0
 const START_LIVES := 3
+# Puntaje por juego: 20 puntos con rendimiento perfecto, multiplicado por la dificultad.
+const MAX_POINTS := 20.0
+# Juegos por tiempo: si terminan usando <= 20% del tiempo es rendimiento perfecto;
+# luego baja linealmente hasta MIN_PERFORMANCE si usan todo el tiempo (5 de 20 puntos).
+const PERFECT_TIME_RATIO := 0.2
+const MIN_PERFORMANCE := 0.25
 
 @onready var transition_ui = $TransitionUI
 @onready var instruction_label = $TransitionUI/InstructionLabel
@@ -32,6 +38,7 @@ var score: float = 0.0
 var lives: int = START_LIVES
 # Dificultad global que leen los microjuegos (1.0 = nivel inicial, el más fácil).
 var difficulty: float = MIN_DIFFICULTY
+var last_points: float = 0.0
 var current_game_instance: Node = null
 
 func _ready() -> void:
@@ -66,6 +73,7 @@ func show_scores() -> void:
 
 func start_game() -> void:
 	score = 0.0
+	last_points = 0.0
 	lives = START_LIVES
 	difficulty = MIN_DIFFICULTY
 	_refill_bag()
@@ -80,7 +88,7 @@ func _refill_bag() -> void:
 func start_roulette() -> void:
 	_show_only(transition_ui)
 	instruction_label.text = "ReMechón!"
-	stats_label.text = "Vidas: %d     Puntaje: %s     Nivel: %s" % [lives, _fmt(score), _fmt(difficulty)]
+	stats_label.text = "Vidas: %d     Puntaje: %s (+%s)     Nivel: %s" % [lives, _fmt(score), _fmt(last_points), _fmt(difficulty)]
 	for icon in icons:
 		icon.get_node("BordeRojo").hide()
 
@@ -104,15 +112,18 @@ func start_roulette() -> void:
 	current_game_instance = load(microgames[target]).instantiate()
 	add_child(current_game_instance)
 
-func end_microgame(won: bool) -> void:
+# performance: 0.0 a 1.0 (1.0 = perfecto). Los juegos sin medición de rendimiento usan 1.0.
+func end_microgame(won: bool, performance: float = 1.0) -> void:
 	if current_game_instance:
 		current_game_instance.queue_free()
 		current_game_instance = null
 
 	if won:
-		score += difficulty
-		print("¡Minijuego superado! Puntaje: ", score)
+		last_points = MAX_POINTS * clampf(performance, 0.0, 1.0) * difficulty
+		score += last_points
+		print("¡Minijuego superado! +", last_points, " Puntaje: ", score)
 	else:
+		last_points = 0.0
 		lives -= 1
 		difficulty = maxf(MIN_DIFFICULTY, difficulty - 0.5)
 		print("¡Fallaste! Vidas restantes: ", lives)
@@ -127,6 +138,13 @@ func end_microgame(won: bool) -> void:
 		_refill_bag()
 		print("¡Ronda completa! Dificultad: ", difficulty)
 	start_roulette()
+
+# Rendimiento (0-1) según la fracción del tiempo usada (0 = instantáneo, 1 = justo a tiempo).
+func time_performance(used_ratio: float) -> float:
+	if used_ratio <= PERFECT_TIME_RATIO:
+		return 1.0
+	var t := (clampf(used_ratio, 0.0, 1.0) - PERFECT_TIME_RATIO) / (1.0 - PERFECT_TIME_RATIO)
+	return lerpf(1.0, MIN_PERFORMANCE, t)
 
 # ---------- Game over y tabla de posiciones ----------
 

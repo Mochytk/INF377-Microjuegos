@@ -91,8 +91,10 @@ func _on_button_pressed(index: int) -> void:
 
 func win_game() -> void:
 	is_player_turn = false
-	# get_parent() llama al Core y ejecuta su función
-	get_parent().end_microgame(true) 
+	# Rendimiento según qué tan rápido completó la secuencia
+	var core = get_parent()
+	var used_ratio := (time_limit - time_left) / time_limit
+	core.end_microgame(true, core.time_performance(used_ratio))
 
 func lose_game() -> void:
 	is_player_turn = false

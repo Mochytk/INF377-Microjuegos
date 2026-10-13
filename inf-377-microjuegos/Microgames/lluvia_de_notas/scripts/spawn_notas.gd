@@ -13,6 +13,9 @@ var fall_gravity := 0.08
 
 func _ready() -> void:
 	random.randomize()
+	# El nodo "cien" que ya viene en la escena también cuenta
+	if has_node("cien"):
+		$cien.colision_cien.connect(_on_cien_colision_cien)
 	var core = get_parent().get_parent()
 	var d: float = core.difficulty if "difficulty" in core else 1.0
 	var level := clampf(d - 1.0, 0.0, 6.0)
@@ -38,9 +41,13 @@ func spawn():
 			var cien_spawn = cienn.instantiate()
 			cien_spawn.position = GetRandomPos()
 			cien_spawn.get_node("RigidBody2D").gravity_scale = fall_gravity
+			cien_spawn.colision_cien.connect(_on_cien_colision_cien)
 			add_child(cien_spawn)
 			
 		await get_tree().create_timer(spawn_interval).timeout
+
+func _on_cien_colision_cien() -> void:
+	get_parent().add_cien()
 
 func _on_cero_colision_cero() -> void:
 	valid = false
