@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://blopdbvjsk7fy"
-path="res://.godot/imported/pixil-frame-0.png-b5704fb1da450632d5639e6997177fcb.ctex"
+path="res://.godot/imported/pixil-frame-0.png-b7e912857b1acd9fbb5a44ba57083fd1.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Microgames/lluvia_de_notas/assets/pixil-frame-0.png"
-dest_files=["res://.godot/imported/pixil-frame-0.png-b5704fb1da450632d5639e6997177fcb.ctex"]
+dest_files=["res://.godot/imported/pixil-frame-0.png-b7e912857b1acd9fbb5a44ba57083fd1.ctex"]
 
 [params]
 

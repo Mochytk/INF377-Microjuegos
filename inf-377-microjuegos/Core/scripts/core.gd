@@ -1,85 +1,175 @@
 extends Control
 
+const SCORES_PATH := "user://scores.json"
+const MAX_SCORES := 10
+const MIN_DIFFICULTY := 1.0
+const START_LIVES := 3
+
 @onready var transition_ui = $TransitionUI
 @onready var instruction_label = $TransitionUI/InstructionLabel
-@onready var border_simon = $TransitionUI/HBoxContainer/IconSimon/BordeRojo
-@onready var border_lluvia = $TransitionUI/HBoxContainer/IconLluvia/BordeRojo
-@onready var border_puerta = $TransitionUI/HBoxContainer/IconPuerta/BordeRojo
-# Nueva referencia
-@onready var border_microondas = $TransitionUI/HBoxContainer/IconMicroondas/BordeRojo
+@onready var stats_label = $TransitionUI/StatsLabel
+@onready var landing_ui = $LandingUI
+@onready var tabla_ui = $TablaUI
+@onready var creditos_ui = $CreditosUI
+@onready var game_over_ui = $GameOverUI
+@onready var scores_label = $TablaUI/Center/VBox/ScoresLabel
+@onready var puntaje_label = $GameOverUI/Center/VBox/LabelPuntaje
+@onready var iniciales = $GameOverUI/Center/VBox/Iniciales
+@onready var btn_guardar = $GameOverUI/Center/VBox/BtnGuardar
 
+# Orden igual al de los iconos del carrusel en TransitionUI/HBoxContainer.
+@onready var icons: Array[Node] = $TransitionUI/HBoxContainer.get_children()
 var microgames: Array[String] = [
 	"res://Microgames/simon_says/scenes/simon_says.tscn",
-	"res://Microgames/lluvia_de_notas/scenes/lluvia_de_notas.tscn",
 	"res://Microgames/puerta/scenes/puerta.tscn",
-	"res://Microgames/microondas/scenes/microondas.tscn" # Nueva ruta
+	"res://Microgames/lluvia_de_notas/scenes/lluvia_de_notas.tscn",
+	"res://Microgames/microondas/scenes/microondas.tscn",
 ]
 
-var score: int = 0
-var lives: int = 3
+# Juegos que aún no salen en la ronda actual. Cuando se vacía, la dificultad sube.
+var pending_games: Array[int] = []
+var score: float = 0.0
+var lives: int = START_LIVES
 # Dificultad global que leen los microjuegos (1.0 = nivel inicial, el más fácil).
-# Sube +1 cada vez que se ganan GAMES_PER_ROUND juegos, y baja 0.5 al perder uno.
-var difficulty: float = 1.0
-var wins_in_round: int = 0
-const GAMES_PER_ROUND := 4
-const MIN_DIFFICULTY := 1.0
+var difficulty: float = MIN_DIFFICULTY
 var current_game_instance: Node = null
 
 func _ready() -> void:
+	$LandingUI/Center/VBox/BtnJugar.pressed.connect(start_game)
+	$LandingUI/Center/VBox/BtnTabla.pressed.connect(show_scores)
+	$LandingUI/Center/VBox/BtnCreditos.pressed.connect(_show_only.bind(creditos_ui))
+	$TablaUI/Center/VBox/BtnVolver.pressed.connect(show_landing)
+	$CreditosUI/Center/VBox/BtnVolver.pressed.connect(show_landing)
+	btn_guardar.pressed.connect(save_initials)
+	iniciales.text_changed.connect(_on_initials_changed)
+	iniciales.text_submitted.connect(func(_t): save_initials())
+	show_landing()
+
+# ---------- Menús ----------
+
+func _show_only(panel: Control) -> void:
+	for p in [landing_ui, tabla_ui, creditos_ui, game_over_ui, transition_ui]:
+		p.visible = (p == panel)
+
+func show_landing() -> void:
+	_show_only(landing_ui)
+
+func show_scores() -> void:
+	var lines: Array[String] = []
+	var scores := load_scores()
+	for i in range(scores.size()):
+		lines.append("%d.  %s   %s" % [i + 1, scores[i]["name"], _fmt(scores[i]["score"])])
+	scores_label.text = "\n".join(lines) if not lines.is_empty() else "Aún no hay puntajes"
+	_show_only(tabla_ui)
+
+# ---------- Flujo de la partida ----------
+
+func start_game() -> void:
+	score = 0.0
+	lives = START_LIVES
+	difficulty = MIN_DIFFICULTY
+	_refill_bag()
 	start_roulette()
 
-func start_roulette() -> void:
-	transition_ui.show()
-	instruction_label.text = "Micro Juegos"
-	
-	var borders = [border_simon, border_lluvia, border_puerta, border_microondas]
-	# El número de saltos ahora es aleatorio (entre 5 y 15 veces)
-	var loops = randi_range(5, 15) 
-	var delay = 0.15 
-	var selected_index = 0
-	
-	for i in range(loops):
-		for b in borders:
-			b.hide()
-			
-		selected_index = i % borders.size()
-		borders[selected_index].show()
-		
-		await get_tree().create_timer(delay).timeout
-		delay *= 0.9 
+func _refill_bag() -> void:
+	pending_games.clear()
+	for i in range(microgames.size()):
+		pending_games.append(i)
+	pending_games.shuffle()
 
-	var chosen_game_path = microgames[selected_index]
-	
+func start_roulette() -> void:
+	_show_only(transition_ui)
+	instruction_label.text = "ReMechón!"
+	stats_label.text = "Vidas: %d     Puntaje: %s     Nivel: %s" % [lives, _fmt(score), _fmt(difficulty)]
+	for icon in icons:
+		icon.get_node("BordeRojo").hide()
+
+	# Se elige el juego de la bolsa y el carrusel gira frenando hasta caer en él.
+	var target: int = pending_games.pop_back()
+	var n := icons.size()
+	var total_steps := randi_range(2, 3) * n + target
+	var delay := 0.05
+	for i in range(total_steps + 1):
+		for icon in icons:
+			icon.get_node("BordeRojo").hide()
+		icons[i % n].get_node("BordeRojo").show()
+		await get_tree().create_timer(delay).timeout
+		delay += 0.012
+
 	instruction_label.text = "¡PREPÁRATE!"
-	await get_tree().create_timer(0.8).timeout 
-	
-	for b in borders:
-		b.hide()
-	
+	await get_tree().create_timer(0.8).timeout
+	icons[target].get_node("BordeRojo").hide()
+
 	transition_ui.hide()
-	var scene_resource = load(chosen_game_path)
-	current_game_instance = scene_resource.instantiate()
+	current_game_instance = load(microgames[target]).instantiate()
 	add_child(current_game_instance)
 
 func end_microgame(won: bool) -> void:
 	if current_game_instance:
 		current_game_instance.queue_free()
-		
+		current_game_instance = null
+
 	if won:
-		score += 1
-		wins_in_round += 1
-		if wins_in_round >= GAMES_PER_ROUND:
-			wins_in_round = 0
-			difficulty += 1.0
-			print("¡Sube la dificultad! Nivel: ", difficulty)
+		score += difficulty
 		print("¡Minijuego superado! Puntaje: ", score)
 	else:
 		lives -= 1
 		difficulty = maxf(MIN_DIFFICULTY, difficulty - 0.5)
 		print("¡Fallaste! Vidas restantes: ", lives)
-		
-	if lives > 0:
-		start_roulette()
-	else:
-		instruction_label.text = "GAME OVER"
-		transition_ui.show()
+
+	if lives <= 0:
+		show_game_over()
+		return
+
+	# Al terminar todos los juegos de la ronda sube la dificultad.
+	if pending_games.is_empty():
+		difficulty += 1.0
+		_refill_bag()
+		print("¡Ronda completa! Dificultad: ", difficulty)
+	start_roulette()
+
+# ---------- Game over y tabla de posiciones ----------
+
+func show_game_over() -> void:
+	puntaje_label.text = "Puntaje: " + _fmt(score)
+	iniciales.text = ""
+	btn_guardar.disabled = true
+	_show_only(game_over_ui)
+	iniciales.grab_focus()
+
+func _on_initials_changed(text: String) -> void:
+	# Solo letras (A-Z) en mayúscula, como en los arcades.
+	var clean := ""
+	for c in text.to_upper():
+		if c >= "A" and c <= "Z":
+			clean += c
+	if clean != text:
+		iniciales.text = clean
+		iniciales.caret_column = clean.length()
+	btn_guardar.disabled = clean.length() != 3
+
+func save_initials() -> void:
+	if iniciales.text.length() != 3:
+		return
+	var scores := load_scores()
+	scores.append({"name": iniciales.text, "score": score})
+	scores.sort_custom(func(a, b): return a["score"] > b["score"])
+	scores = scores.slice(0, MAX_SCORES)
+	var f := FileAccess.open(SCORES_PATH, FileAccess.WRITE)
+	if f:
+		f.store_string(JSON.stringify(scores))
+		f.close() # cerrar antes de volver a leer el archivo
+	show_scores()
+
+func load_scores() -> Array:
+	if not FileAccess.file_exists(SCORES_PATH):
+		return []
+	var raw := FileAccess.get_file_as_string(SCORES_PATH)
+	if raw.is_empty():
+		return []
+	var data = JSON.parse_string(raw)
+	return data if data is Array else []
+
+# 3.0 -> "3", 2.5 -> "2.5"
+func _fmt(value: float) -> String:
+	return str(snappedf(value, 0.1)).trim_suffix(".0")

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cqmkcaki4yw5"
-path="res://.godot/imported/world_tileset.png-2c9ecd0deeda2a1d8d3dc17b005fbe2e.ctex"
+path="res://.godot/imported/world_tileset.png-aa70476a9d1c13e3544d378d177c3121.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Microgames/lluvia_de_notas/assets/world_tileset.png"
-dest_files=["res://.godot/imported/world_tileset.png-2c9ecd0deeda2a1d8d3dc17b005fbe2e.ctex"]
+dest_files=["res://.godot/imported/world_tileset.png-aa70476a9d1c13e3544d378d177c3121.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://brhraxyjpo3uv"
-path="res://.godot/imported/None.png-63f413781ac70d9940a18b1665f5bf05.ctex"
+path="res://.godot/imported/None.png-b23ef81f0b0696848bd0165b2ca60adf.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Microgames/puerta/assets/None.png"
-dest_files=["res://.godot/imported/None.png-63f413781ac70d9940a18b1665f5bf05.ctex"]
+dest_files=["res://.godot/imported/None.png-b23ef81f0b0696848bd0165b2ca60adf.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://diiwkbqft2t4w"
-path="res://.godot/imported/png-transparent-simon-clone-game-modern-flat-escape-android-game-video-game-android-removebg-preview.png-220d93bfae9ecd84e01b518bdd8b12da.ctex"
+path="res://.godot/imported/icon_simon.png-a1f9b89306acef914505a276c71929f6.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Core/assets/icon_simon.png"
-dest_files=["res://.godot/imported/png-transparent-simon-clone-game-modern-flat-escape-android-game-video-game-android-removebg-preview.png-220d93bfae9ecd84e01b518bdd8b12da.ctex"]
+dest_files=["res://.godot/imported/icon_simon.png-a1f9b89306acef914505a276c71929f6.ctex"]
 
 [params]
 
