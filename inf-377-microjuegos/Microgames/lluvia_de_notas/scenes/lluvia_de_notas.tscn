@@ -9,12 +9,17 @@
 [sub_resource type="GDScript" id="GDScript_xo5yo"]
 script/source = "extends Node2D
 var game_ended: bool = false
+var cien_count: int = 0
+const CIEN_PERFECTO := 4 # con 4 cienes se obtiene el puntaje máximo
 
 func _ready() -> void:
-	await get_tree().create_timer(4.0).timeout
+	await get_tree().create_timer(6.0).timeout
 	if not game_ended:
 		game_ended = true
-		get_parent().end_microgame(true)
+		get_parent().end_microgame(true, clampf(float(cien_count) / CIEN_PERFECTO, 0.0, 1.0))
+
+func add_cien() -> void:
+	cien_count += 1
 
 func game_over() -> void:
 	if not game_ended:
