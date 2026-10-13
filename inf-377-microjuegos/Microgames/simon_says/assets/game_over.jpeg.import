@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dugnsa6bldxwo"
-path="res://.godot/imported/game_over.jpeg-73f2a4c42bd8a587d60f10116f1f472f.ctex"
+path="res://.godot/imported/game_over.jpeg-f52c3b02ea67a7079028558f37d21ce0.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Microgames/simon_says/assets/game_over.jpeg"
-dest_files=["res://.godot/imported/game_over.jpeg-73f2a4c42bd8a587d60f10116f1f472f.ctex"]
+dest_files=["res://.godot/imported/game_over.jpeg-f52c3b02ea67a7079028558f37d21ce0.ctex"]
 
 [params]
 
