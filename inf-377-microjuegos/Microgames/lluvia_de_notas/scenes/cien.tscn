@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c0y35slu0s558" path="res://Microgames/lluvia_de_notas/assets/fruit.png" id="1_7aslm"]
 [ext_resource type="Script" uid="uid://dirrso03ts3hr" path="res://Microgames/lluvia_de_notas/scripts/cien.gd" id="1_xfydj"]
-[ext_resource type="Texture2D" uid="uid://dgosx5rfhi1he" path="res://Microgames/lluvia_de_notas/assets/pixil-frame-0 (3).png" id="2_7bhy1"]
+[ext_resource type="Texture2D" uid="uid://dv8o176ffonnu" path="res://Microgames/lluvia_de_notas/assets/cien.png" id="2_k5rj8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0q5u0"]
 atlas = ExtResource("1_7aslm")
@@ -33,7 +33,7 @@ mass = 0.013
 gravity_scale = 0.1
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" unique_id=159139906]
-texture = ExtResource("2_7bhy1")
+texture = ExtResource("2_k5rj8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D" unique_id=867014171]
 visible = false

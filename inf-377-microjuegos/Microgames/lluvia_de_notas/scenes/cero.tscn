@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c8bjln4g4q7aq" path="res://Microgames/lluvia_de_notas/scripts/cero.gd" id="1_vho2w"]
 [ext_resource type="Texture2D" uid="uid://c0y35slu0s558" path="res://Microgames/lluvia_de_notas/assets/fruit.png" id="1_yeblp"]
+[ext_resource type="Texture2D" uid="uid://c17bkql2tu5kp" path="res://Microgames/lluvia_de_notas/assets/cero.png" id="2_k4hnu"]
 [ext_resource type="Texture2D" uid="uid://blopdbvjsk7fy" path="res://Microgames/lluvia_de_notas/assets/pixil-frame-0.png" id="2_lx1j3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h7djk"]
@@ -48,7 +49,7 @@ gravity_scale = 0.1
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" unique_id=842579231]
 position = Vector2(0, 2)
-texture = ExtResource("2_lx1j3")
+texture = ExtResource("2_k4hnu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D" unique_id=1366227434]
 visible = false
