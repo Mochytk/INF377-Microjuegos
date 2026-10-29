@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ntjw51ggngfi"
-path="res://.godot/imported/boton.png-9f8d8eb888bc6714a86ef429bd212c79.ctex"
+path="res://.godot/imported/boton.png-7674c5b3eb6f180426b9670e200ebc1c.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Microgames/enviar_tarea/assets/boton.png"
-dest_files=["res://.godot/imported/boton.png-9f8d8eb888bc6714a86ef429bd212c79.ctex"]
+dest_files=["res://.godot/imported/boton.png-7674c5b3eb6f180426b9670e200ebc1c.ctex"]
 
 [params]
 
