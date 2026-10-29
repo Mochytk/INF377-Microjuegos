@@ -4,6 +4,8 @@ const SCORES_PATH := "user://scores.json"
 const MAX_SCORES := 10
 const MIN_DIFFICULTY := 1.0
 const START_LIVES := 3
+# Segundos que se muestran los controles en "¡PREPÁRATE!" (el testing mostró que pasaban muy rápido)
+const PREPARE_TIME := 4.0
 # Puntaje por juego: 20 puntos con rendimiento perfecto, multiplicado por la dificultad.
 const MAX_POINTS := 20.0
 # Juegos por tiempo: si terminan usando <= 20% del tiempo es rendimiento perfecto;
@@ -119,7 +121,7 @@ func start_roulette() -> void:
 
 	instruction_label.text = "¡PREPÁRATE!"
 	_show_controls(target)
-	await get_tree().create_timer(1.8).timeout
+	await get_tree().create_timer(PREPARE_TIME).timeout
 	controles.hide()
 	carrusel.show()
 
