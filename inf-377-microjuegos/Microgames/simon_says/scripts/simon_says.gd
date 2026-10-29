@@ -16,6 +16,9 @@ var sequence_length: int = 3
 var flash_time: float = 0.6
 var time_limit: float = 5.0
 
+# Qué tan oscuros se ven los botones en reposo (menos = colores más vivos)
+const REST_DARKEN := 0.5
+
 var button_colors: Array[Color] = [
 	Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.CYAN, 
 	Color.MAGENTA, Color.ORANGE, Color.WHITE, Color.PURPLE
@@ -31,9 +34,15 @@ func _ready() -> void:
 	timer_bar.max_value = time_limit
 	timer_bar.value = time_limit
 	
+	# Fondo blanco liso en los botones para que el color (modulate) se vea vivo
+	var flat := StyleBoxFlat.new()
+	flat.bg_color = Color.WHITE
+	flat.set_corner_radius_all(8)
 	for i in range(buttons.size()):
+		for state in ["normal", "hover", "pressed", "focus", "disabled"]:
+			buttons[i].add_theme_stylebox_override(state, flat)
 		buttons[i].pressed.connect(_on_button_pressed.bind(i))
-		buttons[i].modulate = button_colors[i].darkened(0.6)
+		buttons[i].modulate = button_colors[i].darkened(REST_DARKEN)
 		
 	start_microgame()
 
@@ -74,7 +83,7 @@ func flash_button(index: int, time: float) -> void:
 	btn.modulate = button_colors[index] * 2.5 
 	
 	await get_tree().create_timer(time).timeout
-	btn.modulate = button_colors[index].darkened(0.6)
+	btn.modulate = button_colors[index].darkened(REST_DARKEN)
 
 func _on_button_pressed(index: int) -> void:
 	if not is_player_turn:
@@ -97,6 +106,10 @@ func win_game() -> void:
 	core.end_microgame(true, core.time_performance(used_ratio))
 
 func lose_game() -> void:
+	if game_over_ui.visible:
+		return
 	is_player_turn = false
-	# get_parent() llama al Core y ejecuta su función
+	# Muestra el GAME OVER con el corazón un momento antes de avisar al Core
+	game_over_ui.show()
+	await get_tree().create_timer(1.2).timeout
 	get_parent().end_microgame(false)
