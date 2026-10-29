@@ -6,7 +6,7 @@ const SPACING := 300.0
 const CENTER_SCALE := 1.3
 const SIDE_SCALE := 0.85
 
-@onready var items: Array[Control] = [$IconSimon, $IconPuerta, $IconLluvia, $IconMicroondas]
+@onready var items: Array[Control] = [$IconSimon, $IconPuerta, $IconLluvia, $IconMicroondas, $IconEnviarTarea]
 @onready var marco: Control = $Marco
 
 var current: int = 0 # índice del juego que está en el centro
