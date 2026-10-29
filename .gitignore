@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Exportaciones de Godot: se suben solo los .zip / ejecutables finales
+# (nada de carpetas con .godot ni copias del proyecto dentro de Builds/)
+Builds/**/.godot/
+Builds/**/export-*
+Builds/**/*.import
+Builds/**/*.exe

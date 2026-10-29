@@ -8,8 +8,9 @@
 script = ExtResource("1_psuot")
 
 [node name="cero" parent="." unique_id=92391435 instance=ExtResource("2_l5flu")]
-position = Vector2(12.867575, 1.4482279)
+position = Vector2(22, -1)
 
 [node name="cien" parent="." unique_id=1670947645 instance=ExtResource("3_0q5u0")]
+position = Vector2(-27, 0)
 
 [connection signal="colision_cero" from="cero" to="." method="_on_cero_colision_cero"]

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ddwssrloediol"
-path="res://.godot/imported/Floatzel.png-319190d34b4b488df1dca49f1576172c.ctex"
+path="res://.godot/imported/Floatzel.png-eef643e474486192f8497f9e5951b662.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Microgames/Puerta/assets/Floatzel.png"
-dest_files=["res://.godot/imported/Floatzel.png-319190d34b4b488df1dca49f1576172c.ctex"]
+source_file="res://Microgames/puerta/assets/Floatzel.png"
+dest_files=["res://.godot/imported/Floatzel.png-eef643e474486192f8497f9e5951b662.ctex"]
 
 [params]
 

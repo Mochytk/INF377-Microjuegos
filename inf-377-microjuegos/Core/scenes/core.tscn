@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cunccjwm8yas" path="res://Microgames/puerta/assets/Dor_sprite.jpg" id="3_aa113"]
 [ext_resource type="Texture2D" uid="uid://cim7amyjk0sr1" path="res://Core/assets/icon_lluvia.png" id="3_tjgqf"]
 [ext_resource type="Script" path="res://Core/scripts/carrusel.gd" id="6_carrusel"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_enviar_tarea.png" id="7_enviar"]
 [ext_resource type="Texture2D" uid="uid://d0ngubotgugdu" path="res://Core/assets/icon_microondas.png" id="5_aa113"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p1uti"]
@@ -118,6 +119,16 @@ offset_right = 200.0
 offset_bottom = 200.0
 pivot_offset = Vector2(100, 100)
 texture = ExtResource("5_aa113")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconEnviarTarea" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("7_enviar")
 expand_mode = 1
 stretch_mode = 5
 
