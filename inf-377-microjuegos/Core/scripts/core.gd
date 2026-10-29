@@ -36,19 +36,21 @@ const ICON_ARR := preload("res://Core/assets/controles/flecha_up.png")
 const ICON_ABA := preload("res://Core/assets/controles/flecha_down.png")
 
 # Orden igual al de los iconos del carrusel.
-var game_names: Array[String] = ["Simon Dice", "Puerta", "Lluvia de Notas", "Microondas"]
+var game_names: Array[String] = ["Simon Dice", "Puerta", "Lluvia de Notas", "Microondas", "Enviar Tarea"]
 # Controles de cada juego (mismo orden): iconos y texto que se muestran en "¡PREPÁRATE!".
 var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_MOUSE], "text": "Haz clic en los botones con el mouse"},
 	{"icons": [ICON_MOUSE], "text": "Haz clic con el mouse para entrar a la puerta"},
-	{"icons": [ICON_IZQ, ICON_DER], "text": "Muévete con las flechas (Espacio salta)"},
-	{"icons": [ICON_ARR, ICON_ABA, ICON_IZQ, ICON_DER], "text": "Presiona las flechas del teclado"},
+	{"icons": [ICON_IZQ, ICON_DER], "text": "Muévete con las flechas o A y D (W o Espacio salta)"},
+	{"icons": [ICON_ARR, ICON_ABA, ICON_IZQ, ICON_DER], "text": "Presiona las flechas o W A S D"},
+	{"icons": [ICON_MOUSE], "text": "Haz clic en el botón antes de que escape"},
 ]
 var microgames: Array[String] = [
 	"res://Microgames/simon_says/scenes/simon_says.tscn",
 	"res://Microgames/puerta/scenes/puerta.tscn",
 	"res://Microgames/lluvia_de_notas/scenes/lluvia_de_notas.tscn",
 	"res://Microgames/microondas/scenes/microondas.tscn",
+	"res://Microgames/enviar_tarea/scenes/enviar_tarea.tscn",
 ]
 
 # Juegos que aún no salen en la ronda actual. Cuando se vacía, la dificultad sube.
