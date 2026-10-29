@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ntjw51ggngfi"
-path="res://.godot/imported/botón.png-9f8d8eb888bc6714a86ef429bd212c79.ctex"
+path="res://.godot/imported/boton.png-9f8d8eb888bc6714a86ef429bd212c79.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Microgames/enviar_tarea/assets/botón.png"
-dest_files=["res://.godot/imported/botón.png-9f8d8eb888bc6714a86ef429bd212c79.ctex"]
+source_file="res://Microgames/enviar_tarea/assets/boton.png"
+dest_files=["res://.godot/imported/boton.png-9f8d8eb888bc6714a86ef429bd212c79.ctex"]
 
 [params]
 
