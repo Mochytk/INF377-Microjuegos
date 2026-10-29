@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cbs3eoia2ssf8"]
+
+[ext_resource type="Texture2D" uid="uid://bxv7kpmbv584p" path="res://Microgames/enviar_tarea/assets/aula.png" id="1_53m48"]
+[ext_resource type="Texture2D" uid="uid://ntjw51ggngfi" path="res://Microgames/enviar_tarea/assets/botón.png" id="2_451gf"]
+[ext_resource type="Script" uid="uid://1qnd1ebj3vh5" path="res://Microgames/enviar_tarea/scripts/botón.gd" id="3_451gf"]
+[ext_resource type="FontFile" uid="uid://dlm8poxsgrvhv" path="res://Microgames/enviar_tarea/assets/Roboto-Regular.ttf" id="4_0thh5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xepy2"]
+size = Vector2(102.43634, 20.30272)
+
+[node name="EnviarTarea" type="Node2D" unique_id=1488832116]
+
+[node name="aula" type="Sprite2D" parent="." unique_id=500534217]
+position = Vector2(625, 349)
+scale = Vector2(0.825, 0.825)
+texture = ExtResource("1_53m48")
+
+[node name="botón" type="Sprite2D" parent="." unique_id=191307869]
+position = Vector2(149, 317)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("2_451gf")
+script = ExtResource("3_451gf")
+
+[node name="Area2D" type="Area2D" parent="botón" unique_id=386890731]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="botón/Area2D" unique_id=1299419627]
+position = Vector2(-6.25, 0)
+scale = Vector2(13.544999, 13.544999)
+shape = SubResource("RectangleShape2D_xepy2")
+
+[node name="Timer" type="Timer" parent="botón" unique_id=707120560]
+wait_time = 5.0
+
+[node name="Label" type="Label" parent="botón/Timer" unique_id=1506342297]
+anchors_preset = -1
+anchor_left = 1.0780001
+anchor_top = 0.86300004
+anchor_right = 1.406
+anchor_bottom = 1.35
+offset_left = -1019.8561
+offset_top = -75.224
+offset_right = -1201.712
+offset_bottom = -363.8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.093160845, 0.093160845, 0.09316083, 0)
+theme_override_fonts/font = ExtResource("4_0thh5")
+theme_override_font_sizes/font_size = 12
+
+[connection signal="input_event" from="botón/Area2D" to="botón" method="_on_area_2d_input_event"]
