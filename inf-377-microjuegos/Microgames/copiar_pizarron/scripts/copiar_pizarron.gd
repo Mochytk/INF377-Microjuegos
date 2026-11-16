@@ -22,6 +22,7 @@ var letra := 0               # letras ya tipeadas de la palabra
 var tiempo_palabra := 3.0
 var restante := 3.0
 var seg_por_letra := 0.55
+var tiempo_base := 1.3       # segundos fijos por palabra (para leerla)
 var aciertos := 0
 var puntos := 0.0            # suma del puntaje de cada palabra (0 a 1)
 var fallos := 0
@@ -37,6 +38,7 @@ func _ready() -> void:
 	var level := clampf(d - 1.0, 0.0, 6.0)
 	var n := mini(5, 3 + int(level / 2.0))
 	seg_por_letra = maxf(0.3, 0.6 - 0.05 * level)
+	tiempo_base = maxf(0.8, 1.3 - 0.08 * level)
 	var cortas: Array = CORTAS.duplicate(); cortas.shuffle()
 	var largas: Array = LARGAS.duplicate(); largas.shuffle()
 	var n_largas := clampi(int(level), 0, n)      # nivel 1: ninguna larga
@@ -47,7 +49,7 @@ func _ready() -> void:
 
 func _start_word() -> void:
 	letra = 0
-	tiempo_palabra = 0.9 + seg_por_letra * palabras[actual].length()
+	tiempo_palabra = tiempo_base + seg_por_letra * palabras[actual].length()
 	restante = tiempo_palabra
 	esperando = false
 	palabra_label.modulate.a = 1.0
