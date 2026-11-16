@@ -8,6 +8,8 @@ const START_LIVES := 3
 const PREPARE_TIME := 4.0
 # Puntaje por juego: 20 puntos con rendimiento perfecto, multiplicado por la dificultad.
 const MAX_POINTS := 20.0
+# Juegos por ronda: se sacan al azar de todos los microjuegos; al terminarlos sube la dificultad.
+const BAG_SIZE := 5
 # Bono por racha: cada victoria seguida suma +10% al puntaje del juego (x1.1, x1.2, ...), con tope x1.5.
 const STREAK_STEP := 0.1
 const STREAK_MAX := 1.5
@@ -75,6 +77,8 @@ var microgames: Array[String] = [
 
 # Juegos que aún no salen en la ronda actual. Cuando se vacía, la dificultad sube.
 var pending_games: Array[int] = []
+var last_bag: Array[int] = []    # juegos de la ronda anterior
+var last_game: int = -1
 var score: float = 0.0
 var lives: int = START_LIVES
 # Dificultad global que leen los microjuegos (1.0 = nivel inicial, el más fácil).
@@ -124,14 +128,33 @@ func start_game() -> void:
 	shown_score = 0.0
 	shown_lives = START_LIVES
 	difficulty = MIN_DIFFICULTY
+	last_bag.clear()
+	last_game = -1
 	_refill_bag()
 	start_roulette()
 
+# Arma la bolsa de la ronda: BAG_SIZE juegos al azar. Tienen prioridad los que no salieron
+# en la ronda anterior, para que se vayan jugando todos; el resto se completa al azar.
 func _refill_bag() -> void:
-	pending_games.clear()
+	var nuevos: Array[int] = []
+	var repetidos: Array[int] = []
 	for i in range(microgames.size()):
-		pending_games.append(i)
-	pending_games.shuffle()
+		if last_bag.has(i):
+			repetidos.append(i)
+		else:
+			nuevos.append(i)
+	nuevos.shuffle()
+	repetidos.shuffle()
+	var bag: Array[int] = []
+	bag.append_array(nuevos)
+	bag.append_array(repetidos)
+	bag = bag.slice(0, mini(BAG_SIZE, bag.size()))
+	bag.shuffle()
+	# Que la ronda nueva no empiece con el mismo juego que se acaba de jugar (se saca con pop_back)
+	if bag.size() > 1 and bag[-1] == last_game:
+		bag.push_front(bag.pop_back())
+	last_bag = bag.duplicate()
+	pending_games = bag
 
 func start_roulette() -> void:
 	_show_only(transition_ui)
@@ -143,6 +166,7 @@ func start_roulette() -> void:
 
 	# Se elige el juego de la bolsa y el carrusel gira frenando hasta caer en él.
 	var target: int = pending_games.pop_back()
+	last_game = target
 	await carrusel.spin_to(target)
 	nombre_label.text = game_names[target]
 
