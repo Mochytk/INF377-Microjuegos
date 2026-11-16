@@ -1,7 +1,8 @@
 extends Control
 ## Calienta el almuerzo: el microondas va calentando el pote y una aguja avanza por la barra.
 ## Hay que apretar ESPACIO para sacarlo cuando la aguja está en la zona verde: antes queda
-## frío y, si se llega al final, el pote explota. Mientras más al centro del verde, más puntaje.
+## frío y, apenas la aguja pasa la zona verde, el pote explota. Mientras más al centro del verde,
+## más puntaje.
 
 const TEX_VAPOR := preload("res://Microgames/calienta_almuerzo/assets/vapor.png")
 const ANCHO_BARRA := 800.0
@@ -62,8 +63,8 @@ func _process(delta: float) -> void:
 		_steam()
 	if Input.is_action_just_pressed("ui_accept"):
 		_stop()
-	elif p >= 1.0:
-		_finish(false, "explota")
+	elif p > centro + ancho / 2.0:
+		_finish(false, "explota")   # se pasó de la zona verde
 
 func _steam() -> void:
 	var v := Sprite2D.new()
@@ -84,7 +85,7 @@ func _stop() -> void:
 	elif p < centro:
 		_finish(false, "frio")
 	else:
-		_finish(false, "quemado")
+		_finish(false, "explota")
 
 func _finish(won: bool, motivo: String) -> void:
 	if not playing:
@@ -109,14 +110,67 @@ func _finish(won: bool, motivo: String) -> void:
 	if motivo == "frio":
 		fin.text = "¡Quedó frío!"
 		calor.color = Color(0.3, 0.6, 1.0, 0.35)
-	elif motivo == "quemado":
-		fin.text = "¡Se recalentó!"
-		calor.color.a = 0.7
 	else:
 		fin.text = "¡Explotó el pote!"
-		pote.hide()
-		explosion.show()
-		explosion.scale = Vector2(2, 2)
-		create_tween().tween_property(explosion, "scale", Vector2(7, 7), 0.15)
+		mensaje.text = "¡Te pasaste de la zona verde!"
+		await _explode()
 	await get_tree().create_timer(1.1).timeout
 	core.end_microgame(false)
+
+# El pote se infla temblando, explota con un destello y la comida queda pegada en el vidrio
+func _explode() -> void:
+	var base := pote.position
+	var infla := create_tween().set_parallel(true)
+	infla.tween_property(pote, "scale", Vector2(5.3, 5.3), 0.35).set_ease(Tween.EASE_IN)
+	infla.tween_property(pote, "modulate", Color(1.6, 0.7, 0.6), 0.35)
+	for i in range(7):
+		pote.position = base + Vector2(randf_range(-8, 8), randf_range(-5, 5))
+		await get_tree().create_timer(0.05).timeout
+	pote.hide()
+	# destello blanco dentro del microondas
+	var flash := ColorRect.new()
+	flash.color = Color(1, 1, 0.9, 0.95)
+	flash.position = calor.position
+	flash.size = calor.size
+	flash.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(flash)
+	create_tween().tween_property(flash, "color:a", 0.0, 0.3)
+	calor.color = Color(0.55, 0.18, 0.08, 0.55)
+	# nube de la explosión
+	explosion.position = base + Vector2(0, -20)
+	explosion.show()
+	explosion.scale = Vector2(2, 2)
+	var boom := create_tween()
+	boom.tween_property(explosion, "scale", Vector2(6, 6), 0.18).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	boom.tween_property(explosion, "modulate:a", 0.0, 0.5).set_delay(0.25)
+	# la tapa sale volando
+	var tapa := ColorRect.new()
+	tapa.color = Color(0.23, 0.48, 0.84)
+	tapa.size = Vector2(110, 18)
+	tapa.pivot_offset = tapa.size / 2.0
+	tapa.position = base + Vector2(-55, -50)
+	add_child(tapa)
+	var vuela := create_tween().set_parallel(true)
+	vuela.tween_property(tapa, "position", tapa.position + Vector2(randf_range(-160, 160), -120), 0.35).set_ease(Tween.EASE_OUT)
+	vuela.tween_property(tapa, "rotation", randf_range(-4.0, 4.0), 0.35)
+	vuela.chain().tween_property(tapa, "position:y", 380.0, 0.3).set_ease(Tween.EASE_IN)
+	# pedazos de comida que quedan pegados en el vidrio y escurren
+	var colores := [Color("#d9472b"), Color("#e88a2a"), Color("#f2c14e"), Color("#4caf50"), Color("#f7f3e6")]
+	for i in range(18):
+		var trozo := ColorRect.new()
+		trozo.color = colores.pick_random()
+		var lado := randf_range(10, 26)
+		trozo.size = Vector2(lado, lado * randf_range(0.7, 1.2))
+		trozo.position = base
+		trozo.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(trozo)
+		var fin_vidrio := calor.position + calor.size
+		var destino := Vector2(randf_range(calor.position.x + 10, fin_vidrio.x - 30), randf_range(calor.position.y + 10, fin_vidrio.y - 30))
+		var t2 := create_tween()
+		t2.tween_property(trozo, "position", destino, randf_range(0.15, 0.3)).set_ease(Tween.EASE_OUT)
+		t2.tween_property(trozo, "position:y", destino.y + randf_range(15, 45), randf_range(0.8, 1.4))
+	# la pantalla se sacude
+	for i in range(8):
+		position = Vector2(randf_range(-12, 12), randf_range(-8, 8))
+		await get_tree().create_timer(0.035).timeout
+	position = Vector2.ZERO

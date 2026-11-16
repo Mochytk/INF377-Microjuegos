@@ -77,7 +77,7 @@ var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_MOUSE], "text": "Mueve el mouse para atrapar las hojas con la carpeta"},
 	{"icons": [ICON_IZQ, ICON_DER], "text": "Inclina el paraguas hacia donde viene la lluvia (flechas o A y D)"},
 	{"icons": [ICON_MOUSE], "text": "Haz clic en el cargador y llévalo con el mouse al enchufe sin tocar los pupitres"},
-	{"icons": [ICON_ESPACIO], "text": "Aprieta ESPACIO cuando la aguja esté en la zona verde"},
+	{"icons": [ICON_ESPACIO], "text": "Aprieta ESPACIO en la zona verde. ¡Si te pasas, explota!"},
 ]
 var microgames: Array[String] = [
 	"res://Microgames/simon_says/scenes/simon_says.tscn",
