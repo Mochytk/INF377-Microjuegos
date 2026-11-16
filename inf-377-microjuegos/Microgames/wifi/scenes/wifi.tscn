@@ -1,0 +1,173 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/wifi/scripts/wifi.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/wifi/assets/campus.png" id="campus"]
+[ext_resource type="Texture2D" path="res://Microgames/wifi/assets/est_abajo_0.png" id="est"]
+[ext_resource type="Texture2D" path="res://Microgames/wifi/assets/wifi_0.png" id="wifi0"]
+[ext_resource type="Texture2D" path="res://Microgames/wifi/assets/anillo.png" id="anillo"]
+
+[sub_resource type="LabelSettings" id="LS_msg"]
+font_size = 30
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_tel"]
+font_size = 20
+font_color = Color(0.08, 0.08, 0.1, 1)
+
+[sub_resource type="LabelSettings" id="LS_estado"]
+font_size = 18
+font_color = Color(0.25, 0.27, 0.32, 1)
+
+[sub_resource type="StyleBoxFlat" id="SB_tel"]
+bg_color = Color(0.08, 0.08, 0.1, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="SB_pantalla"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.96, 0.97, 0.99, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="SB_barra_bg"]
+bg_color = Color(0.8, 0.82, 0.86, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="SB_barra"]
+bg_color = Color(0.2, 0.55, 0.95, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="Wifi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Mapa" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("campus")
+expand_mode = 1
+
+[node name="Anillo" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("anillo")
+
+[node name="Jugador" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(544, 448)
+scale = Vector2(4, 4)
+texture = ExtResource("est")
+centered = false
+offset = Vector2(-7, -17)
+
+[node name="Senal" type="Sprite2D" parent="Jugador"]
+texture_filter = 1
+position = Vector2(0, -26)
+texture = ExtResource("wifi0")
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 26.0
+offset_bottom = 70.0
+grow_horizontal = 2
+text = "¡Busca señal y quédate quieto para cargar el Aula!"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
+
+[node name="Telefono" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 800.0
+offset_top = 484.0
+offset_right = 1136.0
+offset_bottom = 636.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_tel")
+
+[node name="Margen" type="MarginContainer" parent="Telefono"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Pantalla" type="PanelContainer" parent="Telefono/Margen"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("SB_pantalla")
+
+[node name="VBox" type="VBoxContainer" parent="Telefono/Margen/Pantalla"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="Fila" type="HBoxContainer" parent="Telefono/Margen/Pantalla/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Icono" type="TextureRect" parent="Telefono/Margen/Pantalla/VBox/Fila"]
+texture_filter = 1
+custom_minimum_size = Vector2(57, 42)
+layout_mode = 2
+texture = ExtResource("wifi0")
+expand_mode = 1
+
+[node name="Titulo" type="Label" parent="Telefono/Margen/Pantalla/VBox/Fila"]
+layout_mode = 2
+text = "Aula USM"
+label_settings = SubResource("LS_tel")
+
+[node name="Porcentaje" type="Label" parent="Telefono/Margen/Pantalla/VBox/Fila"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0%"
+label_settings = SubResource("LS_tel")
+
+[node name="Carga" type="ProgressBar" parent="Telefono/Margen/Pantalla/VBox"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+theme_override_styles/background = SubResource("SB_barra_bg")
+theme_override_styles/fill = SubResource("SB_barra")
+max_value = 1.0
+step = 0.001
+show_percentage = false
+
+[node name="Estado" type="Label" parent="Telefono/Margen/Pantalla/VBox"]
+layout_mode = 2
+text = "Sin señal..."
+label_settings = SubResource("LS_estado")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+mouse_filter = 2
+show_percentage = false
