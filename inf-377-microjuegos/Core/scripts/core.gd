@@ -55,7 +55,7 @@ const ICON_ARR := preload("res://Core/assets/controles/flecha_up.png")
 const ICON_ABA := preload("res://Core/assets/controles/flecha_down.png")
 
 # Orden igual al de los iconos del carrusel.
-var game_names: Array[String] = ["Simon Dice", "Puerta", "Lluvia de Notas", "Microondas", "Enviar Tarea", "Bandeja", "Impresora", "Wi-Fi", "No te duermas", "Copiar el pizarrón", "Firma la lista", "Fila del casino", "Despertador", "Micro lleno", "Bicicletero", "Toma de ramos", "Trabajo en grupo", "Fotocopia a tiempo", "Paraguas", "Cargar el celular", "Calienta el almuerzo", "Calculadora en el certamen", "Chat a escondidas", "Corre a la micro", "Máquina de snacks", "El proyector", "Borra la pizarra"]
+var game_names: Array[String] = ["Simón dice", "Puerta", "Lluvia de notas", "Microondas", "Enviar tarea", "Bandeja", "Impresora", "Wi-Fi", "No te duermas", "Copiar el pizarrón", "Firma la lista", "Fila del casino", "Despertador", "Micro llena", "Bicicletero", "Toma de ramos", "Trabajo en grupo", "Fotocopia a tiempo", "Paraguas", "Cargar el celular", "Calienta el almuerzo", "Calculadora en el certamen", "Chat a escondidas", "Corre a la micro", "Máquina de snacks", "El proyector", "Borra la pizarra"]
 # Controles de cada juego (mismo orden): iconos y texto que se muestran en "¡PREPÁRATE!".
 var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_MOUSE], "text": "Memoriza los colores que dice el profesor y haz clic en ellos"},

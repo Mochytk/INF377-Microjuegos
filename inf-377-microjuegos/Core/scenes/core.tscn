@@ -610,7 +610,7 @@ horizontal_alignment = 1
 
 [node name="Texto" type="Label" parent="CreditosUI/Center/VBox"]
 layout_mode = 2
-text = "ReMechón!  ·  INF377 - Microjuegos\n\nSergio Rojas\nCore, Simon Dice, Impresora, Fila del casino, Toma de ramos, Paraguas, El proyector\n\nIsidora Sarmiento\nLluvia de Notas, Enviar Tarea, Bandeja, Despertador, Trabajo en grupo, Calculadora en el certamen, Borra la pizarra\n\nCristobal Pino\nMicroondas, No te duermas, Firma la lista, Bicicletero, Fotocopia a tiempo, Calienta el almuerzo, Máquina de snacks\n\nBenjamin Ponce\nPuertas, Wi-Fi, Copiar el pizarrón, Micro lleno, Cargar el celular, Chat a escondidas, Corre a la micro"
+text = "ReMechón!  ·  INF377 - Microjuegos\n\nSergio Rojas\nCore, Simón dice, Impresora, Fila del casino, Toma de ramos, Paraguas, El proyector\n\nIsidora Sarmiento\nLluvia de notas, Enviar tarea, Bandeja, Despertador, Trabajo en grupo, Calculadora en el certamen, Borra la pizarra\n\nCristobal Pino\nMicroondas, No te duermas, Firma la lista, Bicicletero, Fotocopia a tiempo, Calienta el almuerzo, Máquina de snacks\n\nBenjamin Ponce\nPuerta, Wi-Fi, Copiar el pizarrón, Micro llena, Cargar el celular, Chat a escondidas, Corre a la micro"
 label_settings = SubResource("LabelSettings_creditos")
 horizontal_alignment = 1
 
