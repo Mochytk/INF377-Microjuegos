@@ -57,12 +57,14 @@ func _ready() -> void:
 	var core = get_parent()
 	var d: float = core.difficulty if "difficulty" in core else 1.0
 	var level := clampf(d - 1.0, 0.0, 6.0)
+	# Sobre el nivel 7 la dificultad sigue creciendo sin tope: cada nivel extra apura todo un 8 % más
+	var apuro := 1.0 + 0.08 * maxf(0.0, d - 7.0)
 	radio = maxf(85.0, 120.0 - 6.0 * level)
 	if level >= 4.0:
 		caidas = [0.35, 0.7]
 	elif level >= 2.0:
 		caidas = [0.5]
-	time_limit = 13.0 + 3.5 * caidas.size() - 0.4 * level
+	time_limit = (13.0 + 3.5 * caidas.size() - 0.4 * level) / apuro
 	timer_bar.max_value = time_limit
 	timer_bar.value = time_limit
 	hotspot = _pick_spot(240.0)

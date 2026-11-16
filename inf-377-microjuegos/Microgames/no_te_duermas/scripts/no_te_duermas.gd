@@ -40,7 +40,9 @@ func _ready() -> void:
 	var core = get_parent()
 	var d: float = core.difficulty if "difficulty" in core else 1.0
 	var level := clampf(d - 1.0, 0.0, 6.0)
-	cierre = 0.30 + 0.045 * level
+	# Sobre el nivel 7 la dificultad sigue creciendo sin tope: cada nivel extra apura todo un 8 % más
+	var apuro := 1.0 + 0.08 * maxf(0.0, d - 7.0)
+	cierre = (0.30 + 0.045 * level) * apuro
 	aviso = maxf(0.45, 0.7 - 0.04 * level)
 	var n := mini(4, 2 + int(level / 2.0))
 	for i in range(n):

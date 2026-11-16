@@ -36,9 +36,11 @@ func _ready() -> void:
 	var core = get_parent()
 	var d: float = core.difficulty if "difficulty" in core else 1.0
 	var level := clampf(d - 1.0, 0.0, 6.0)
+	# Sobre el nivel 7 la dificultad sigue creciendo sin tope: cada nivel extra apura todo un 8 % más
+	var apuro := 1.0 + 0.08 * maxf(0.0, d - 7.0)
 	var n := mini(5, 3 + int(level / 2.0))
-	seg_por_letra = maxf(0.3, 0.6 - 0.05 * level)
-	tiempo_base = maxf(0.8, 1.3 - 0.08 * level)
+	seg_por_letra = maxf(0.3, 0.6 - 0.05 * level) / apuro
+	tiempo_base = maxf(0.8, 1.3 - 0.08 * level) / apuro
 	var cortas: Array = CORTAS.duplicate(); cortas.shuffle()
 	var largas: Array = LARGAS.duplicate(); largas.shuffle()
 	var n_largas := clampi(int(level), 0, n)      # nivel 1: ninguna larga

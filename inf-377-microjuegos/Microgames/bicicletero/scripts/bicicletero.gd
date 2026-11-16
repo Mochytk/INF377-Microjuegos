@@ -46,10 +46,12 @@ func _ready() -> void:
 	var core = get_parent()
 	var d: float = core.difficulty if "difficulty" in core else 1.0
 	var level := clampf(d - 1.0, 0.0, 6.0)
+	# Sobre el nivel 7 la dificultad sigue creciendo sin tope: cada nivel extra apura todo un 8 % más
+	var apuro := 1.0 + 0.08 * maxf(0.0, d - 7.0)
 	var n := mini(8, 5 + int(level / 2.0))
 	ancho = minf(170.0, 960.0 / n)
 	medio = ancho / 2.0 - 24.0
-	rival_time = maxf(5.5, 9.5 - 0.65 * level)
+	rival_time = maxf(5.5, 9.5 - 0.65 * level) / apuro
 	timer_bar.max_value = rival_time
 	timer_bar.value = rival_time
 
@@ -105,7 +107,7 @@ func _ready() -> void:
 		p.scale = Vector2(4, 4)
 		p.position = Vector2(randf_range(200, 950), 420.0 + i * 90.0)
 		peatones_nodo.add_child(p)
-		peatones.append({"nodo": p, "vel": (110.0 + 15.0 * level) * (1 if randf() < 0.5 else -1)})
+		peatones.append({"nodo": p, "vel": (110.0 + 15.0 * level) * apuro * (1 if randf() < 0.5 else -1)})
 	playing = true
 
 func _process(delta: float) -> void:

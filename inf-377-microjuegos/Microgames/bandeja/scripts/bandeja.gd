@@ -27,6 +27,7 @@ var playing := false
 var t := 0.0
 var jugo := 1.0
 var amplitud := 12.0
+var rapidez := 1.0              # qué tan rápido se ladea (crece sin tope en niveles altos)
 var zona_segura := 10.0
 var fase1 := 0.0
 var fase2 := 0.0
@@ -43,7 +44,10 @@ func _ready() -> void:
 	var core = get_parent()
 	var d: float = core.difficulty if "difficulty" in core else 1.0
 	var level := clampf(d - 1.0, 0.0, 6.0)
+	# Sobre el nivel 7 la dificultad sigue creciendo sin tope: cada nivel extra apura todo un 8 % más
+	var apuro := 1.0 + 0.08 * maxf(0.0, d - 7.0)
 	amplitud = 18.0 + 1.5 * level
+	rapidez = apuro
 	zona_segura = 9.0
 	fase1 = randf() * TAU
 	fase2 = randf() * TAU
@@ -70,7 +74,7 @@ func _process(delta: float) -> void:
 	empujon = lerpf(empujon, empujon_obj, clampf(8.0 * delta, 0.0, 1.0))
 
 	# Inclinación = vaivén propio + choques + corrección del jugador (mouse)
-	var vaiven := amplitud * (0.65 * sin(0.9 * t + fase1) + 0.35 * sin(1.9 * t + fase2))
+	var vaiven := amplitud * (0.65 * sin(0.9 * rapidez * t + fase1) + 0.35 * sin(1.9 * rapidez * t + fase2))
 	var correccion := clampf((mouse_x - mouse_inicio) / MOUSE_RANGO, -1.0, 1.0) * MAX_CORRECCION
 	angulo = vaiven + empujon + correccion
 	pivot.rotation_degrees = angulo

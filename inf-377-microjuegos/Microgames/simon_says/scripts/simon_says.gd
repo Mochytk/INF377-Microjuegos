@@ -37,8 +37,12 @@ var time_limit: float = 5.0
 func _ready() -> void:
 	var level := _get_level()
 	sequence_length = 3 + int(level / 2.0)           # 3 -> 5 como máximo
-	show_time = maxf(0.6, 0.9 - 0.04 * level)
-	time_limit = maxf(4.0, 5.0 - 0.2 * level)
+	# Sobre el nivel 7 la dificultad sigue creciendo sin tope: cada nivel extra apura todo un 8 % más
+	var core = get_parent()
+	var d: float = core.difficulty if "difficulty" in core else 1.0
+	var apuro := 1.0 + 0.08 * maxf(0.0, d - 7.0)
+	show_time = maxf(0.6, 0.9 - 0.04 * level) / apuro
+	time_limit = maxf(4.0, 5.0 - 0.2 * level) / apuro
 
 	timer_bar.max_value = time_limit
 	timer_bar.value = time_limit
