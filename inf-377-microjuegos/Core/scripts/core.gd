@@ -54,7 +54,7 @@ const ICON_ARR := preload("res://Core/assets/controles/flecha_up.png")
 const ICON_ABA := preload("res://Core/assets/controles/flecha_down.png")
 
 # Orden igual al de los iconos del carrusel.
-var game_names: Array[String] = ["Simon Dice", "Puerta", "Lluvia de Notas", "Microondas", "Enviar Tarea", "Bandeja", "Impresora", "Wi-Fi", "No te duermas", "Copiar el pizarrón", "Firma la lista", "Fila del casino", "Despertador", "Micro lleno", "Bicicletero", "Toma de ramos", "Trabajo en grupo", "Fotocopia a tiempo", "Paraguas", "Cargar el celular", "Calienta el almuerzo", "Calculadora en el certamen", "Chat a escondidas", "Corre a la micro", "Máquina de snacks"]
+var game_names: Array[String] = ["Simon Dice", "Puerta", "Lluvia de Notas", "Microondas", "Enviar Tarea", "Bandeja", "Impresora", "Wi-Fi", "No te duermas", "Copiar el pizarrón", "Firma la lista", "Fila del casino", "Despertador", "Micro lleno", "Bicicletero", "Toma de ramos", "Trabajo en grupo", "Fotocopia a tiempo", "Paraguas", "Cargar el celular", "Calienta el almuerzo", "Calculadora en el certamen", "Chat a escondidas", "Corre a la micro", "Máquina de snacks", "El proyector"]
 # Controles de cada juego (mismo orden): iconos y texto que se muestran en "¡PREPÁRATE!".
 var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_MOUSE], "text": "Memoriza los colores que dice el profesor y haz clic en ellos"},
@@ -82,6 +82,7 @@ var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_ESPACIO], "text": "Mantén ESPACIO para escribir y suéltalo cuando el profe se dé vuelta"},
 	{"icons": [ICON_IZQ, ICON_DER], "text": "Alterna las flechas ← → (o A y D) rápido para correr a la micro"},
 	{"icons": [ICON_MOUSE], "text": "Haz clic en la máquina para soltar el snack, ¡pero no muy seguido!"},
+	{"icons": [ICON_MOUSE], "text": "Sigue el cable AMARILLO del notebook y haz clic en la entrada HDMI donde termina."},
 ]
 var microgames: Array[String] = [
 	"res://Microgames/simon_says/scenes/simon_says.tscn",
@@ -109,6 +110,7 @@ var microgames: Array[String] = [
 	"res://Microgames/chat_escondidas/scenes/chat_escondidas.tscn",
 	"res://Microgames/corre_micro/scenes/corre_micro.tscn",
 	"res://Microgames/maquina_snacks/scenes/maquina_snacks.tscn",
+	"res://Microgames/proyector/scenes/proyector.tscn",
 ]
 
 var bag: Array[int] = []         # juegos que están en el carrusel, por puesto
