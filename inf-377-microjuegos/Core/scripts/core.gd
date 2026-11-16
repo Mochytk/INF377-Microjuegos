@@ -8,8 +8,9 @@ const START_LIVES := 3
 const PREPARE_TIME := 4.0
 # Puntaje por juego: 20 puntos con rendimiento perfecto, multiplicado por la dificultad.
 const MAX_POINTS := 20.0
-# Juegos por ronda: se sacan al azar de todos los microjuegos; al terminarlos sube la dificultad.
-const BAG_SIZE := 5
+# Juegos que se ven en el carrusel al mismo tiempo. El que se juega sale del carrusel y entra
+# uno nuevo. Cada BAG_SIZE juegos jugados sube la dificultad.
+const BAG_SIZE := 4
 # Bono por racha: cada victoria seguida suma +10% al puntaje del juego (x1.1, x1.2, ...), con tope x1.5.
 const STREAK_STEP := 0.1
 const STREAK_MAX := 1.5
@@ -55,7 +56,7 @@ var game_names: Array[String] = ["Simon Dice", "Puerta", "Lluvia de Notas", "Mic
 # Controles de cada juego (mismo orden): iconos y texto que se muestran en "¡PREPÁRATE!".
 var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_MOUSE], "text": "Memoriza los colores que dice el profesor y haz clic en ellos"},
-	{"icons": [ICON_MOUSE], "text": "Haz clic con el mouse para entrar a la puerta"},
+	{"icons": [ICON_MOUSE], "text": "Haz clic cuando pases frente a la sala indicada"},
 	{"icons": [ICON_IZQ, ICON_DER], "text": "Muévete con las flechas o A y D (W o Espacio salta)"},
 	{"icons": [ICON_ARR, ICON_ABA, ICON_IZQ, ICON_DER], "text": "Presiona las flechas (o WASD) para llegar primero al microondas"},
 	{"icons": [ICON_MOUSE], "text": "Haz clic en el botón antes de que escape"},
@@ -88,10 +89,11 @@ var microgames: Array[String] = [
 	"res://Microgames/bicicletero/scenes/bicicletero.tscn",
 ]
 
-# Juegos que aún no salen en la ronda actual. Cuando se vacía, la dificultad sube.
-var pending_games: Array[int] = []
-var last_bag: Array[int] = []    # juegos de la ronda anterior
-var last_game: int = -1
+var bag: Array[int] = []         # juegos que están en el carrusel, por puesto
+var deck: Array[int] = []        # juegos que esperan su turno para entrar al carrusel
+var discard: Array[int] = []     # juegos ya jugados; vuelven al mazo cuando este se acaba
+var played_slot: int = -1        # puesto del carrusel que hay que reemplazar (-1 = ninguno)
+var games_in_round: int = 0      # juegos jugados desde la última subida de dificultad
 var score: float = 0.0
 var lives: int = START_LIVES
 # Dificultad global que leen los microjuegos (1.0 = nivel inicial, el más fácil).
@@ -141,33 +143,35 @@ func start_game() -> void:
 	shown_score = 0.0
 	shown_lives = START_LIVES
 	difficulty = MIN_DIFFICULTY
-	last_bag.clear()
-	last_game = -1
-	_refill_bag()
+	_new_bag()
 	start_roulette()
 
-# Arma la bolsa de la ronda: BAG_SIZE juegos al azar. Tienen prioridad los que no salieron
-# en la ronda anterior, para que se vayan jugando todos; el resto se completa al azar.
-func _refill_bag() -> void:
-	var nuevos: Array[int] = []
-	var repetidos: Array[int] = []
+# Reparte de nuevo: baraja todos los juegos, los primeros BAG_SIZE van al carrusel y el resto al mazo.
+func _new_bag() -> void:
+	deck.clear()
+	discard.clear()
 	for i in range(microgames.size()):
-		if last_bag.has(i):
-			repetidos.append(i)
-		else:
-			nuevos.append(i)
-	nuevos.shuffle()
-	repetidos.shuffle()
-	var bag: Array[int] = []
-	bag.append_array(nuevos)
-	bag.append_array(repetidos)
-	bag = bag.slice(0, mini(BAG_SIZE, bag.size()))
-	bag.shuffle()
-	# Que la ronda nueva no empiece con el mismo juego que se acaba de jugar (se saca con pop_back)
-	if bag.size() > 1 and bag[-1] == last_game:
-		bag.push_front(bag.pop_back())
-	last_bag = bag.duplicate()
-	pending_games = bag
+		deck.append(i)
+	deck.shuffle()
+	bag.clear()
+	for i in range(mini(BAG_SIZE, deck.size())):
+		bag.append(deck.pop_back())
+	played_slot = -1
+	games_in_round = 0
+	carrusel.set_games(bag)
+
+# Saca del mazo el juego que entra al carrusel en lugar del que se acaba de jugar.
+# Cuando el mazo se acaba, se barajan los ya jugados: así todos salen antes de repetirse.
+func _draw_game(jugado: int) -> int:
+	discard.append(jugado)
+	if deck.is_empty():
+		deck = discard.duplicate()
+		discard.clear()
+		deck.shuffle()
+		# que no vuelva de inmediato el mismo juego, si hay otros
+		if deck.size() > 1 and deck[-1] == jugado:
+			deck.push_front(deck.pop_back())
+	return deck.pop_back()
 
 func start_roulette() -> void:
 	_show_only(transition_ui)
@@ -177,10 +181,19 @@ func start_roulette() -> void:
 	controles.hide()
 	carrusel.show()
 
-	# Se elige el juego de la bolsa y el carrusel gira frenando hasta caer en él.
-	var target: int = pending_games.pop_back()
-	last_game = target
-	await carrusel.spin_to(target)
+	# El juego recién jugado sale del carrusel y entra uno nuevo en su puesto
+	if played_slot >= 0:
+		var slot_viejo := played_slot
+		played_slot = -1
+		nombre_label.text = "¡Nuevo: %s!" % game_names[bag[slot_viejo]]
+		await carrusel.replace_game(slot_viejo, bag[slot_viejo])
+		nombre_label.text = ""
+
+	# Se elige al azar uno de los juegos del carrusel, que gira frenando hasta caer en él.
+	var slot := randi() % bag.size()
+	var target: int = bag[slot]
+	await carrusel.spin_to(slot)
+	played_slot = slot
 	nombre_label.text = game_names[target]
 
 	instruction_label.text = "¡PREPÁRATE!"
@@ -233,10 +246,15 @@ func end_microgame(won: bool, performance: float = 1.0) -> void:
 		show_game_over()
 		return
 
-	# Al terminar todos los juegos de la ronda sube la dificultad.
-	if pending_games.is_empty():
+	# El juego jugado se cambia por uno nuevo del mazo (la animación se ve al volver al carrusel)
+	if played_slot >= 0:
+		bag[played_slot] = _draw_game(bag[played_slot])
+
+	# Cada BAG_SIZE juegos jugados sube la dificultad.
+	games_in_round += 1
+	if games_in_round >= BAG_SIZE:
+		games_in_round = 0
 		difficulty += 1.0
-		_refill_bag()
 		print("¡Ronda completa! Dificultad: ", difficulty)
 	start_roulette()
 
