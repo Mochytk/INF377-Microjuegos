@@ -8,6 +8,8 @@
 [ext_resource type="Theme" path="res://Core/core_theme.tres" id="9_theme"]
 [ext_resource type="Texture2D" path="res://Core/assets/corazon.png" id="8_corazon"]
 [ext_resource type="Texture2D" path="res://Core/assets/icon_enviar_tarea.png" id="7_enviar"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_bandeja.png" id="10_bandeja"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_impresora.png" id="11_impresora"]
 [ext_resource type="Texture2D" uid="uid://d0ngubotgugdu" path="res://Core/assets/icon_microondas.png" id="5_aa113"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p1uti"]
@@ -143,6 +145,26 @@ offset_right = 200.0
 offset_bottom = 200.0
 pivot_offset = Vector2(100, 100)
 texture = ExtResource("7_enviar")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconBandeja" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("10_bandeja")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconImpresora" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("11_impresora")
 expand_mode = 1
 stretch_mode = 5
 
