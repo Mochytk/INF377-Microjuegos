@@ -137,13 +137,14 @@ func _finish(won: bool) -> void:
 	var core = get_parent()
 	fin.show()
 	if won:
-		nota.text = "7,0"
+		# escala USM: de 0 a 100
+		nota.text = "100"
 		fin.text = "¡Correcto!"
 		pregunta.text += " %d ✓" % correcta
 		await get_tree().create_timer(1.0).timeout
 		core.end_microgame(true, core.time_performance(used_ratio))
 	else:
-		nota.text = "1,0"
+		nota.text = "0"
 		fin.text = "¡Se acabó el tiempo!"
 		fin.label_settings = fin.label_settings.duplicate()
 		fin.label_settings.font_color = Color(1, 0.4, 0.35)
