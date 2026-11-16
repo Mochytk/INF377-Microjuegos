@@ -1,0 +1,187 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/no_te_duermas/scripts/no_te_duermas.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/no_te_duermas/assets/sala.png" id="sala"]
+[ext_resource type="Texture2D" path="res://Microgames/no_te_duermas/assets/profe_espalda_0.png" id="profe"]
+
+[sub_resource type="LabelSettings" id="LS_msg"]
+font_size = 32
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_alerta"]
+font_size = 64
+font_color = Color(1, 0.85, 0.2, 1)
+outline_size = 14
+outline_color = Color(0.6, 0.08, 0.08, 1)
+
+[sub_resource type="LabelSettings" id="LS_zzz"]
+font_size = 44
+font_color = Color(0.75, 0.85, 1, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_small"]
+font_size = 22
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="SB_bg"]
+bg_color = Color(0.12, 0.12, 0.16, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="SB_fill"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="NoTeDuermas" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Fondo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("sala")
+expand_mode = 1
+
+[node name="Profe" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(440, 400)
+scale = Vector2(4, 4)
+texture = ExtResource("profe")
+centered = false
+offset = Vector2(-14, -46)
+
+[node name="Alerta" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 400.0
+offset_top = 130.0
+offset_right = 480.0
+offset_bottom = 210.0
+text = "!"
+label_settings = SubResource("LS_alerta")
+horizontal_alignment = 1
+
+[node name="Sueno" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.05, 0.03, 0.08, 0)
+
+[node name="ParpadoArriba" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+mouse_filter = 2
+color = Color(0.09, 0.05, 0.05, 1)
+
+[node name="Pestanas" type="ColorRect" parent="ParpadoArriba"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ParpadoAbajo" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = 648.0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0.09, 0.05, 0.05, 1)
+
+[node name="Pestanas" type="ColorRect" parent="ParpadoAbajo"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Zzz" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 880.0
+offset_top = 300.0
+offset_right = 1040.0
+offset_bottom = 360.0
+text = "Zzz..."
+label_settings = SubResource("LS_zzz")
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 28.0
+offset_bottom = 74.0
+grow_horizontal = 2
+text = "¡No te duermas! Aprieta ESPACIO"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
+
+[node name="OjosTexto" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1040.0
+offset_top = 180.0
+offset_right = 1140.0
+offset_bottom = 212.0
+text = "Ojos"
+label_settings = SubResource("LS_small")
+horizontal_alignment = 1
+
+[node name="Medidor" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 1066.0
+offset_top = 216.0
+offset_right = 1114.0
+offset_bottom = 436.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("SB_bg")
+theme_override_styles/fill = SubResource("SB_fill")
+max_value = 1.0
+step = 0.001
+value = 0.8
+fill_mode = 3
+show_percentage = false
+
+[node name="Limite" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 1058.0
+offset_top = 346.0
+offset_right = 1122.0
+offset_bottom = 350.0
+mouse_filter = 2
+color = Color(1, 0.3, 0.3, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+mouse_filter = 2
+show_percentage = false
