@@ -26,9 +26,9 @@ func _layout(offset: float) -> void:
 		items[i].scale = Vector2(s, s)
 		items[i].position = Vector2(center.x + r * SPACING, center.y) - items[i].pivot_offset
 		if a <= 1.0:
-			items[i].modulate.a = lerpf(1.0, 0.55, a)
+			items[i].modulate.a = lerpf(1.0, 0.85, a)
 		else:
-			items[i].modulate.a = lerpf(0.55, 0.0, clampf((a - 1.0) / 0.5, 0.0, 1.0))
+			items[i].modulate.a = lerpf(0.85, 0.0, clampf((a - 1.0) / 0.5, 0.0, 1.0))
 		items[i].z_index = 1 if a < 0.5 else 0
 	marco.position = center - marco.pivot_offset
 
