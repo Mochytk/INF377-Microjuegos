@@ -31,6 +31,9 @@ var rapidez := 1.0
 var fase1 := 0.0
 var fase2 := 0.0
 var gota_clock := 0.0
+var lado := 1.0                 # lado desde el que sopla el viento casi todo el tiempo
+var lado_actual := 1.0
+var cambia_lado := false         # en niveles altos el viento cambia de lado a mitad de camino
 
 func _ready() -> void:
 	# Nivel 1: el viento cambia lento y hay harto margen. Al subir: cambia más rápido y más fuerte, con menos margen.
@@ -42,6 +45,9 @@ func _ready() -> void:
 	rapidez = 1.0 + 0.09 * level
 	fase1 = randf() * TAU
 	fase2 = randf() * TAU
+	lado = 1.0 if randf() < 0.5 else -1.0
+	lado_actual = lado
+	cambia_lado = level >= 2.0
 	playing = true
 
 func _process(delta: float) -> void:
@@ -52,8 +58,13 @@ func _process(delta: float) -> void:
 	estudiante.position.x = lerpf(START_X, END_X, progreso)
 	estudiante.texture = TEX_CAMINA[int(t / 0.14) % 4]
 
-	# Viento: mezcla de dos ondas para que no sea predecible
-	viento = clampf(amplitud * (0.7 * sin(0.9 * rapidez * t + fase1) + 0.45 * sin(2.1 * rapidez * t + fase2)), -1.0, 1.0)
+	# Viento: sopla sobre todo desde un lado (así, sin mover el paraguas uno se moja) y encima
+	# lleva una mezcla de dos ondas para que no sea predecible
+	if cambia_lado and t >= WALK_TIME * 0.5:
+		cambia_lado = false
+		lado = -lado
+	lado_actual = lerpf(lado_actual, lado, clampf(2.5 * delta, 0.0, 1.0))
+	viento = clampf(lado_actual * 0.55 + amplitud * 0.5 * (0.7 * sin(0.9 * rapidez * t + fase1) + 0.45 * sin(2.1 * rapidez * t + fase2)), -1.0, 1.0)
 	lluvia.dir = viento
 
 	inclinacion = clampf(inclinacion + Input.get_axis("ui_left", "ui_right") * VEL_PARAGUAS * delta, -1.0, 1.0)
