@@ -8,6 +8,9 @@ const START_LIVES := 3
 const PREPARE_TIME := 4.0
 # Puntaje por juego: 20 puntos con rendimiento perfecto, multiplicado por la dificultad.
 const MAX_POINTS := 20.0
+# Bono por racha: cada victoria seguida suma +10% al puntaje del juego (x1.1, x1.2, ...), con tope x1.5.
+const STREAK_STEP := 0.1
+const STREAK_MAX := 1.5
 # Juegos por tiempo: si terminan usando <= 20% del tiempo es rendimiento perfecto;
 # luego baja linealmente hasta MIN_PERFORMANCE si usan todo el tiempo (5 de 20 puntos).
 const PERFECT_TIME_RATIO := 0.2
@@ -68,6 +71,7 @@ var lives: int = START_LIVES
 # Dificultad global que leen los microjuegos (1.0 = nivel inicial, el más fácil).
 var difficulty: float = MIN_DIFFICULTY
 var last_points: float = 0.0
+var streak: int = 0   # victorias seguidas
 # Valores que muestra el HUD: se actualizan con las animaciones, no de golpe
 var shown_score: float = 0.0
 var shown_lives: int = START_LIVES
@@ -106,6 +110,7 @@ func show_scores() -> void:
 func start_game() -> void:
 	score = 0.0
 	last_points = 0.0
+	streak = 0
 	lives = START_LIVES
 	shown_score = 0.0
 	shown_lives = START_LIVES
@@ -164,11 +169,13 @@ func end_microgame(won: bool, performance: float = 1.0) -> void:
 		current_game_instance = null
 
 	if won:
-		last_points = MAX_POINTS * clampf(performance, 0.0, 1.0) * difficulty
+		streak += 1
+		last_points = MAX_POINTS * clampf(performance, 0.0, 1.0) * difficulty * streak_multiplier()
 		score += last_points
 		print("¡Minijuego superado! +", last_points, " Puntaje: ", score)
 	else:
 		last_points = 0.0
+		streak = 0
 		lives -= 1
 		difficulty = maxf(MIN_DIFFICULTY, difficulty - 0.5)
 		print("¡Fallaste! Vidas restantes: ", lives)
@@ -243,7 +250,20 @@ func _anim_win(points: float) -> void:
 	tw.tween_property(lbl, "scale", Vector2(1.25, 1.25), 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tw.tween_property(lbl, "scale", Vector2.ONE, 0.1)
 	await tw.finished
-	await get_tree().create_timer(0.6).timeout
+
+	# Desde la 2ª victoria seguida se muestra la racha bajo el puntaje
+	var racha: Label = null
+	if streak >= 2:
+		var mult := streak_multiplier()
+		var texto := "¡Racha de %d! x%s" % [streak, _fmt(mult)]
+		if mult >= STREAK_MAX:
+			texto += " (máx.)"
+		racha = _result_label(texto, 44, Color(1, 0.55, 0.15))
+		racha.position = Vector2(center.x - racha.size.x / 2.0, lbl.position.y + lbl.size.y + 6)
+		_pop_node(racha, 1.3)
+	await get_tree().create_timer(0.8 if racha else 0.6).timeout
+	if racha:
+		create_tween().tween_property(racha, "modulate:a", 0.0, 0.3)
 
 	var target := puntaje_hud.global_position + puntaje_hud.size / 2.0 - lbl.size / 2.0
 	var fly := create_tween().set_parallel(true)
@@ -251,6 +271,8 @@ func _anim_win(points: float) -> void:
 	fly.tween_property(lbl, "scale", Vector2(0.3, 0.3), 0.6).set_ease(Tween.EASE_IN)
 	await fly.finished
 	lbl.queue_free()
+	if racha:
+		racha.queue_free()
 
 	# La suma sube de a poco hasta el puntaje nuevo
 	var from := shown_score
@@ -312,6 +334,10 @@ func _anim_lose() -> void:
 	minus.queue_free()
 	left.queue_free()
 	right.queue_free()
+
+# Multiplicador de la racha actual: 1 victoria = x1.0, 2 = x1.1, 3 = x1.2 ... hasta x1.5
+func streak_multiplier() -> float:
+	return minf(STREAK_MAX, 1.0 + STREAK_STEP * maxi(0, streak - 1))
 
 # Rendimiento (0-1) según la fracción del tiempo usada (0 = instantáneo, 1 = justo a tiempo).
 func time_performance(used_ratio: float) -> float:
