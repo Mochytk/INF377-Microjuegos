@@ -1,0 +1,150 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/micro_lleno/scripts/micro_lleno.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/micro_lleno/assets/interior.png" id="interior"]
+[ext_resource type="Texture2D" path="res://Microgames/micro_lleno/assets/micro.png" id="micro"]
+[ext_resource type="Texture2D" path="res://Microgames/micro_lleno/assets/puerta.png" id="puerta"]
+[ext_resource type="Texture2D" path="res://Microgames/micro_lleno/assets/jugador.png" id="jugador"]
+
+[sub_resource type="LabelSettings" id="LS_msg"]
+font_size = 30
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_fin"]
+font_size = 44
+font_color = Color(1, 0.85, 0.2, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[node name="MicroLleno" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Calle" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.5, 0.72, 0.85, 1)
+
+[node name="Vereda" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = 600.0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0.73, 0.71, 0.66, 1)
+
+[node name="Bus" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+
+[node name="Interior" type="TextureRect" parent="Bus"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+texture = ExtResource("interior")
+expand_mode = 1
+
+[node name="Gente" type="Control" parent="Bus"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="PuertaIzq" type="TextureRect" parent="Bus"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 160.0
+offset_top = 136.0
+offset_right = 368.0
+offset_bottom = 564.0
+mouse_filter = 2
+texture = ExtResource("puerta")
+expand_mode = 1
+
+[node name="PuertaDer" type="TextureRect" parent="Bus"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 788.0
+offset_top = 136.0
+offset_right = 996.0
+offset_bottom = 564.0
+mouse_filter = 2
+texture = ExtResource("puerta")
+expand_mode = 1
+flip_h = true
+
+[node name="Micro" type="TextureRect" parent="Bus"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+texture = ExtResource("micro")
+expand_mode = 1
+
+[node name="Jugador" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(576, 644)
+scale = Vector2(6, 6)
+texture = ExtResource("jugador")
+centered = false
+offset = Vector2(-7, -18)
+
+[node name="Globo" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 34.0
+text = "¡Permiso!"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 24.0
+offset_bottom = 68.0
+grow_horizontal = 2
+text = "¡Haz clic en la gente para abrirte paso!"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
+
+[node name="Fin" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LS_fin")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+mouse_filter = 2
+show_percentage = false

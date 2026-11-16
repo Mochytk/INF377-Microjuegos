@@ -26,3 +26,12 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+	# Animación: salto en el aire, caminar al moverse, quieto si no
+	var anim := "quieto"
+	if not is_on_floor():
+		anim = "salto"
+	elif direction:
+		anim = "camina"
+	if $AnimatedSprite2D.animation != anim:
+		$AnimatedSprite2D.play(anim)

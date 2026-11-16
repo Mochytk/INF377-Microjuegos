@@ -5,7 +5,31 @@
 [ext_resource type="Texture2D" uid="uid://cunccjwm8yas" path="res://Microgames/puerta/assets/Dor_sprite.jpg" id="3_aa113"]
 [ext_resource type="Texture2D" uid="uid://cim7amyjk0sr1" path="res://Core/assets/icon_lluvia.png" id="3_tjgqf"]
 [ext_resource type="Script" path="res://Core/scripts/carrusel.gd" id="6_carrusel"]
+[ext_resource type="Theme" path="res://Core/core_theme.tres" id="9_theme"]
+[ext_resource type="Texture2D" path="res://Core/assets/corazon.png" id="8_corazon"]
 [ext_resource type="Texture2D" path="res://Core/assets/icon_enviar_tarea.png" id="7_enviar"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_bandeja.png" id="10_bandeja"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_impresora.png" id="11_impresora"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_wifi.png" id="12_wifi"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_no_te_duermas.png" id="13_ntd"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_copiar_pizarron.png" id="14_iconpizarron"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_firma_lista.png" id="15_iconfirmalista"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_fila_casino.png" id="16_iconfilacasino"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_despertador.png" id="17_icondespertador"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_micro_lleno.png" id="18_iconmicrolleno"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_bicicletero.png" id="19_iconbicicletero"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_toma_ramos.png" id="20_icontomaramos"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_trabajo_grupo.png" id="21_icontrabajogrupo"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_fotocopia.png" id="22_iconfotocopia"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_paraguas.png" id="23_iconparaguas"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_cargar_celular.png" id="24_iconcargarcelular"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_calienta_almuerzo.png" id="25_iconcalientaalmuerzo"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_calculadora.png" id="26_iconcalculadora"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_chat_escondidas.png" id="27_iconchatescondidas"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_corre_micro.png" id="28_iconcorremicro"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_maquina_snacks.png" id="29_iconmaquinasnacks"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_proyector.png" id="30_iconproyector"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_borra_pizarra.png" id="31_iconborrapizarra"]
 [ext_resource type="Texture2D" uid="uid://d0ngubotgugdu" path="res://Core/assets/icon_microondas.png" id="5_aa113"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p1uti"]
@@ -19,9 +43,26 @@ outline_color = Color(0.7, 0.1, 0.1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_head"]
 font_size = 56
+font_color = Color(1, 1, 1, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hud"]
+font_size = 40
+outline_size = 6
+outline_color = Color(0.02, 0.02, 0.06, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_creditos"]
+font_size = 23
+font_color = Color(1, 1, 1, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_body"]
 font_size = 30
+font_color = Color(1, 1, 1, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Core" type="Control" unique_id=309319848]
 layout_mode = 3
@@ -30,6 +71,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_7wmpk")
 
 [node name="TransitionUI" type="ColorRect" parent="." unique_id=1857654034]
@@ -42,7 +84,7 @@ offset_right = 15.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.05, 0.05, 0.12, 1)
+color = Color(0.02, 0.02, 0.06, 1)
 
 [node name="InstructionLabel" type="Label" parent="TransitionUI"]
 layout_mode = 1
@@ -132,6 +174,226 @@ texture = ExtResource("7_enviar")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="IconBandeja" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("10_bandeja")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconImpresora" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("11_impresora")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconWifi" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("12_wifi")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconNoTeDuermas" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("13_ntd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconPizarron" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("14_iconpizarron")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconFirmaLista" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("15_iconfirmalista")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconFilaCasino" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("16_iconfilacasino")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconDespertador" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("17_icondespertador")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconMicroLleno" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("18_iconmicrolleno")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconBicicletero" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("19_iconbicicletero")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconTomaRamos" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("20_icontomaramos")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconTrabajoGrupo" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("21_icontrabajogrupo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconFotocopia" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("22_iconfotocopia")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconParaguas" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("23_iconparaguas")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconCargarCelular" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("24_iconcargarcelular")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconCalientaAlmuerzo" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("25_iconcalientaalmuerzo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconCalculadora" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("26_iconcalculadora")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconChatEscondidas" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("27_iconchatescondidas")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconCorreMicro" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("28_iconcorremicro")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconMaquinaSnacks" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("29_iconmaquinasnacks")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconProyector" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("30_iconproyector")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconBorraPizarra" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("31_iconborrapizarra")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="Controles" type="VBoxContainer" parent="TransitionUI"]
 visible = false
 layout_mode = 1
@@ -140,9 +402,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -560.0
+offset_left = -460.0
 offset_top = -170.0
-offset_right = 560.0
+offset_right = 460.0
 offset_bottom = 170.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -159,6 +421,7 @@ layout_mode = 2
 text = ""
 label_settings = SubResource("LabelSettings_body")
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="NombreLabel" type="Label" parent="TransitionUI"]
 layout_mode = 1
@@ -177,22 +440,56 @@ text = ""
 label_settings = SubResource("LabelSettings_head")
 horizontal_alignment = 1
 
-[node name="StatsLabel" type="Label" parent="TransitionUI"]
+[node name="Hud" type="HBoxContainer" parent="TransitionUI"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -400.0
-offset_top = -90.0
-offset_right = 400.0
+offset_left = -450.0
+offset_top = -100.0
+offset_right = 450.0
 offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 0
-text = ""
-label_settings = SubResource("LabelSettings_body")
-horizontal_alignment = 1
+theme_override_constants/separation = 70
+alignment = 1
+
+[node name="Vidas" type="HBoxContainer" parent="TransitionUI/Hud"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HeartIcon" type="TextureRect" parent="TransitionUI/Hud/Vidas"]
+texture_filter = 1
+custom_minimum_size = Vector2(60, 52)
+layout_mode = 2
+size_flags_vertical = 4
+pivot_offset = Vector2(30, 26)
+texture = ExtResource("8_corazon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VidasLabel" type="Label" parent="TransitionUI/Hud/Vidas"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "3"
+label_settings = SubResource("LabelSettings_hud")
+vertical_alignment = 1
+
+[node name="PuntajeLabel" type="Label" parent="TransitionUI/Hud"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+text = "Puntaje: 0"
+label_settings = SubResource("LabelSettings_hud")
+vertical_alignment = 1
+
+[node name="NivelLabel" type="Label" parent="TransitionUI/Hud"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+text = "Nivel: 1"
+label_settings = SubResource("LabelSettings_hud")
+vertical_alignment = 1
 
 [node name="LandingUI" type="ColorRect" parent="."]
 visible = false
@@ -202,7 +499,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.05, 0.05, 0.12, 1)
+color = Color(0.02, 0.02, 0.06, 1)
+theme = ExtResource("9_theme")
 
 [node name="Center" type="CenterContainer" parent="LandingUI"]
 layout_mode = 1
@@ -248,7 +546,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.05, 0.05, 0.12, 1)
+color = Color(0.02, 0.02, 0.06, 1)
+theme = ExtResource("9_theme")
 
 [node name="Center" type="CenterContainer" parent="TablaUI"]
 layout_mode = 1
@@ -288,7 +587,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.05, 0.05, 0.12, 1)
+color = Color(0.02, 0.02, 0.06, 1)
+theme = ExtResource("9_theme")
 
 [node name="Center" type="CenterContainer" parent="CreditosUI"]
 layout_mode = 1
@@ -310,8 +610,8 @@ horizontal_alignment = 1
 
 [node name="Texto" type="Label" parent="CreditosUI/Center/VBox"]
 layout_mode = 2
-text = "ReMechón!\nINF377 - Microjuegos\n\nEquipo de desarrollo:\n\nSergio Rojas: Core, Simon Dice\nIsidora Sarmiento: Lluvia de Notas\nCristobal Pino: Microondas\nBenjamin Ponce: Puertas"
-label_settings = SubResource("LabelSettings_body")
+text = "ReMechón!  ·  INF377 - Microjuegos\n\nSergio Rojas\nCore, Simon Dice, Impresora, Fila del casino, Toma de ramos, Paraguas, El proyector\n\nIsidora Sarmiento\nLluvia de Notas, Enviar Tarea, Bandeja, Despertador, Trabajo en grupo, Calculadora en el certamen, Borra la pizarra\n\nCristobal Pino\nMicroondas, No te duermas, Firma la lista, Bicicletero, Fotocopia a tiempo, Calienta el almuerzo, Máquina de snacks\n\nBenjamin Ponce\nPuertas, Wi-Fi, Copiar el pizarrón, Micro lleno, Cargar el celular, Chat a escondidas, Corre a la micro"
+label_settings = SubResource("LabelSettings_creditos")
 horizontal_alignment = 1
 
 [node name="BtnVolver" type="Button" parent="CreditosUI/Center/VBox"]
@@ -328,7 +628,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.05, 0.05, 0.12, 1)
+color = Color(0.02, 0.02, 0.06, 1)
+theme = ExtResource("9_theme")
 
 [node name="Center" type="CenterContainer" parent="GameOverUI"]
 layout_mode = 1

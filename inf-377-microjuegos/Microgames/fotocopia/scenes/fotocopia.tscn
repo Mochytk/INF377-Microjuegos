@@ -1,0 +1,95 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/fotocopia/scripts/fotocopia.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/fotocopia/assets/biblioteca.png" id="fondo"]
+[ext_resource type="Texture2D" path="res://Microgames/fotocopia/assets/fotocopiadora.png" id="foto"]
+[ext_resource type="Texture2D" path="res://Microgames/fotocopia/assets/carpeta.png" id="carpeta"]
+
+[sub_resource type="LabelSettings" id="LS_msg"]
+font_size = 28
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_cuenta"]
+font_size = 32
+font_color = Color(1, 0.85, 0.2, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_fin"]
+font_size = 44
+font_color = Color(1, 0.85, 0.2, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Fotocopia" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Fondo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("fondo")
+expand_mode = 1
+
+[node name="Piso" type="Node2D" parent="."]
+
+[node name="Fotocopiadora" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(576, 318)
+scale = Vector2(4, 4)
+texture = ExtResource("foto")
+
+[node name="Hojas" type="Node2D" parent="."]
+
+[node name="Carpeta" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(576, 596)
+scale = Vector2(4, 4)
+texture = ExtResource("carpeta")
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 26.0
+offset_bottom = 66.0
+grow_horizontal = 2
+text = "¡Atrapa las hojas del apunte con la carpeta!"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
+
+[node name="Cuenta" type="Label" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 330.0
+offset_bottom = 170.0
+text = "Hojas: 0 / 6
+Perdidas: 0 / 2"
+label_settings = SubResource("LS_cuenta")
+
+[node name="Fin" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LS_fin")
+horizontal_alignment = 1

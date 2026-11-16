@@ -19,9 +19,11 @@ func _ready() -> void:
 	var core = get_parent().get_parent()
 	var d: float = core.difficulty if "difficulty" in core else 1.0
 	var level := clampf(d - 1.0, 0.0, 6.0)
-	spawn_interval = maxf(0.5, 0.8 - 0.05 * level)
+	# Sobre el nivel 7 la dificultad sigue creciendo sin tope: cada nivel extra apura todo un 8 % más
+	var apuro := 1.0 + 0.08 * maxf(0.0, d - 7.0)
+	spawn_interval = maxf(0.5, 0.8 - 0.05 * level) / apuro
 	zero_chance = minf(0.5, 0.35 + 0.025 * level)
-	fall_gravity = 0.08 + 0.01 * level
+	fall_gravity = (0.08 + 0.01 * level) * apuro
 	# Eliminamos el retraso de 3 segundos para que inicie de inmediato
 	spawn()
 
