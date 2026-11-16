@@ -1,0 +1,189 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/chat_escondidas/scripts/chat_escondidas.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/chat_escondidas/assets/sala.png" id="sala"]
+[ext_resource type="Texture2D" path="res://Microgames/chat_escondidas/assets/profe_espalda_0.png" id="profe"]
+[ext_resource type="Texture2D" path="res://Microgames/chat_escondidas/assets/manos.png" id="manos"]
+
+[sub_resource type="LabelSettings" id="LS_msg"]
+font_size = 26
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_alerta"]
+font_size = 64
+font_color = Color(1, 0.85, 0.2, 1)
+outline_size = 14
+outline_color = Color(0.6, 0.08, 0.08, 1)
+
+[sub_resource type="LabelSettings" id="LS_chat"]
+font_size = 24
+font_color = Color(0.07, 0.07, 0.09, 1)
+
+[sub_resource type="LabelSettings" id="LS_grupo"]
+font_size = 20
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LS_fin"]
+font_size = 44
+font_color = Color(1, 0.85, 0.2, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="SB_tel"]
+bg_color = Color(0.07, 0.07, 0.09, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+
+[sub_resource type="StyleBoxFlat" id="SB_head"]
+bg_color = Color(0.03, 0.37, 0.33, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+
+[sub_resource type="StyleBoxFlat" id="SB_screen"]
+bg_color = Color(0.9, 0.87, 0.83, 1)
+
+[sub_resource type="StyleBoxFlat" id="SB_burbuja"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.86, 0.97, 0.78, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 2
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="ChatEscondidas" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Fondo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("sala")
+expand_mode = 1
+
+[node name="Profe" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(440, 400)
+scale = Vector2(4, 4)
+texture = ExtResource("profe")
+centered = false
+offset = Vector2(-14, -46)
+
+[node name="Alerta" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 400.0
+offset_top = 130.0
+offset_right = 480.0
+offset_bottom = 210.0
+text = "!"
+label_settings = SubResource("LS_alerta")
+horizontal_alignment = 1
+
+[node name="Celular" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 676.0
+offset_top = 330.0
+offset_right = 1036.0
+offset_bottom = 760.0
+mouse_filter = 2
+
+[node name="Cuerpo" type="Panel" parent="Celular"]
+layout_mode = 0
+offset_right = 360.0
+offset_bottom = 430.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_tel")
+
+[node name="Cabecera" type="Panel" parent="Celular"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 14.0
+offset_right = 348.0
+offset_bottom = 56.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_head")
+
+[node name="Grupo" type="Label" parent="Celular/Cabecera"]
+layout_mode = 0
+offset_left = 12.0
+offset_right = 330.0
+offset_bottom = 42.0
+text = "Los del fondo 🤫"
+label_settings = SubResource("LS_grupo")
+vertical_alignment = 1
+
+[node name="Pantalla" type="Panel" parent="Celular"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 56.0
+offset_right = 348.0
+offset_bottom = 430.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_screen")
+
+[node name="Burbuja" type="PanelContainer" parent="Celular/Pantalla"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 16.0
+offset_right = 326.0
+offset_bottom = 120.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_burbuja")
+
+[node name="Texto" type="Label" parent="Celular/Pantalla/Burbuja"]
+custom_minimum_size = Vector2(272, 0)
+layout_mode = 2
+label_settings = SubResource("LS_chat")
+autowrap_mode = 3
+
+[node name="Manos" type="Sprite2D" parent="Celular"]
+texture_filter = 1
+position = Vector2(180, 300)
+scale = Vector2(6, 6)
+texture = ExtResource("manos")
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 26.0
+offset_bottom = 64.0
+grow_horizontal = 2
+text = "Mantén ESPACIO para escribir. ¡Suéltalo si el profe mira!"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
+
+[node name="Fin" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = 250.0
+offset_right = 680.0
+offset_bottom = 320.0
+label_settings = SubResource("LS_fin")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+mouse_filter = 2
+show_percentage = false
