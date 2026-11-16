@@ -41,7 +41,7 @@ const ICON_ABA := preload("res://Core/assets/controles/flecha_down.png")
 var game_names: Array[String] = ["Simon Dice", "Puerta", "Lluvia de Notas", "Microondas", "Enviar Tarea"]
 # Controles de cada juego (mismo orden): iconos y texto que se muestran en "¡PREPÁRATE!".
 var game_controls: Array[Dictionary] = [
-	{"icons": [ICON_MOUSE], "text": "Haz clic en los botones con el mouse"},
+	{"icons": [ICON_MOUSE], "text": "Memoriza los colores que dice el profesor y haz clic en ellos"},
 	{"icons": [ICON_MOUSE], "text": "Haz clic con el mouse para entrar a la puerta"},
 	{"icons": [ICON_IZQ, ICON_DER], "text": "Muévete con las flechas o A y D (W o Espacio salta)"},
 	{"icons": [ICON_ARR, ICON_ABA, ICON_IZQ, ICON_DER], "text": "Presiona las flechas o W A S D"},

@@ -3,12 +3,24 @@
 [ext_resource type="Script" uid="uid://clapu3s4ph3am" path="res://Microgames/simon_says/scripts/simon_says.gd" id="1_qn4h8"]
 [ext_resource type="Texture2D" uid="uid://dugnsa6bldxwo" path="res://Microgames/simon_says/assets/game_over.jpeg" id="2_gameover"]
 [ext_resource type="Texture2D" uid="uid://moffcqbx3hgh" path="res://Microgames/simon_says/assets/heart.png" id="3_heart"]
+[ext_resource type="Texture2D" path="res://Microgames/simon_says/assets/sala.png" id="4_sala"]
+[ext_resource type="Texture2D" path="res://Microgames/simon_says/assets/profesor_0.png" id="5_prof"]
 
-[sub_resource type="Environment" id="Environment_p1uti"]
-background_mode = 3
-glow_enabled = true
-glow_intensity = 1.54
-glow_bloom = 0.11
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_globo"]
+content_margin_left = 20.0
+content_margin_top = 12.0
+content_margin_right = 20.0
+content_margin_bottom = 14.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.08, 0.08, 0.08, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
 
 [node name="SimonSaysMicrogame" type="Control" unique_id=900250134]
 layout_mode = 3
@@ -19,64 +31,85 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qn4h8")
 
-[node name="GridContainer" type="GridContainer" parent="." unique_id=942863412]
+[node name="Fondo" type="TextureRect" parent="."]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-offset_transform_enabled = true
-offset_transform_position = Vector2(0, 29.05)
-columns = 3
+texture = ExtResource("4_sala")
+expand_mode = 1
 
-[node name="Boton 1" type="Button" parent="GridContainer" unique_id=1551624183]
+[node name="Profesor" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(456, 240)
+scale = Vector2(4, 4)
+texture = ExtResource("5_prof")
+
+[node name="Globo" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 50.0
+offset_right = 1110.0
+offset_bottom = 250.0
+
+[node name="ColaBorde" type="Polygon2D" parent="Globo"]
+color = Color(0.08, 0.08, 0.08, 1)
+polygon = PackedVector2Array(10, 70, 10, 140, -68, 140)
+
+[node name="Panel" type="PanelContainer" parent="Globo"]
+layout_mode = 0
+offset_right = 550.0
+offset_bottom = 190.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_globo")
+
+[node name="VBox" type="VBoxContainer" parent="Globo/Panel"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
 
-[node name="Boton 2" type="Button" parent="GridContainer" unique_id=1298149697]
+[node name="Texto" type="Label" parent="Globo/Panel/VBox"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.08, 0.08, 0.08, 1)
+theme_override_font_sizes/font_size = 28
+text = "¡Memoriza lo que digo!"
+horizontal_alignment = 1
 
-[node name="Boton 3" type="Button" parent="GridContainer" unique_id=116316766]
+[node name="Fila" type="HBoxContainer" parent="Globo/Panel/VBox"]
+custom_minimum_size = Vector2(0, 76)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
 
-[node name="Boton 4" type="Button" parent="GridContainer" unique_id=2012670993]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="ColaRelleno" type="Polygon2D" parent="Globo"]
+color = Color(1, 1, 1, 1)
+polygon = PackedVector2Array(14, 82, 14, 128, -42, 134)
 
-[node name="Boton 5" type="Button" parent="GridContainer" unique_id=2034060818]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="Barra" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -178.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.09, 0.03, 0.05, 0.82)
 
-[node name="Boton 6" type="Button" parent="GridContainer" unique_id=529227110]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Boton 7" type="Button" parent="GridContainer" unique_id=1402597637]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Boton 8" type="Button" parent="GridContainer" unique_id=980379561]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Boton 9" type="Button" parent="GridContainer" unique_id=879108239]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=339634108]
-environment = SubResource("Environment_p1uti")
+[node name="Botones" type="HBoxContainer" parent="Barra"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_right = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
 
 [node name="GameOverUI" type="Control" parent="." unique_id=1403461262]
 visible = false
