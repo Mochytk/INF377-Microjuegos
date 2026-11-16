@@ -46,6 +46,19 @@ position = Vector2(456, 240)
 scale = Vector2(4, 4)
 texture = ExtResource("5_prof")
 
+[node name="NombreProfe" type="Label" parent="."]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 336.0
+offset_right = 576.0
+offset_bottom = 372.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 26
+text = "Profe Simon"
+horizontal_alignment = 1
+
 [node name="Globo" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
