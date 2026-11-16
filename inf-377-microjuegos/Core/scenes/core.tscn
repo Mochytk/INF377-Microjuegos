@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://Core/assets/icon_firma_lista.png" id="15_iconfirmalista"]
 [ext_resource type="Texture2D" path="res://Core/assets/icon_fila_casino.png" id="16_iconfilacasino"]
 [ext_resource type="Texture2D" path="res://Core/assets/icon_despertador.png" id="17_icondespertador"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_micro_lleno.png" id="18_iconmicrolleno"]
 [ext_resource type="Texture2D" uid="uid://d0ngubotgugdu" path="res://Core/assets/icon_microondas.png" id="5_aa113"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p1uti"]
@@ -234,6 +235,16 @@ texture = ExtResource("17_icondespertador")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="IconMicroLleno" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("18_iconmicrolleno")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="Controles" type="VBoxContainer" parent="TransitionUI"]
 visible = false
 layout_mode = 1
@@ -449,7 +460,7 @@ horizontal_alignment = 1
 
 [node name="Texto" type="Label" parent="CreditosUI/Center/VBox"]
 layout_mode = 2
-text = "ReMechón!\nINF377 - Microjuegos\n\nEquipo de desarrollo:\n\nSergio Rojas: Core, Simon Dice, Impresora, Fila del casino\nIsidora Sarmiento: Lluvia de Notas, Enviar Tarea, Bandeja, Despertador\nCristobal Pino: Microondas, No te duermas, Firma la lista\nBenjamin Ponce: Puertas, Wi-Fi, Copiar el pizarrón"
+text = "ReMechón!\nINF377 - Microjuegos\n\nEquipo de desarrollo:\n\nSergio Rojas: Core, Simon Dice, Impresora, Fila del casino\nIsidora Sarmiento: Lluvia de Notas, Enviar Tarea, Bandeja, Despertador\nCristobal Pino: Microondas, No te duermas, Firma la lista\nBenjamin Ponce: Puertas, Wi-Fi, Copiar el pizarrón, Micro lleno"
 label_settings = SubResource("LabelSettings_body")
 horizontal_alignment = 1
 
