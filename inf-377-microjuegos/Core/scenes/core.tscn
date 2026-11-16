@@ -18,6 +18,11 @@
 [ext_resource type="Texture2D" path="res://Core/assets/icon_despertador.png" id="17_icondespertador"]
 [ext_resource type="Texture2D" path="res://Core/assets/icon_micro_lleno.png" id="18_iconmicrolleno"]
 [ext_resource type="Texture2D" path="res://Core/assets/icon_bicicletero.png" id="19_iconbicicletero"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_toma_ramos.png" id="20_icontomaramos"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_trabajo_grupo.png" id="21_icontrabajogrupo"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_fotocopia.png" id="22_iconfotocopia"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_paraguas.png" id="23_iconparaguas"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_cargar_celular.png" id="24_iconcargarcelular"]
 [ext_resource type="Texture2D" uid="uid://d0ngubotgugdu" path="res://Core/assets/icon_microondas.png" id="5_aa113"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p1uti"]
@@ -39,6 +44,12 @@ outline_color = Color(0, 0, 0, 1)
 font_size = 40
 outline_size = 6
 outline_color = Color(0.02, 0.02, 0.06, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_creditos"]
+font_size = 23
+font_color = Color(1, 1, 1, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_body"]
 font_size = 30
@@ -253,6 +264,56 @@ offset_right = 200.0
 offset_bottom = 200.0
 pivot_offset = Vector2(100, 100)
 texture = ExtResource("19_iconbicicletero")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconTomaRamos" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("20_icontomaramos")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconTrabajoGrupo" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("21_icontrabajogrupo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconFotocopia" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("22_iconfotocopia")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconParaguas" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("23_iconparaguas")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconCargarCelular" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("24_iconcargarcelular")
 expand_mode = 1
 stretch_mode = 5
 
@@ -471,8 +532,8 @@ horizontal_alignment = 1
 
 [node name="Texto" type="Label" parent="CreditosUI/Center/VBox"]
 layout_mode = 2
-text = "ReMechón!\nINF377 - Microjuegos\n\nEquipo de desarrollo:\n\nSergio Rojas: Core, Simon Dice, Impresora, Fila del casino\nIsidora Sarmiento: Lluvia de Notas, Enviar Tarea, Bandeja, Despertador\nCristobal Pino: Microondas, No te duermas, Firma la lista, Bicicletero\nBenjamin Ponce: Puertas, Wi-Fi, Copiar el pizarrón, Micro lleno"
-label_settings = SubResource("LabelSettings_body")
+text = "ReMechón!  ·  INF377 - Microjuegos\n\nSergio Rojas\nCore, Simon Dice, Impresora, Fila del casino, Toma de ramos, Paraguas\n\nIsidora Sarmiento\nLluvia de Notas, Enviar Tarea, Bandeja, Despertador, Trabajo en grupo\n\nCristobal Pino\nMicroondas, No te duermas, Firma la lista, Bicicletero, Fotocopia a tiempo\n\nBenjamin Ponce\nPuertas, Wi-Fi, Copiar el pizarrón, Micro lleno, Cargar el celular"
+label_settings = SubResource("LabelSettings_creditos")
 horizontal_alignment = 1
 
 [node name="BtnVolver" type="Button" parent="CreditosUI/Center/VBox"]

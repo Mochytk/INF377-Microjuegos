@@ -1,0 +1,107 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/toma_ramos/scripts/toma_ramos.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/toma_ramos/assets/notebook.png" id="fondo"]
+
+[sub_resource type="LabelSettings" id="LS_header"]
+font_size = 26
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LS_falta"]
+font_size = 24
+font_color = Color(0.2, 0.22, 0.28, 1)
+
+[sub_resource type="LabelSettings" id="LS_ramo"]
+font_size = 34
+font_color = Color(0.75, 0.1, 0.12, 1)
+
+[sub_resource type="LabelSettings" id="LS_aviso"]
+font_size = 26
+font_color = Color(0.8, 0.15, 0.15, 1)
+
+[sub_resource type="StyleBoxFlat" id="SB_header"]
+bg_color = Color(0.12, 0.3, 0.55, 1)
+
+[node name="TomaRamos" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Fondo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("fondo")
+expand_mode = 1
+
+[node name="Header" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 28.0
+offset_right = 1072.0
+offset_bottom = 76.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_header")
+
+[node name="Texto" type="Label" parent="Header"]
+layout_mode = 2
+text = "  PORTAL DE INSCRIPCIÓN DE RAMOS"
+label_settings = SubResource("LS_header")
+vertical_alignment = 1
+
+[node name="Falta" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 84.0
+offset_right = 420.0
+offset_bottom = 132.0
+text = "Te falta inscribir:"
+label_settings = SubResource("LS_falta")
+vertical_alignment = 1
+
+[node name="Ramo" type="Label" parent="."]
+layout_mode = 0
+offset_left = 330.0
+offset_top = 80.0
+offset_right = 1060.0
+offset_bottom = 134.0
+text = "INF-377 · Diseño de Videojuegos"
+label_settings = SubResource("LS_ramo")
+vertical_alignment = 1
+
+[node name="Grid" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 146.0
+offset_right = 1052.0
+offset_bottom = 510.0
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="Aviso" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 516.0
+offset_right = 1052.0
+offset_bottom = 556.0
+label_settings = SubResource("LS_aviso")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+mouse_filter = 2
+show_percentage = false

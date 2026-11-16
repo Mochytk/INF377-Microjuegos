@@ -1,0 +1,152 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/trabajo_grupo/scripts/trabajo_grupo.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/trabajo_grupo/assets/mesa.png" id="mesa"]
+
+[sub_resource type="LabelSettings" id="LS_msg"]
+font_size = 28
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_cuenta"]
+font_size = 44
+font_color = Color(1, 0.85, 0.2, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_grupo"]
+font_size = 24
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LS_error"]
+font_size = 28
+font_color = Color(1, 0.4, 0.35, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="SB_tel"]
+bg_color = Color(0.07, 0.07, 0.09, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+
+[sub_resource type="StyleBoxFlat" id="SB_header"]
+bg_color = Color(0.03, 0.37, 0.33, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+
+[sub_resource type="StyleBoxFlat" id="SB_chat"]
+bg_color = Color(0.9, 0.87, 0.83, 1)
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[node name="TrabajoGrupo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Fondo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("mesa")
+expand_mode = 1
+
+[node name="Telefono" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 326.0
+offset_top = 30.0
+offset_right = 826.0
+offset_bottom = 640.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_tel")
+
+[node name="Header" type="Panel" parent="Telefono"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 16.0
+offset_right = 486.0
+offset_bottom = 72.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_header")
+
+[node name="Nombre" type="Label" parent="Telefono/Header"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 460.0
+offset_bottom = 56.0
+text = "Grupo INF377 · Informe final"
+label_settings = SubResource("LS_grupo")
+vertical_alignment = 1
+
+[node name="Chat" type="Panel" parent="Telefono"]
+clip_contents = true
+layout_mode = 0
+offset_left = 14.0
+offset_top = 72.0
+offset_right = 486.0
+offset_bottom = 594.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_chat")
+
+[node name="Lista" type="VBoxContainer" parent="Telefono/Chat"]
+layout_mode = 0
+offset_left = 10.0
+offset_right = 462.0
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 320.0
+offset_bottom = 220.0
+text = "Haz clic en los
+mensajes que son
+TAREAS.
+¡Ignora los memes!"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
+
+[node name="Cuenta" type="Label" parent="."]
+layout_mode = 0
+offset_left = 836.0
+offset_top = 60.0
+offset_right = 1146.0
+offset_bottom = 200.0
+text = "Tareas
+0 / 3"
+label_settings = SubResource("LS_cuenta")
+horizontal_alignment = 1
+
+[node name="Error" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 836.0
+offset_top = 260.0
+offset_right = 1146.0
+offset_bottom = 340.0
+text = "¡Eso no es
+una tarea!"
+label_settings = SubResource("LS_error")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+mouse_filter = 2
+show_percentage = false

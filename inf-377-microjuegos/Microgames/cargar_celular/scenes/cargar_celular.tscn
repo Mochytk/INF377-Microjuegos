@@ -1,0 +1,128 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/cargar_celular/scripts/cargar_celular.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/cargar_celular/assets/sala_piso.png" id="fondo"]
+[ext_resource type="Texture2D" path="res://Microgames/cargar_celular/assets/celular_bajo.png" id="celular"]
+[ext_resource type="Texture2D" path="res://Microgames/cargar_celular/assets/enchufe.png" id="enchufe"]
+
+[sub_resource type="LabelSettings" id="LS_msg"]
+font_size = 26
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_bat"]
+font_size = 24
+font_color = Color(1, 0.35, 0.3, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_libre"]
+font_size = 24
+font_color = Color(0.35, 1, 0.5, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_fin"]
+font_size = 44
+font_color = Color(1, 0.85, 0.2, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[node name="CargarCelular" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Fondo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("fondo")
+expand_mode = 1
+
+[node name="Pupitres" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="Cable" type="Line2D" parent="."]
+width = 6.0
+default_color = Color(0.96, 0.96, 0.96, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Celular" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(76, 328)
+scale = Vector2(4, 4)
+texture = ExtResource("celular")
+
+[node name="Enchufe" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(150, 328)
+scale = Vector2(4, 4)
+texture = ExtResource("enchufe")
+
+[node name="Bateria" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 400.0
+offset_right = 140.0
+offset_bottom = 434.0
+text = "1%"
+label_settings = SubResource("LS_bat")
+horizontal_alignment = 1
+
+[node name="Aqui" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = 250.0
+offset_right = 1150.0
+offset_bottom = 284.0
+text = "ENCHUFE ▼"
+label_settings = SubResource("LS_libre")
+horizontal_alignment = 1
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 22.0
+offset_bottom = 60.0
+grow_horizontal = 2
+text = "Haz clic en el cargador y llévalo al enchufe sin tocar los pupitres"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
+
+[node name="Fin" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LS_fin")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+mouse_filter = 2
+show_percentage = false
