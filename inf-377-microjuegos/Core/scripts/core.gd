@@ -11,8 +11,9 @@ const MAX_POINTS := 20.0
 # Juegos que se ven en el carrusel al mismo tiempo. El que se juega sale del carrusel y entra
 # uno nuevo.
 const BAG_SIZE := 4
-# Cada cuántos juegos jugados sube la dificultad en 1. No tiene tope: crece mientras dure la partida.
-const GAMES_PER_LEVEL := 3
+# Cada cuántos juegos GANADOS sube la dificultad en 1 (las derrotas no cuentan). No tiene tope:
+# crece mientras dure la partida.
+const WINS_PER_LEVEL := 2
 # Bono por racha: cada victoria seguida suma +10% al puntaje del juego (x1.1, x1.2, ...), con tope x1.5.
 const STREAK_STEP := 0.1
 const STREAK_MAX := 1.5
@@ -117,7 +118,7 @@ var bag: Array[int] = []         # juegos que están en el carrusel, por puesto
 var deck: Array[int] = []        # juegos que esperan su turno para entrar al carrusel
 var discard: Array[int] = []     # juegos ya jugados; vuelven al mazo cuando este se acaba
 var played_slot: int = -1        # puesto del carrusel que hay que reemplazar (-1 = ninguno)
-var games_in_round: int = 0      # juegos jugados desde la última subida de dificultad
+var wins_in_round: int = 0       # juegos ganados desde la última subida de dificultad
 var score: float = 0.0
 var lives: int = START_LIVES
 # Dificultad global que leen los microjuegos (1.0 = nivel inicial, el más fácil).
@@ -181,7 +182,7 @@ func _new_bag() -> void:
 	for i in range(mini(BAG_SIZE, deck.size())):
 		bag.append(deck.pop_back())
 	played_slot = -1
-	games_in_round = 0
+	wins_in_round = 0
 	carrusel.set_games(bag)
 
 # Saca del mazo el juego que entra al carrusel en lugar del que se acaba de jugar.
@@ -274,12 +275,13 @@ func end_microgame(won: bool, performance: float = 1.0) -> void:
 	if played_slot >= 0:
 		bag[played_slot] = _draw_game(bag[played_slot])
 
-	# Cada GAMES_PER_LEVEL juegos jugados sube la dificultad.
-	games_in_round += 1
-	if games_in_round >= GAMES_PER_LEVEL:
-		games_in_round = 0
-		difficulty += 1.0
-		print("¡Ronda completa! Dificultad: ", difficulty)
+	# Cada WINS_PER_LEVEL juegos ganados sube la dificultad.
+	if won:
+		wins_in_round += 1
+		if wins_in_round >= WINS_PER_LEVEL:
+			wins_in_round = 0
+			difficulty += 1.0
+			print("¡Subes de nivel! Dificultad: ", difficulty)
 	start_roulette()
 
 # ---------- Pantalla de resultado ----------
