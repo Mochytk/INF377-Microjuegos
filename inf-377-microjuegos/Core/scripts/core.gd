@@ -52,7 +52,7 @@ const ICON_ARR := preload("res://Core/assets/controles/flecha_up.png")
 const ICON_ABA := preload("res://Core/assets/controles/flecha_down.png")
 
 # Orden igual al de los iconos del carrusel.
-var game_names: Array[String] = ["Simon Dice", "Puerta", "Lluvia de Notas", "Microondas", "Enviar Tarea", "Bandeja", "Impresora", "Wi-Fi", "No te duermas", "Copiar el pizarrón", "Firma la lista", "Fila del casino", "Despertador", "Micro lleno", "Bicicletero", "Toma de ramos", "Trabajo en grupo"]
+var game_names: Array[String] = ["Simon Dice", "Puerta", "Lluvia de Notas", "Microondas", "Enviar Tarea", "Bandeja", "Impresora", "Wi-Fi", "No te duermas", "Copiar el pizarrón", "Firma la lista", "Fila del casino", "Despertador", "Micro lleno", "Bicicletero", "Toma de ramos", "Trabajo en grupo", "Fotocopia a tiempo"]
 # Controles de cada juego (mismo orden): iconos y texto que se muestran en "¡PREPÁRATE!".
 var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_MOUSE], "text": "Memoriza los colores que dice el profesor y haz clic en ellos"},
@@ -72,6 +72,7 @@ var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_ARR, ICON_ABA, ICON_IZQ, ICON_DER], "text": "Maneja con las flechas (o WASD) hasta el puesto LIBRE sin chocar"},
 	{"icons": [ICON_MOUSE], "text": "Haz clic en el ramo que te falta antes de que se acaben los cupos"},
 	{"icons": [ICON_MOUSE], "text": "Haz clic en los mensajes que son tareas. ¡Ignora los memes!"},
+	{"icons": [ICON_MOUSE], "text": "Mueve el mouse para atrapar las hojas con la carpeta"},
 ]
 var microgames: Array[String] = [
 	"res://Microgames/simon_says/scenes/simon_says.tscn",
@@ -91,6 +92,7 @@ var microgames: Array[String] = [
 	"res://Microgames/bicicletero/scenes/bicicletero.tscn",
 	"res://Microgames/toma_ramos/scenes/toma_ramos.tscn",
 	"res://Microgames/trabajo_grupo/scenes/trabajo_grupo.tscn",
+	"res://Microgames/fotocopia/scenes/fotocopia.tscn",
 ]
 
 var bag: Array[int] = []         # juegos que están en el carrusel, por puesto

@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" path="res://Core/assets/icon_bicicletero.png" id="19_iconbicicletero"]
 [ext_resource type="Texture2D" path="res://Core/assets/icon_toma_ramos.png" id="20_icontomaramos"]
 [ext_resource type="Texture2D" path="res://Core/assets/icon_trabajo_grupo.png" id="21_icontrabajogrupo"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_fotocopia.png" id="22_iconfotocopia"]
 [ext_resource type="Texture2D" uid="uid://d0ngubotgugdu" path="res://Core/assets/icon_microondas.png" id="5_aa113"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p1uti"]
@@ -278,6 +279,16 @@ texture = ExtResource("21_icontrabajogrupo")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="IconFotocopia" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("22_iconfotocopia")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="Controles" type="VBoxContainer" parent="TransitionUI"]
 visible = false
 layout_mode = 1
@@ -493,7 +504,7 @@ horizontal_alignment = 1
 
 [node name="Texto" type="Label" parent="CreditosUI/Center/VBox"]
 layout_mode = 2
-text = "ReMechón!\nINF377 - Microjuegos\n\nEquipo de desarrollo:\n\nSergio Rojas: Core, Simon Dice, Impresora, Fila del casino, Toma de ramos\nIsidora Sarmiento: Lluvia de Notas, Enviar Tarea, Bandeja, Despertador, Trabajo en grupo\nCristobal Pino: Microondas, No te duermas, Firma la lista, Bicicletero\nBenjamin Ponce: Puertas, Wi-Fi, Copiar el pizarrón, Micro lleno"
+text = "ReMechón!\nINF377 - Microjuegos\n\nEquipo de desarrollo:\n\nSergio Rojas: Core, Simon Dice, Impresora, Fila del casino, Toma de ramos\nIsidora Sarmiento: Lluvia de Notas, Enviar Tarea, Bandeja, Despertador, Trabajo en grupo\nCristobal Pino: Microondas, No te duermas, Firma la lista, Bicicletero, Fotocopia a tiempo\nBenjamin Ponce: Puertas, Wi-Fi, Copiar el pizarrón, Micro lleno"
 label_settings = SubResource("LabelSettings_body")
 horizontal_alignment = 1
 
