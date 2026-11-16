@@ -50,7 +50,7 @@ var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_MOUSE], "text": "Memoriza los colores que dice el profesor y haz clic en ellos"},
 	{"icons": [ICON_MOUSE], "text": "Haz clic con el mouse para entrar a la puerta"},
 	{"icons": [ICON_IZQ, ICON_DER], "text": "Muévete con las flechas o A y D (W o Espacio salta)"},
-	{"icons": [ICON_ARR, ICON_ABA, ICON_IZQ, ICON_DER], "text": "Presiona las flechas o W A S D"},
+	{"icons": [ICON_ARR, ICON_ABA, ICON_IZQ, ICON_DER], "text": "Presiona las flechas (o WASD) para llegar primero al microondas"},
 	{"icons": [ICON_MOUSE], "text": "Haz clic en el botón antes de que escape"},
 ]
 var microgames: Array[String] = [
