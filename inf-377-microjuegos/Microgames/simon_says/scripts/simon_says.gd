@@ -1,5 +1,5 @@
 extends Control
-## Simon Dice: un profesor dice una secuencia de colores en un globo de texto y el
+## Simón dice: un profesor dice una secuencia de colores en un globo de texto y el
 ## jugador la repite haciendo clic con el mouse en los botones de colores.
 
 const COLORS := [

@@ -1,5 +1,5 @@
 extends Control
-## Micro lleno: la micro llega repleta y la puerta está tapada de gente. Hay que hacer clic en
+## Micro llena: la micro llega repleta y la puerta está tapada de gente. Hay que hacer clic en
 ## cada pasajero para que se corra hacia adentro y así poder subir antes de que cierre la puerta.
 ## Los que llevan mochilón necesitan dos clics.
 
