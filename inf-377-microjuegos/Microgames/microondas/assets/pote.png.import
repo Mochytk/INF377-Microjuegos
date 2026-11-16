@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bilbhos1rdiap"
-path="res://.godot/imported/Wallfloordoorw First Spritesheet 1.png-18ff5c7553868b568da19863d7ee3200.ctex"
+uid="uid://c53eu8nyaxgh"
+path="res://.godot/imported/pote.png-dad7c5e13650fa39d9b223a940048de2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Microgames/microondas/assets/Wallfloordoorw First Spritesheet 1.png"
-dest_files=["res://.godot/imported/Wallfloordoorw First Spritesheet 1.png-18ff5c7553868b568da19863d7ee3200.ctex"]
+source_file="res://Microgames/microondas/assets/pote.png"
+dest_files=["res://.godot/imported/pote.png-dad7c5e13650fa39d9b223a940048de2.ctex"]
 
 [params]
 
