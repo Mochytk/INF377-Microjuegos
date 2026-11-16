@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxcit6pnx24nt"
-path="res://.godot/imported/Unarmed_Idle_with_shadow.png-e4790cd5ca2bcf9d93dc246f4f35c28c.ctex"
+uid="uid://uidh462plkp3"
+path="res://.godot/imported/rival_0.png-153474c8475d3d89fd48c8ba552b180f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Microgames/microondas/assets/Unarmed_Idle_with_shadow.png"
-dest_files=["res://.godot/imported/Unarmed_Idle_with_shadow.png-e4790cd5ca2bcf9d93dc246f4f35c28c.ctex"]
+source_file="res://Microgames/microondas/assets/rival_0.png"
+dest_files=["res://.godot/imported/rival_0.png-153474c8475d3d89fd48c8ba552b180f.ctex"]
 
 [params]
 

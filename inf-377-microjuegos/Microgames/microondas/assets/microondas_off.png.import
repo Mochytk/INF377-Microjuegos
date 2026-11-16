@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c436l4n2dvyl6"
-path="res://.godot/imported/Cafeteria Second Spritesheet 1.png-4a6ef9c94a97318664de55e4555bba62.ctex"
+uid="uid://1vaab6kcvi47"
+path="res://.godot/imported/microondas_off.png-5ddb36469f46c3d13fe3a2379bc0f8e6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Microgames/microondas/assets/Cafeteria Second Spritesheet 1.png"
-dest_files=["res://.godot/imported/Cafeteria Second Spritesheet 1.png-4a6ef9c94a97318664de55e4555bba62.ctex"]
+source_file="res://Microgames/microondas/assets/microondas_off.png"
+dest_files=["res://.godot/imported/microondas_off.png-5ddb36469f46c3d13fe3a2379bc0f8e6.ctex"]
 
 [params]
 
