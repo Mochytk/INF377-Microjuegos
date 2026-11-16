@@ -1,0 +1,117 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/corre_micro/scripts/corre_micro.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/corre_micro/assets/calle.png" id="calle"]
+[ext_resource type="Texture2D" path="res://Microgames/corre_micro/assets/paradero.png" id="paradero"]
+[ext_resource type="Texture2D" path="res://Microgames/corre_micro/assets/micro.png" id="micro"]
+[ext_resource type="Texture2D" path="res://Microgames/corre_micro/assets/jugador_0.png" id="jugador"]
+[ext_resource type="Texture2D" path="res://Core/assets/controles/flecha_left.png" id="izq"]
+[ext_resource type="Texture2D" path="res://Core/assets/controles/flecha_right.png" id="der"]
+
+[sub_resource type="LabelSettings" id="LS_msg"]
+font_size = 28
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_fin"]
+font_size = 44
+font_color = Color(1, 0.85, 0.2, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[node name="CorreMicro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Fondo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("calle")
+expand_mode = 1
+
+[node name="Micro" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(960, 470)
+z_index = 1
+scale = Vector2(4, 4)
+texture = ExtResource("micro")
+
+[node name="Humo" type="Node2D" parent="."]
+
+[node name="Paradero" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(650, 386)
+scale = Vector2(4, 4)
+texture = ExtResource("paradero")
+
+[node name="Jugador" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(110, 476)
+scale = Vector2(4, 4)
+texture = ExtResource("jugador")
+centered = false
+offset = Vector2(-11, -36)
+
+[node name="Izq" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 436.0
+offset_top = 540.0
+offset_right = 532.0
+offset_bottom = 636.0
+pivot_offset = Vector2(48, 48)
+mouse_filter = 2
+texture = ExtResource("izq")
+expand_mode = 1
+
+[node name="Der" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 620.0
+offset_top = 540.0
+offset_right = 716.0
+offset_bottom = 636.0
+pivot_offset = Vector2(48, 48)
+mouse_filter = 2
+texture = ExtResource("der")
+expand_mode = 1
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 26.0
+offset_bottom = 66.0
+grow_horizontal = 2
+text = "¡Alterna ←  →  rápido para alcanzar la micro!"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
+
+[node name="Fin" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 150.0
+offset_bottom = 220.0
+grow_horizontal = 2
+label_settings = SubResource("LS_fin")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+mouse_filter = 2
+show_percentage = false
