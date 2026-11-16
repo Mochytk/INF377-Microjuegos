@@ -38,9 +38,11 @@ func _ready() -> void:
 	var core = get_parent()
 	var d: float = core.difficulty if "difficulty" in core else 1.0
 	var level := clampf(d - 1.0, 0.0, 6.0)
+	# Sobre el nivel 7 la dificultad sigue creciendo sin tope: cada nivel extra apura todo un 8 % más
+	var apuro := 1.0 + 0.08 * maxf(0.0, d - 7.0)
 	total = 6 + int(level)
-	intervalo = maxf(0.55, 0.9 - 0.06 * level)
-	dispersion = 200.0 + 30.0 * level
+	intervalo = maxf(0.55, 0.9 - 0.06 * level) / apuro
+	dispersion = (200.0 + 30.0 * level) * apuro
 	max_perdidas = 2 + int(total / 6.0)
 	_update_count()
 	playing = true

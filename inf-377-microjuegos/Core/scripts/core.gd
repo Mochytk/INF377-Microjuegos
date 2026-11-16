@@ -9,8 +9,10 @@ const PREPARE_TIME := 4.0
 # Puntaje por juego: 20 puntos con rendimiento perfecto, multiplicado por la dificultad.
 const MAX_POINTS := 20.0
 # Juegos que se ven en el carrusel al mismo tiempo. El que se juega sale del carrusel y entra
-# uno nuevo. Cada BAG_SIZE juegos jugados sube la dificultad.
+# uno nuevo.
 const BAG_SIZE := 4
+# Cada cuántos juegos jugados sube la dificultad en 1. No tiene tope: crece mientras dure la partida.
+const GAMES_PER_LEVEL := 3
 # Bono por racha: cada victoria seguida suma +10% al puntaje del juego (x1.1, x1.2, ...), con tope x1.5.
 const STREAK_STEP := 0.1
 const STREAK_MAX := 1.5
@@ -260,9 +262,9 @@ func end_microgame(won: bool, performance: float = 1.0) -> void:
 	if played_slot >= 0:
 		bag[played_slot] = _draw_game(bag[played_slot])
 
-	# Cada BAG_SIZE juegos jugados sube la dificultad.
+	# Cada GAMES_PER_LEVEL juegos jugados sube la dificultad.
 	games_in_round += 1
-	if games_in_round >= BAG_SIZE:
+	if games_in_round >= GAMES_PER_LEVEL:
 		games_in_round = 0
 		difficulty += 1.0
 		print("¡Ronda completa! Dificultad: ", difficulty)

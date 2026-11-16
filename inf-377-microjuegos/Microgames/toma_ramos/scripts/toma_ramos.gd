@@ -31,9 +31,11 @@ func _ready() -> void:
 	var core = get_parent()
 	var d: float = core.difficulty if "difficulty" in core else 1.0
 	var level := clampf(d - 1.0, 0.0, 6.0)
+	# Sobre el nivel 7 la dificultad sigue creciendo sin tope: cada nivel extra apura todo un 8 % más
+	var apuro := 1.0 + 0.08 * maxf(0.0, d - 7.0)
 	var n := 4 if level < 2.0 else (6 if level < 5.0 else 8)
 	var parecidos := mini(3, int(level))
-	time_limit = maxf(5.0, 7.5 - 0.4 * level)
+	time_limit = maxf(5.0, 7.5 - 0.4 * level) / apuro
 	recarga_pendiente = level >= 3.0
 	timer_bar.max_value = time_limit
 	timer_bar.value = time_limit

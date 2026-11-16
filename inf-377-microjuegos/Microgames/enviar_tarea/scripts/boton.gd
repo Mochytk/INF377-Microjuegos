@@ -19,11 +19,13 @@ func _ready() -> void:
 	var core = get_parent().get_parent()
 	var d: float = core.difficulty if "difficulty" in core else 1.0
 	var level := clampf(d - 1.0, 0.0, 6.0)
-	velocidad = minf(850.0, 450.0 + 65.0 * level)
+	# Sobre el nivel 7 la dificultad sigue creciendo sin tope: cada nivel extra apura todo un 8 % más
+	var apuro := 1.0 + 0.08 * maxf(0.0, d - 7.0)
+	velocidad = minf(850.0, 450.0 + 65.0 * level) * apuro
 
 	randomize()
 	direccion = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
-	timer.wait_time = maxf(3.5, 5.0 - 0.25 * level)
+	timer.wait_time = maxf(3.5, 5.0 - 0.25 * level) / apuro
 	timer.one_shot = true
 	timer.timeout.connect(_on_timer_timeout)
 	label.text = str(timer.wait_time)

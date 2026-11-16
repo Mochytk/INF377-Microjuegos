@@ -33,10 +33,12 @@ func _ready() -> void:
 	var core = get_parent()
 	var d: float = core.difficulty if "difficulty" in core else 1.0
 	var level := clampf(d - 1.0, 0.0, 6.0)
+	# Sobre el nivel 7 la dificultad sigue creciendo sin tope: cada nivel extra apura todo un 8 % más
+	var apuro := 1.0 + 0.08 * maxf(0.0, d - 7.0)
 	total = mini(6, 3 + int(level / 2.0))
 	n_botones = 3 if level >= 2.0 else 2
 	alto_boton = 110.0 if level < 4.0 else 80.0
-	time_limit = 1.5 + maxf(1.0, 1.7 - 0.1 * level) * total
+	time_limit = (1.5 + maxf(1.0, 1.7 - 0.1 * level) * total) / apuro
 	timer_bar.max_value = time_limit
 	timer_bar.value = time_limit
 	_next_alarm()

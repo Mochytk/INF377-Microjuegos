@@ -39,6 +39,8 @@ func _ready() -> void:
 	var core = get_parent()
 	var d: float = core.difficulty if "difficulty" in core else 1.0
 	var level := clampf(d - 1.0, 0.0, 6.0)
+	# Sobre el nivel 7 la dificultad sigue creciendo sin tope: cada nivel extra apura todo un 8 % más
+	var apuro := 1.0 + 0.08 * maxf(0.0, d - 7.0)
 	var problemas: Array = [ATASCO, SIN_PAPEL]
 	problemas.shuffle()
 	if level < 2.0:
@@ -46,7 +48,7 @@ func _ready() -> void:
 	for p in problemas:
 		pasos.append_array(p)
 	pasos.append_array(IMPRIMIR)
-	time_limit = maxf(pasos.size() * 1.6, pasos.size() * 2.3 - 0.3 * level)
+	time_limit = maxf(pasos.size() * 1.6, pasos.size() * 2.3 - 0.3 * level) / apuro
 	timer_bar.max_value = time_limit
 	timer_bar.value = time_limit
 
