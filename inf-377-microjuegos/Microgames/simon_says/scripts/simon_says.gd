@@ -16,7 +16,6 @@ const TEX_BOCA_ABIERTA := preload("res://Microgames/simon_says/assets/profesor_1
 
 @onready var botones = $Barra/Botones
 @onready var timer_bar = $ProgressBar
-@onready var game_over_ui = $GameOverUI
 @onready var profesor: Sprite2D = $Profesor
 @onready var texto: Label = $Globo/Panel/VBox/Texto
 @onready var fila: HBoxContainer = $Globo/Panel/VBox/Fila
@@ -41,7 +40,6 @@ func _ready() -> void:
 	show_time = maxf(0.6, 0.9 - 0.04 * level)
 	time_limit = maxf(4.0, 5.0 - 0.2 * level)
 
-	game_over_ui.hide()
 	timer_bar.max_value = time_limit
 	timer_bar.value = time_limit
 	_build_buttons()
@@ -204,7 +202,6 @@ func lose_game() -> void:
 	finished = true
 	is_player_turn = false
 	talking = false
-	# Muestra el GAME OVER con el corazón un momento antes de avisar al Core
-	game_over_ui.show()
-	await get_tree().create_timer(1.2).timeout
+	texto.text = "¡Ups! Esa no era..."
+	await get_tree().create_timer(0.8).timeout
 	get_parent().end_microgame(false)

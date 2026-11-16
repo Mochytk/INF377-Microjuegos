@@ -15,7 +15,10 @@ const MIN_PERFORMANCE := 0.25
 
 @onready var transition_ui = $TransitionUI
 @onready var instruction_label = $TransitionUI/InstructionLabel
-@onready var stats_label = $TransitionUI/StatsLabel
+@onready var vidas_label: Label = $TransitionUI/Hud/Vidas/VidasLabel
+@onready var heart_icon: TextureRect = $TransitionUI/Hud/Vidas/HeartIcon
+@onready var puntaje_hud: Label = $TransitionUI/Hud/PuntajeLabel
+@onready var nivel_hud: Label = $TransitionUI/Hud/NivelLabel
 @onready var landing_ui = $LandingUI
 @onready var tabla_ui = $TablaUI
 @onready var creditos_ui = $CreditosUI
@@ -31,6 +34,9 @@ const MIN_PERFORMANCE := 0.25
 @onready var controles_iconos = $TransitionUI/Controles/Iconos
 @onready var controles_texto = $TransitionUI/Controles/Texto
 
+const HEART_FULL := preload("res://Core/assets/corazon.png")
+const HEART_LEFT := preload("res://Core/assets/corazon_izq.png")
+const HEART_RIGHT := preload("res://Core/assets/corazon_der.png")
 const ICON_MOUSE := preload("res://Core/assets/controles/mouse.png")
 const ICON_IZQ := preload("res://Core/assets/controles/flecha_left.png")
 const ICON_DER := preload("res://Core/assets/controles/flecha_right.png")
@@ -62,6 +68,9 @@ var lives: int = START_LIVES
 # Dificultad global que leen los microjuegos (1.0 = nivel inicial, el más fácil).
 var difficulty: float = MIN_DIFFICULTY
 var last_points: float = 0.0
+# Valores que muestra el HUD: se actualizan con las animaciones, no de golpe
+var shown_score: float = 0.0
+var shown_lives: int = START_LIVES
 var current_game_instance: Node = null
 
 func _ready() -> void:
@@ -98,6 +107,8 @@ func start_game() -> void:
 	score = 0.0
 	last_points = 0.0
 	lives = START_LIVES
+	shown_score = 0.0
+	shown_lives = START_LIVES
 	difficulty = MIN_DIFFICULTY
 	_refill_bag()
 	start_roulette()
@@ -111,7 +122,7 @@ func _refill_bag() -> void:
 func start_roulette() -> void:
 	_show_only(transition_ui)
 	instruction_label.text = "ReMechón!"
-	stats_label.text = "Vidas: %d     Puntaje: %s (+%s)     Nivel: %s" % [lives, _fmt(score), _fmt(last_points), _fmt(difficulty)]
+	_update_hud()
 	nombre_label.text = ""
 	controles.hide()
 	carrusel.show()
@@ -162,6 +173,9 @@ func end_microgame(won: bool, performance: float = 1.0) -> void:
 		difficulty = maxf(MIN_DIFFICULTY, difficulty - 0.5)
 		print("¡Fallaste! Vidas restantes: ", lives)
 
+	# Pantalla de resultado: sube el puntaje o se rompe el corazón
+	await show_result(won, last_points, performance >= 0.999)
+
 	if lives <= 0:
 		show_game_over()
 		return
@@ -172,6 +186,132 @@ func end_microgame(won: bool, performance: float = 1.0) -> void:
 		_refill_bag()
 		print("¡Ronda completa! Dificultad: ", difficulty)
 	start_roulette()
+
+# ---------- Pantalla de resultado ----------
+
+func _update_hud() -> void:
+	vidas_label.text = str(shown_lives)
+	puntaje_hud.text = "Puntaje: " + _fmt(shown_score)
+	nivel_hud.text = "Nivel: " + _fmt(difficulty)
+
+func _set_shown_score(v: float) -> void:
+	shown_score = v
+	_update_hud()
+
+func _result_label(text: String, size: int, color: Color) -> Label:
+	var ls := LabelSettings.new()
+	ls.font_size = size
+	ls.font_color = color
+	ls.outline_size = maxi(6, size / 8)
+	ls.outline_color = Color(0.45, 0.07, 0.07, 1) if color.r > 0.9 and color.g > 0.7 else Color(0.2, 0.0, 0.0, 1)
+	var l := Label.new()
+	l.label_settings = ls
+	l.text = text
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	transition_ui.add_child(l)
+	l.reset_size()
+	l.pivot_offset = l.size / 2.0
+	return l
+
+func _pop_node(node: Control, peak: float = 1.3) -> void:
+	node.pivot_offset = node.size / 2.0
+	var tw := create_tween()
+	tw.tween_property(node, "scale", Vector2(peak, peak), 0.1)
+	tw.tween_property(node, "scale", Vector2.ONE, 0.15)
+
+func show_result(won: bool, points: float, perfect: bool) -> void:
+	_show_only(transition_ui)
+	carrusel.hide()
+	controles.hide()
+	nombre_label.text = ""
+	_update_hud()
+	if won:
+		instruction_label.text = "¡PERFECTO!" if perfect else "¡BIEN HECHO!"
+		await _anim_win(points)
+	else:
+		instruction_label.text = "¡FALLASTE!"
+		await _anim_lose()
+	await get_tree().create_timer(0.5).timeout
+
+# "+20": aparece en el centro, viaja hasta el puntaje de abajo y se suma
+func _anim_win(points: float) -> void:
+	var lbl := _result_label("+" + _fmt(points), 130, Color(1, 0.85, 0.2))
+	var center := size / 2.0
+	lbl.position = center - lbl.size / 2.0
+	lbl.scale = Vector2(0.3, 0.3)
+	var tw := create_tween()
+	tw.tween_property(lbl, "scale", Vector2(1.25, 1.25), 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_property(lbl, "scale", Vector2.ONE, 0.1)
+	await tw.finished
+	await get_tree().create_timer(0.6).timeout
+
+	var target := puntaje_hud.global_position + puntaje_hud.size / 2.0 - lbl.size / 2.0
+	var fly := create_tween().set_parallel(true)
+	fly.tween_property(lbl, "global_position", target, 0.6).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	fly.tween_property(lbl, "scale", Vector2(0.3, 0.3), 0.6).set_ease(Tween.EASE_IN)
+	await fly.finished
+	lbl.queue_free()
+
+	# La suma sube de a poco hasta el puntaje nuevo
+	var from := shown_score
+	var count := create_tween()
+	count.tween_method(_set_shown_score, from, score, 0.6)
+	_pop_node(puntaje_hud, 1.2)
+	await count.finished
+	shown_score = score
+	_update_hud()
+
+# El corazón se rompe en dos y el "-1" sube sobre las vidas desvaneciéndose
+func _anim_lose() -> void:
+	var heart_size := Vector2(15, 13) * 16.0
+	var pos := size / 2.0 - heart_size / 2.0
+	var make := func(tex: Texture2D) -> TextureRect:
+		var r := TextureRect.new()
+		r.texture = tex
+		r.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		r.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		r.stretch_mode = TextureRect.STRETCH_SCALE
+		r.size = heart_size
+		r.position = pos
+		r.pivot_offset = Vector2(heart_size.x / 2.0, heart_size.y)
+		r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		transition_ui.add_child(r)
+		return r
+	var heart: TextureRect = make.call(HEART_FULL)
+	# Latido y temblor antes de romperse
+	var shake := create_tween()
+	for i in range(6):
+		shake.tween_property(heart, "position:x", pos.x + (10 if i % 2 == 0 else -10), 0.05)
+	shake.tween_property(heart, "position:x", pos.x, 0.05)
+	await shake.finished
+	heart.queue_free()
+
+	var left: TextureRect = make.call(HEART_LEFT)
+	var right: TextureRect = make.call(HEART_RIGHT)
+	var br := create_tween().set_parallel(true)
+	br.tween_property(left, "position", pos + Vector2(-110, 150), 0.9).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	br.tween_property(left, "rotation", -0.6, 0.9)
+	br.tween_property(left, "modulate:a", 0.0, 0.9).set_delay(0.3)
+	br.tween_property(right, "position", pos + Vector2(110, 150), 0.9).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	br.tween_property(right, "rotation", 0.6, 0.9)
+	br.tween_property(right, "modulate:a", 0.0, 0.9).set_delay(0.3)
+	await get_tree().create_timer(0.5).timeout
+
+	# "-1" sobre el número de vidas: sube y se vuelve transparente
+	var minus := _result_label("-1", 90, Color(1, 0.3, 0.3))
+	minus.global_position = vidas_label.global_position + vidas_label.size / 2.0 - minus.size / 2.0 - Vector2(0, 50)
+	var start_y := minus.position.y
+	var up := create_tween().set_parallel(true)
+	up.tween_property(minus, "position:y", start_y - 90.0, 1.0).set_ease(Tween.EASE_OUT)
+	up.tween_property(minus, "modulate:a", 0.0, 1.0).set_delay(0.2)
+	shown_lives = lives
+	_update_hud()
+	_pop_node(vidas_label, 1.4)
+	_pop_node(heart_icon, 0.7)
+	await up.finished
+	minus.queue_free()
+	left.queue_free()
+	right.queue_free()
 
 # Rendimiento (0-1) según la fracción del tiempo usada (0 = instantáneo, 1 = justo a tiempo).
 func time_performance(used_ratio: float) -> float:

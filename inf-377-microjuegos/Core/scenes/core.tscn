@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cunccjwm8yas" path="res://Microgames/puerta/assets/Dor_sprite.jpg" id="3_aa113"]
 [ext_resource type="Texture2D" uid="uid://cim7amyjk0sr1" path="res://Core/assets/icon_lluvia.png" id="3_tjgqf"]
 [ext_resource type="Script" path="res://Core/scripts/carrusel.gd" id="6_carrusel"]
+[ext_resource type="Texture2D" path="res://Core/assets/corazon.png" id="8_corazon"]
 [ext_resource type="Texture2D" path="res://Core/assets/icon_enviar_tarea.png" id="7_enviar"]
 [ext_resource type="Texture2D" uid="uid://d0ngubotgugdu" path="res://Core/assets/icon_microondas.png" id="5_aa113"]
 
@@ -19,6 +20,11 @@ outline_color = Color(0.7, 0.1, 0.1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_head"]
 font_size = 56
+
+[sub_resource type="LabelSettings" id="LabelSettings_hud"]
+font_size = 40
+outline_size = 6
+outline_color = Color(0.05, 0.05, 0.12, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_body"]
 font_size = 30
@@ -177,22 +183,53 @@ text = ""
 label_settings = SubResource("LabelSettings_head")
 horizontal_alignment = 1
 
-[node name="StatsLabel" type="Label" parent="TransitionUI"]
+[node name="Hud" type="HBoxContainer" parent="TransitionUI"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -400.0
-offset_top = -90.0
-offset_right = 400.0
+offset_left = -450.0
+offset_top = -100.0
+offset_right = 450.0
 offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 0
-text = ""
-label_settings = SubResource("LabelSettings_body")
-horizontal_alignment = 1
+theme_override_constants/separation = 70
+alignment = 1
+
+[node name="Vidas" type="HBoxContainer" parent="TransitionUI/Hud"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HeartIcon" type="TextureRect" parent="TransitionUI/Hud/Vidas"]
+texture_filter = 1
+custom_minimum_size = Vector2(60, 52)
+layout_mode = 2
+size_flags_vertical = 4
+pivot_offset = Vector2(30, 26)
+texture = ExtResource("8_corazon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VidasLabel" type="Label" parent="TransitionUI/Hud/Vidas"]
+layout_mode = 2
+text = "3"
+label_settings = SubResource("LabelSettings_hud")
+vertical_alignment = 1
+
+[node name="PuntajeLabel" type="Label" parent="TransitionUI/Hud"]
+layout_mode = 2
+text = "Puntaje: 0"
+label_settings = SubResource("LabelSettings_hud")
+vertical_alignment = 1
+
+[node name="NivelLabel" type="Label" parent="TransitionUI/Hud"]
+layout_mode = 2
+text = "Nivel: 1"
+label_settings = SubResource("LabelSettings_hud")
+vertical_alignment = 1
 
 [node name="LandingUI" type="ColorRect" parent="."]
 visible = false
