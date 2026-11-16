@@ -1,0 +1,155 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/despertador/scripts/despertador.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/despertador/assets/pieza_dormido.png" id="pieza"]
+
+[sub_resource type="LabelSettings" id="LS_msg"]
+font_size = 30
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_hora"]
+font_size = 76
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LS_alarma"]
+font_size = 26
+font_color = Color(1, 0.85, 0.2, 1)
+
+[sub_resource type="LabelSettings" id="LS_zzz"]
+font_size = 40
+font_color = Color(0.75, 0.85, 1, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_error"]
+font_size = 28
+font_color = Color(1, 0.4, 0.35, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="SB_tel"]
+bg_color = Color(0.07, 0.07, 0.09, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3, 0.32, 0.38, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+
+[sub_resource type="StyleBoxFlat" id="SB_pantalla"]
+bg_color = Color(0.1, 0.12, 0.24, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="Despertador" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Fondo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("pieza")
+expand_mode = 1
+
+[node name="Zzz" type="Label" parent="."]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 310.0
+offset_right = 260.0
+offset_bottom = 360.0
+text = "Zzz..."
+label_settings = SubResource("LS_zzz")
+
+[node name="Telefono" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 84.0
+offset_right = 1084.0
+offset_bottom = 624.0
+pivot_offset = Vector2(210, 270)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_tel")
+
+[node name="Pantalla" type="Panel" parent="Telefono"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 34.0
+offset_right = 402.0
+offset_bottom = 506.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_pantalla")
+
+[node name="Alarma" type="Label" parent="Telefono/Pantalla"]
+layout_mode = 0
+offset_top = 26.0
+offset_right = 384.0
+offset_bottom = 62.0
+text = "ALARMA 1 de 3"
+label_settings = SubResource("LS_alarma")
+horizontal_alignment = 1
+
+[node name="Hora" type="Label" parent="Telefono/Pantalla"]
+layout_mode = 0
+offset_top = 62.0
+offset_right = 384.0
+offset_bottom = 160.0
+text = "07:00"
+label_settings = SubResource("LS_hora")
+horizontal_alignment = 1
+
+[node name="Botones" type="Control" parent="Telefono/Pantalla"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 12.0
+offset_top = 176.0
+offset_right = 372.0
+offset_bottom = 460.0
+mouse_filter = 2
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 26.0
+offset_bottom = 70.0
+grow_horizontal = 2
+text = "¡Apaga las alarmas! No toques POSPONER"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
+
+[node name="Error" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 100.0
+offset_top = 200.0
+offset_right = 600.0
+offset_bottom = 240.0
+text = "¡5 minutos más... no!"
+label_settings = SubResource("LS_error")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+mouse_filter = 2
+show_percentage = false

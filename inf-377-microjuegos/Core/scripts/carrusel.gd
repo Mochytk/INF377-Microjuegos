@@ -6,7 +6,7 @@ const SPACING := 300.0
 const CENTER_SCALE := 1.3
 const SIDE_SCALE := 0.85
 
-@onready var items: Array[Control] = [$IconSimon, $IconPuerta, $IconLluvia, $IconMicroondas, $IconEnviarTarea, $IconBandeja, $IconImpresora, $IconWifi, $IconNoTeDuermas, $IconPizarron, $IconFirmaLista, $IconFilaCasino]
+@onready var items: Array[Control] = [$IconSimon, $IconPuerta, $IconLluvia, $IconMicroondas, $IconEnviarTarea, $IconBandeja, $IconImpresora, $IconWifi, $IconNoTeDuermas, $IconPizarron, $IconFirmaLista, $IconFilaCasino, $IconDespertador, $IconMicroLleno, $IconBicicletero]
 @onready var marco: Control = $Marco
 
 var current: int = 0 # índice del juego que está en el centro
@@ -34,7 +34,12 @@ func _layout(offset: float) -> void:
 
 func spin_to(target: int) -> void:
 	var n := items.size()
-	var steps := randi_range(1, 2) * n + posmod(target - current, n)
+	# Siempre gira entre 8 y 12 puestos, sin importar cuántos juegos haya: con muchos juegos,
+	# dar vueltas completas hacía el giro demasiado largo. Parte desde un punto que deja al
+	# elegido a esa distancia (el carrusel estaba oculto, así que el salto no se ve).
+	var steps := randi_range(8, 12)
+	current = posmod(target - steps, n)
+	_layout(0.0)
 	var step_time := 0.08
 	for s in range(steps):
 		var tween := create_tween()
