@@ -91,10 +91,10 @@ offset = Vector2(-14, -46)
 
 [node name="Cuaderno" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_left = 300.0
-offset_top = 548.0
-offset_right = 852.0
-offset_bottom = 648.0
+offset_left = 196.0
+offset_top = 502.0
+offset_right = 956.0
+offset_bottom = 642.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("SB_papel")
 
@@ -108,11 +108,11 @@ text = "Mi cuaderno"
 label_settings = SubResource("LS_cuaderno")
 
 [node name="Copiado" type="RichTextLabel" parent="Cuaderno/VBox"]
-custom_minimum_size = Vector2(0, 44)
+custom_minimum_size = Vector2(0, 84)
 layout_mode = 2
 mouse_filter = 2
 theme_override_colors/default_color = Color(0.15, 0.2, 0.45, 1)
-theme_override_font_sizes/normal_font_size = 26
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 scroll_active = false
 

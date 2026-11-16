@@ -63,12 +63,13 @@ func _draw_word() -> void:
 	palabra_label.text = "[center][color=#7CFF9B]%s[/color]%s[/center]" % [w.substr(0, letra), w.substr(letra)]
 
 func _draw_notebook() -> void:
+	# espacio no separable entre la marca y la palabra, para que no queden en líneas distintas
 	var parts: Array = []
 	for i in range(resultados.size()):
 		if resultados[i]:
-			parts.append("[color=#1f8f4a]✓ %s[/color]" % palabras[i])
+			parts.append("[color=#1f8f4a]✓\u00a0%s[/color]" % palabras[i])
 		else:
-			parts.append("[color=#c0392b]✗ %s[/color]" % palabras[i].substr(0, 2) + "...")
+			parts.append("[color=#c0392b]✗\u00a0%s...[/color]" % palabras[i].substr(0, 2))
 	if playing and not esperando and actual < palabras.size():
 		parts.append(palabras[actual].substr(0, letra) + "_")
 	copiado.text = "   ".join(parts)
