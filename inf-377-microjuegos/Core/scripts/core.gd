@@ -82,7 +82,7 @@ var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_ESPACIO], "text": "Mantén ESPACIO para escribir y suéltalo cuando el profe se dé vuelta"},
 	{"icons": [ICON_IZQ, ICON_DER], "text": "Alterna las flechas ← → (o A y D) rápido para correr a la micro"},
 	{"icons": [ICON_MOUSE], "text": "Haz clic en la máquina para soltar el snack, ¡pero no muy seguido!"},
-	{"icons": [ICON_MOUSE], "text": "Sigue el cable AMARILLO del notebook y haz clic en la entrada HDMI donde termina."},
+	{"icons": [ICON_MOUSE], "text": "Sigue el cable AMARILLO y haz clic en su entrada HDMI"},
 ]
 var microgames: Array[String] = [
 	"res://Microgames/simon_says/scenes/simon_says.tscn",
