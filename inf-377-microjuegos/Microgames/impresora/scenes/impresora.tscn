@@ -1,0 +1,258 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/impresora/scripts/impresora.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/impresora/assets/biblioteca.png" id="biblioteca"]
+[ext_resource type="Texture2D" path="res://Microgames/impresora/assets/impresora_cuerpo.png" id="impresora_cuerpo"]
+[ext_resource type="Texture2D" path="res://Microgames/impresora/assets/tapa_cerrada.png" id="tapa_cerrada"]
+[ext_resource type="Texture2D" path="res://Microgames/impresora/assets/tapa_abierta.png" id="tapa_abierta"]
+[ext_resource type="Texture2D" path="res://Microgames/impresora/assets/hoja_atascada.png" id="hoja_atascada"]
+[ext_resource type="Texture2D" path="res://Microgames/impresora/assets/bandeja_cerrada.png" id="bandeja_cerrada"]
+[ext_resource type="Texture2D" path="res://Microgames/impresora/assets/resma.png" id="resma"]
+[ext_resource type="Texture2D" path="res://Microgames/impresora/assets/boton_imprimir.png" id="boton_imprimir"]
+[ext_resource type="Texture2D" path="res://Microgames/impresora/assets/hoja_impresa.png" id="hoja_impresa"]
+
+[sub_resource type="LabelSettings" id="LS_msg"]
+font_size = 34
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_banner"]
+font_size = 22
+outline_size = 4
+outline_color = Color(0, 0, 0, 0.5)
+
+[sub_resource type="LabelSettings" id="LS_pantalla"]
+font_size = 14
+font_color = Color(0.45, 1, 0.6, 1)
+
+[sub_resource type="LabelSettings" id="LS_titulo"]
+font_size = 26
+font_color = Color(1, 0.85, 0.2, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_error"]
+font_size = 30
+font_color = Color(1, 0.3, 0.3, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="SB_panel"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.03, 0.03, 0.08, 0.85)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.85, 0.2, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Impresora" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Fondo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+texture = ExtResource("biblioteca")
+expand_mode = 1
+
+[node name="Pendon0" type="Label" parent="."]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 234.0
+offset_right = 208.0
+offset_bottom = 296.0
+text = "Biblio-
+teca"
+label_settings = SubResource("LS_banner")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pendon1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 916.0
+offset_top = 234.0
+offset_right = 1000.0
+offset_bottom = 296.0
+text = "Biblio-
+teca"
+label_settings = SubResource("LS_banner")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TapaAbierta" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 436.0
+offset_top = 200.0
+offset_right = 716.0
+offset_bottom = 304.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+texture = ExtResource("tapa_abierta")
+expand_mode = 1
+
+[node name="Cuerpo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 436.0
+offset_top = 296.0
+offset_right = 716.0
+offset_bottom = 464.0
+mouse_filter = 2
+texture = ExtResource("impresora_cuerpo")
+expand_mode = 1
+
+[node name="Tapa" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 436.0
+offset_top = 272.0
+offset_right = 716.0
+offset_bottom = 304.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+texture = ExtResource("tapa_cerrada")
+expand_mode = 1
+
+[node name="Hoja" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 508.0
+offset_top = 250.0
+offset_right = 644.0
+offset_bottom = 298.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+texture = ExtResource("hoja_atascada")
+expand_mode = 1
+
+[node name="Bandeja" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 472.0
+offset_top = 400.0
+offset_right = 680.0
+offset_bottom = 448.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+texture = ExtResource("bandeja_cerrada")
+expand_mode = 1
+
+[node name="Boton" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 668.0
+offset_top = 352.0
+offset_right = 700.0
+offset_bottom = 384.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+texture = ExtResource("boton_imprimir")
+expand_mode = 1
+
+[node name="Resma" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 408.0
+offset_right = 872.0
+offset_bottom = 464.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+texture = ExtResource("resma")
+expand_mode = 1
+
+[node name="Pantalla" type="Label" parent="."]
+layout_mode = 0
+offset_left = 632.0
+offset_top = 312.0
+offset_right = 700.0
+offset_bottom = 340.0
+text = "ATASCO"
+label_settings = SubResource("LS_pantalla")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Salida" type="Control" parent="."]
+layout_mode = 0
+offset_left = 476.0
+offset_top = 356.0
+offset_right = 604.0
+offset_bottom = 526.0
+clip_contents = true
+mouse_filter = 2
+
+[node name="HojaImpresa" type="TextureRect" parent="Salida"]
+layout_mode = 0
+offset_top = -160.0
+offset_right = 120.0
+offset_bottom = -16.0
+mouse_filter = 2
+texture = ExtResource("hoja_impresa")
+expand_mode = 1
+
+[node name="Lista" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 110.0
+offset_right = 398.0
+offset_bottom = 410.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Lista"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Titulo" type="Label" parent="Lista/VBox"]
+layout_mode = 2
+text = "Para imprimir:"
+label_settings = SubResource("LS_titulo")
+
+[node name="Pasos" type="VBoxContainer" parent="Lista/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 26.0
+offset_bottom = 76.0
+grow_horizontal = 2
+text = "¡Imprime tu informe antes de la entrega!"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
+
+[node name="Error" type="Label" parent="."]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 240.0
+offset_right = 900.0
+offset_bottom = 284.0
+visible = false
+text = "¡Esa no!"
+label_settings = SubResource("LS_error")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+mouse_filter = 2
+show_percentage = false
