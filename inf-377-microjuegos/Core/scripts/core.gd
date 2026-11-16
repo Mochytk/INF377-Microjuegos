@@ -204,6 +204,8 @@ func _update_hud() -> void:
 func _set_shown_score(v: float) -> void:
 	shown_score = v
 	_update_hud()
+	# Mientras cuenta se muestran enteros, para que no parpadeen los decimales
+	puntaje_hud.text = "Puntaje: " + str(int(v))
 
 func _result_label(text: String, size: int, color: Color) -> Label:
 	var ls := LabelSettings.new()

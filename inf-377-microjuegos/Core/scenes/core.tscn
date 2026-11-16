@@ -222,18 +222,21 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="VidasLabel" type="Label" parent="TransitionUI/Hud/Vidas"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "3"
 label_settings = SubResource("LabelSettings_hud")
 vertical_alignment = 1
 
 [node name="PuntajeLabel" type="Label" parent="TransitionUI/Hud"]
+custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 text = "Puntaje: 0"
 label_settings = SubResource("LabelSettings_hud")
 vertical_alignment = 1
 
 [node name="NivelLabel" type="Label" parent="TransitionUI/Hud"]
+custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 text = "Nivel: 1"
 label_settings = SubResource("LabelSettings_hud")
