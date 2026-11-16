@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qjl6uvuk1yfg"
-path="res://.godot/imported/Hoja de sprites pixel art con personaje USM.png-60b3f00724348d123495942d9a8ba90e.ctex"
+uid="uid://bdit1pdec2cjj"
+path="res://.godot/imported/estudiante_camina_2.png-a9da7dd7d484c08d848cab51733341eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Microgames/lluvia_de_notas/assets/Hoja de sprites pixel art con personaje USM.png"
-dest_files=["res://.godot/imported/Hoja de sprites pixel art con personaje USM.png-60b3f00724348d123495942d9a8ba90e.ctex"]
+source_file="res://Microgames/lluvia_de_notas/assets/estudiante_camina_2.png"
+dest_files=["res://.godot/imported/estudiante_camina_2.png-a9da7dd7d484c08d848cab51733341eb.ctex"]
 
 [params]
 

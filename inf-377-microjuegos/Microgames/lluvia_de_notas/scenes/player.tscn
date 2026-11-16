@@ -1,56 +1,61 @@
 [gd_scene format=3 uid="uid://2oskjl4j124s"]
 
 [ext_resource type="Script" uid="uid://fnpc6g8t1744" path="res://Microgames/lluvia_de_notas/scripts/player_movement.gd" id="1_cc1bj"]
-[ext_resource type="Texture2D" uid="uid://qjl6uvuk1yfg" path="res://Microgames/lluvia_de_notas/assets/Hoja de sprites pixel art con personaje USM.png" id="2_aj026"]
+[ext_resource type="Texture2D" path="res://Microgames/lluvia_de_notas/assets/estudiante_quieto.png" id="2_quieto"]
+[ext_resource type="Texture2D" path="res://Microgames/lluvia_de_notas/assets/estudiante_camina_1.png" id="3_cam1"]
+[ext_resource type="Texture2D" path="res://Microgames/lluvia_de_notas/assets/estudiante_camina_2.png" id="4_cam2"]
+[ext_resource type="Texture2D" path="res://Microgames/lluvia_de_notas/assets/estudiante_salto.png" id="5_salto"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_aj026"]
-atlas = ExtResource("2_aj026")
-region = Rect2(0, 0, 384, 1024)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f4s0c"]
-atlas = ExtResource("2_aj026")
-region = Rect2(384, 0, 384, 1024)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bb7y5"]
-atlas = ExtResource("2_aj026")
-region = Rect2(768, 0, 384, 1024)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a54fw"]
-atlas = ExtResource("2_aj026")
-region = Rect2(1152, 0, 384, 1024)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_wvde7"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_est"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_aj026")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f4s0c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bb7y5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a54fw")
+"texture": ExtResource("2_quieto")
 }],
-"loop": 1,
-"name": &"default",
+"loop": true,
+"name": &"quieto",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_cam1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_quieto")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cam2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_quieto")
+}],
+"loop": true,
+"name": &"camina",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_salto")
+}],
+"loop": true,
+"name": &"salto",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iea10"]
-size = Vector2(195, 545)
+size = Vector2(200, 540)
 
 [node name="player" type="CharacterBody2D" unique_id=1823944776 groups=["player"]]
 script = ExtResource("1_cc1bj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=372009832]
-position = Vector2(0, -12)
-sprite_frames = SubResource("SpriteFrames_wvde7")
-autoplay = "default"
-frame = 3
+texture_filter = 1
+position = Vector2(0, 57.3)
+scale = Vector2(16.6667, 16.6667)
+sprite_frames = SubResource("SpriteFrames_est")
+animation = &"quieto"
+autoplay = "quieto"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=863605770]
-position = Vector2(-40, 52)
+position = Vector2(0, 54)
 shape = SubResource("RectangleShape2D_iea10")
