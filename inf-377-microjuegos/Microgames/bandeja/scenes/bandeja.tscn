@@ -1,0 +1,189 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/bandeja/scripts/bandeja.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Microgames/bandeja/assets/comedor.png" id="2_comedor"]
+[ext_resource type="Texture2D" path="res://Microgames/bandeja/assets/estudiante_bandeja_0.png" id="3_est"]
+[ext_resource type="Texture2D" path="res://Microgames/bandeja/assets/bandeja.png" id="4_bandeja"]
+[ext_resource type="Texture2D" path="res://Microgames/bandeja/assets/vaso.png" id="5_vaso"]
+[ext_resource type="Texture2D" path="res://Microgames/bandeja/assets/jugo.png" id="6_jugo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_msg"]
+font_size = 34
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_libre"]
+font_size = 28
+font_color = Color(0.35, 1, 0.5, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_small"]
+font_size = 24
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_permiso"]
+font_size = 24
+font_color = Color(0.08, 0.08, 0.08, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bubble"]
+content_margin_left = 8.0
+content_margin_top = 2.0
+content_margin_right = 8.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.08, 0.08, 0.08, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.12, 0.12, 0.16, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill"]
+bg_color = Color(1, 0.6, 0.12, 1)
+
+[node name="Bandeja" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Fondo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_comedor")
+expand_mode = 1
+
+[node name="Estudiante" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(80, 336)
+scale = Vector2(4, 4)
+texture = ExtResource("3_est")
+centered = false
+offset = Vector2(-13, -36)
+
+[node name="Permiso" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 36.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bubble")
+
+[node name="Texto" type="Label" parent="Permiso"]
+layout_mode = 2
+text = "¡Permiso!"
+label_settings = SubResource("LabelSettings_permiso")
+horizontal_alignment = 1
+
+[node name="Libre" type="Label" parent="."]
+layout_mode = 0
+offset_left = 980.0
+offset_top = 92.0
+offset_right = 1150.0
+offset_bottom = 130.0
+text = "LIBRE ▼"
+label_settings = SubResource("LabelSettings_libre")
+horizontal_alignment = 1
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 34.0
+offset_bottom = 84.0
+grow_horizontal = 2
+text = "¡Llega a la mesa sin botar el jugo!"
+label_settings = SubResource("LabelSettings_msg")
+horizontal_alignment = 1
+
+[node name="Panel" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -304.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0.04, 0.04, 0.08, 0.9)
+
+[node name="Ayuda" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 344.0
+offset_bottom = 120.0
+text = "Mueve el mouse
+para mantener
+la bandeja derecha"
+label_settings = SubResource("LabelSettings_small")
+
+[node name="JugoTexto" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = 18.0
+offset_right = 1120.0
+offset_bottom = 52.0
+text = "Jugo"
+label_settings = SubResource("LabelSettings_small")
+horizontal_alignment = 1
+
+[node name="Medidor" type="ProgressBar" parent="Panel"]
+layout_mode = 0
+offset_left = 1030.0
+offset_top = 58.0
+offset_right = 1090.0
+offset_bottom = 280.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill")
+max_value = 1.0
+step = 0.001
+value = 1.0
+fill_mode = 3
+show_percentage = false
+
+[node name="BandejaPivot" type="Node2D" parent="."]
+position = Vector2(576, 496)
+
+[node name="Bandeja" type="Sprite2D" parent="BandejaPivot"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("4_bandeja")
+
+[node name="Vaso" type="Sprite2D" parent="BandejaPivot/Bandeja"]
+texture_filter = 1
+position = Vector2(56, 5)
+
+[node name="Jugo" type="Sprite2D" parent="BandejaPivot/Bandeja/Vaso"]
+texture_filter = 1
+texture = ExtResource("6_jugo")
+
+[node name="Borde" type="Sprite2D" parent="BandejaPivot/Bandeja/Vaso"]
+texture_filter = 1
+texture = ExtResource("5_vaso")
+
+[node name="Gotas" type="Node2D" parent="."]
