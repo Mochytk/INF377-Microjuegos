@@ -51,7 +51,7 @@ const ICON_ARR := preload("res://Core/assets/controles/flecha_up.png")
 const ICON_ABA := preload("res://Core/assets/controles/flecha_down.png")
 
 # Orden igual al de los iconos del carrusel.
-var game_names: Array[String] = ["Simon Dice", "Puerta", "Lluvia de Notas", "Microondas", "Enviar Tarea", "Bandeja", "Impresora", "Wi-Fi", "No te duermas", "Copiar el pizarrón", "Firma la lista", "Fila del casino"]
+var game_names: Array[String] = ["Simon Dice", "Puerta", "Lluvia de Notas", "Microondas", "Enviar Tarea", "Bandeja", "Impresora", "Wi-Fi", "No te duermas", "Copiar el pizarrón", "Firma la lista", "Fila del casino", "Despertador"]
 # Controles de cada juego (mismo orden): iconos y texto que se muestran en "¡PREPÁRATE!".
 var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_MOUSE], "text": "Memoriza los colores que dice el profesor y haz clic en ellos"},
@@ -66,6 +66,7 @@ var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_TECLADO], "text": "Escribe en el teclado la palabra del pizarrón antes de que la borren"},
 	{"icons": [ICON_MOUSE], "text": "Busca tu nombre en la lista y haz clic en su fila para firmar"},
 	{"icons": [ICON_IZQ, ICON_DER], "text": "Cámbiate a la fila más rápida con las flechas (o A y D)"},
+	{"icons": [ICON_MOUSE], "text": "Haz clic en APAGAR en cada alarma. ¡No toques POSPONER!"},
 ]
 var microgames: Array[String] = [
 	"res://Microgames/simon_says/scenes/simon_says.tscn",
@@ -80,6 +81,7 @@ var microgames: Array[String] = [
 	"res://Microgames/copiar_pizarron/scenes/copiar_pizarron.tscn",
 	"res://Microgames/firma_lista/scenes/firma_lista.tscn",
 	"res://Microgames/fila_casino/scenes/fila_casino.tscn",
+	"res://Microgames/despertador/scenes/despertador.tscn",
 ]
 
 # Juegos que aún no salen en la ronda actual. Cuando se vacía, la dificultad sube.
