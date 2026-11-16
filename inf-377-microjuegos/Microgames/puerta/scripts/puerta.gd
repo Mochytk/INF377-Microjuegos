@@ -14,7 +14,7 @@ func _ready() -> void:
 	correct_door = randi_range(1 , 6)
 	print("Puerta correcta", correct_door)
 	
-	$UI/InstructionLabel.text = "Puerta N°" + str(correct_door) + " !"
+	$UI/InstructionLabel.text = "¡Entra a la Sala " + str(correct_door) + "!"
 	$Timer.start()
 
 func _process(delta: float) -> void:
