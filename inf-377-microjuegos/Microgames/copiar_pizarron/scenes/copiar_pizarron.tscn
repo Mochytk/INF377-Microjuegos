@@ -1,0 +1,128 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/copiar_pizarron/scripts/copiar_pizarron.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/copiar_pizarron/assets/sala_pizarron.png" id="sala"]
+[ext_resource type="Texture2D" path="res://Microgames/copiar_pizarron/assets/profe_espalda_0.png" id="profe"]
+
+[sub_resource type="LabelSettings" id="LS_msg"]
+font_size = 30
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_cuaderno"]
+font_size = 22
+font_color = Color(0.2, 0.25, 0.45, 1)
+
+[sub_resource type="StyleBoxFlat" id="SB_papel"]
+content_margin_left = 22.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.98, 0.98, 0.96, 1)
+border_width_left = 8
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.22, 0.27, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="StyleBoxFlat" id="SB_bar_bg"]
+bg_color = Color(0.15, 0.3, 0.24, 1)
+
+[sub_resource type="StyleBoxFlat" id="SB_bar"]
+bg_color = Color(0.91, 0.94, 0.91, 1)
+
+[node name="CopiarPizarron" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Fondo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("sala")
+expand_mode = 1
+
+[node name="Palabra" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 96.0
+offset_right = 912.0
+offset_bottom = 206.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.91, 0.94, 0.91, 1)
+theme_override_font_sizes/normal_font_size = 68
+bbcode_enabled = true
+text = "[center]PALABRA[/center]"
+scroll_active = false
+
+[node name="Borrador" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 436.0
+offset_top = 222.0
+offset_right = 856.0
+offset_bottom = 236.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("SB_bar_bg")
+theme_override_styles/fill = SubResource("SB_bar")
+max_value = 1.0
+step = 0.001
+value = 1.0
+show_percentage = false
+
+[node name="Profe" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(316, 400)
+scale = Vector2(4, 4)
+texture = ExtResource("profe")
+centered = false
+offset = Vector2(-14, -46)
+
+[node name="Cuaderno" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 548.0
+offset_right = 852.0
+offset_bottom = 648.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_papel")
+
+[node name="VBox" type="VBoxContainer" parent="Cuaderno"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Titulo" type="Label" parent="Cuaderno/VBox"]
+layout_mode = 2
+text = "Mi cuaderno"
+label_settings = SubResource("LS_cuaderno")
+
+[node name="Copiado" type="RichTextLabel" parent="Cuaderno/VBox"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.15, 0.2, 0.45, 1)
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 6.0
+offset_bottom = 48.0
+grow_horizontal = 2
+text = "¡Copia lo que escribe el profe antes de que lo borre!"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
