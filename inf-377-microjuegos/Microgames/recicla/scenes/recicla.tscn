@@ -95,6 +95,15 @@ mouse_filter = 2
 texture = ExtResource("c_papel")
 expand_mode = 1
 
+[node name="FondoFlecha" type="ColorRect" parent="Contenedores/Papel"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 26.0
+offset_right = 136.0
+offset_bottom = 106.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.45)
+
 [node name="Flecha" type="TextureRect" parent="Contenedores/Papel"]
 texture_filter = 1
 layout_mode = 0
@@ -147,6 +156,15 @@ offset_bottom = 200.0
 mouse_filter = 2
 texture = ExtResource("c_plastico")
 expand_mode = 1
+
+[node name="FondoFlecha" type="ColorRect" parent="Contenedores/Plastico"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 26.0
+offset_right = 136.0
+offset_bottom = 106.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.45)
 
 [node name="Flecha" type="TextureRect" parent="Contenedores/Plastico"]
 texture_filter = 1
@@ -201,6 +219,15 @@ mouse_filter = 2
 texture = ExtResource("c_organico")
 expand_mode = 1
 
+[node name="FondoFlecha" type="ColorRect" parent="Contenedores/Organico"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 26.0
+offset_right = 136.0
+offset_bottom = 106.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.45)
+
 [node name="Flecha" type="TextureRect" parent="Contenedores/Organico"]
 texture_filter = 1
 layout_mode = 0
@@ -246,14 +273,13 @@ pivot_offset = Vector2(40, 40)
 mouse_filter = 2
 expand_mode = 1
 
-[node name="NombreResiduo" type="Label" parent="Residuo"]
+[node name="NombreResiduo" type="Label" parent="."]
 layout_mode = 0
-offset_left = -110.0
-offset_top = -38.0
-offset_right = 190.0
-offset_bottom = -6.0
+offset_left = 628.0
+offset_top = 214.0
+offset_right = 928.0
+offset_bottom = 246.0
 label_settings = SubResource("LS_item")
-horizontal_alignment = 1
 
 [node name="Mensaje" type="Label" parent="."]
 layout_mode = 1

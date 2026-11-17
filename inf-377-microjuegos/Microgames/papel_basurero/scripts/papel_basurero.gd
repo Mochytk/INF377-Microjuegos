@@ -48,14 +48,14 @@ var anim := 0.0
 
 func _ready() -> void:
 	# Nivel 1: sin viento, basurero cerca, 1 enceste y trayectoria completa. Al subir: viento más
-	# fuerte, basurero más lejos, hasta 3 encestes y menos ayuda en la trayectoria.
+	# fuerte, basurero más lejos, 2 encestes y menos ayuda en la trayectoria.
 	var core = get_parent()
 	var d: float = core.difficulty if "difficulty" in core else 1.0
 	level = clampf(d - 1.0, 0.0, 6.0)
 	# Sobre el nivel 7 la dificultad sigue creciendo sin tope: cada nivel extra apura todo un 8 % más
 	var apuro := 1.0 + 0.08 * maxf(0.0, d - 7.0)
-	necesarios = 1 if level < 2.0 else (2 if level < 5.0 else 3)
-	viento_max = 0.0 if level < 1.0 else minf(1.0, 0.3 + 0.12 * level)
+	necesarios = 1 if level < 2.0 else 2
+	viento_max = 0.0 if level < 1.0 else minf(0.85, 0.3 + 0.1 * level)
 	borde_x = 700.0 + 35.0 * level + randf_range(-30.0, 30.0)
 	basurero.position.x = borde_x
 	borde_y = basurero.position.y + 12.0

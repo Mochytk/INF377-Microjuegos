@@ -18,7 +18,7 @@ const CENTRO_X := 576.0
 
 @onready var contenedores: Array = [$Contenedores/Papel, $Contenedores/Plastico, $Contenedores/Organico]
 @onready var residuo: TextureRect = $Residuo
-@onready var nombre_residuo: Label = $Residuo/NombreResiduo
+@onready var nombre_residuo: Label = $NombreResiduo
 @onready var mensaje: Label = $Mensaje
 @onready var contador: Label = $Contador
 @onready var errores_label: Label = $Errores
@@ -41,14 +41,14 @@ var texturas := {}
 var suma_reaccion := 0.0       # suma de la parte de la caída que pasó antes de clasificar
 
 func _ready() -> void:
-	# Nivel 1: 5 residuos que caen lento y se aceptan 2 errores. Al subir: más residuos, más
+	# Nivel 1: 4 residuos que caen lento y se aceptan 2 errores. Al subir: hasta 7 residuos, más
 	# rápidos y desde el nivel 4 solo 1 error.
 	var core = get_parent()
 	var d: float = core.difficulty if "difficulty" in core else 1.0
 	var level := clampf(d - 1.0, 0.0, 6.0)
 	# Sobre el nivel 7 la dificultad sigue creciendo sin tope: cada nivel extra apura todo un 8 % más
 	var apuro := 1.0 + 0.08 * maxf(0.0, d - 7.0)
-	total = 5 + int(level * 0.7)
+	total = 4 + int(level / 2.0)
 	tiempo_caida = maxf(0.95, 2.3 - 0.22 * level) / apuro
 	max_errores = 3 if level < 3.0 else 2
 	# El ritmo lo marca la caída; el tiempo total es solo un tope de seguridad
@@ -83,6 +83,7 @@ func _siguiente() -> void:
 	residuo.scale = Vector2.ONE
 	residuo.modulate.a = 1.0
 	residuo.position = Vector2(CENTRO_X - 40.0, Y_INICIO)
+	nombre_residuo.modulate.a = 1.0
 	caida = 0.0
 	cayendo = true
 
@@ -94,6 +95,7 @@ func _process(delta: float) -> void:
 	if cayendo:
 		caida += delta / tiempo_caida
 		residuo.position.y = lerpf(Y_INICIO, Y_TAPA, caida)
+		nombre_residuo.position.y = residuo.position.y + 24.0
 		residuo.rotation = sin(caida * 9.0) * 0.15
 		if caida >= 1.0:
 			_al_suelo()
@@ -119,6 +121,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _lanzar(destino: int) -> void:
 	cayendo = false
 	suma_reaccion += caida
+	nombre_residuo.modulate.a = 0.0
 	var bin: Control = contenedores[destino]
 	var tapa: TextureRect = bin.get_node("Tapa")
 	var bien: bool = destino == actual[2]
@@ -156,6 +159,7 @@ func _lanzar(destino: int) -> void:
 # Nadie lo clasificó: rebota en la tapa del medio y queda en el suelo
 func _al_suelo() -> void:
 	cayendo = false
+	nombre_residuo.modulate.a = 0.0
 	_error("¡Quedó en el suelo!")
 	_actualizar_textos()
 	var t := create_tween()
