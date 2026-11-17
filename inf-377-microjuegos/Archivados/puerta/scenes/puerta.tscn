@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://bbrgsf20lbpwb"]
 
-[ext_resource type="Script" uid="uid://bxle8qhmg5hfo" path="res://Microgames/puerta/scripts/player.gd" id="1_7h2oo"]
-[ext_resource type="Texture2D" uid="uid://cunccjwm8yas" path="res://Microgames/puerta/assets/Dor_sprite.jpg" id="1_fiy6g"]
-[ext_resource type="Script" uid="uid://dwh8p7c2ax0fs" path="res://Microgames/puerta/scripts/puerta.gd" id="1_ry0by"]
-[ext_resource type="Texture2D" uid="uid://brhraxyjpo3uv" path="res://Microgames/puerta/assets/None.png" id="2_k3nym"]
-[ext_resource type="Script" uid="uid://lb82josdkt17" path="res://Microgames/puerta/scripts/door_detector.gd" id="3_mj8py"]
-[ext_resource type="Script" uid="uid://bobjxekhf4fx" path="res://Microgames/puerta/scripts/door.gd" id="4_fiy6g"]
-[ext_resource type="Texture2D" uid="uid://cmqch6pqsma11" path="res://Microgames/puerta/assets/Floatzel_win.png" id="5_pk4h7"]
-[ext_resource type="Texture2D" uid="uid://ddwssrloediol" path="res://Microgames/puerta/assets/Floatzel.png" id="5_ry0by"]
-[ext_resource type="Texture2D" uid="uid://b1773f7pg2kyu" path="res://Microgames/puerta/assets/Floatzel_lose.png" id="6_k3nym"]
+[ext_resource type="Script" uid="uid://bxle8qhmg5hfo" path="res://Archivados/puerta/scripts/player.gd" id="1_7h2oo"]
+[ext_resource type="Texture2D" uid="uid://cunccjwm8yas" path="res://Archivados/puerta/assets/Dor_sprite.jpg" id="1_fiy6g"]
+[ext_resource type="Script" uid="uid://dwh8p7c2ax0fs" path="res://Archivados/puerta/scripts/puerta.gd" id="1_ry0by"]
+[ext_resource type="Texture2D" uid="uid://brhraxyjpo3uv" path="res://Archivados/puerta/assets/None.png" id="2_k3nym"]
+[ext_resource type="Script" uid="uid://lb82josdkt17" path="res://Archivados/puerta/scripts/door_detector.gd" id="3_mj8py"]
+[ext_resource type="Script" uid="uid://bobjxekhf4fx" path="res://Archivados/puerta/scripts/door.gd" id="4_fiy6g"]
+[ext_resource type="Texture2D" uid="uid://cmqch6pqsma11" path="res://Archivados/puerta/assets/Floatzel_win.png" id="5_pk4h7"]
+[ext_resource type="Texture2D" uid="uid://ddwssrloediol" path="res://Archivados/puerta/assets/Floatzel.png" id="5_ry0by"]
+[ext_resource type="Texture2D" uid="uid://b1773f7pg2kyu" path="res://Archivados/puerta/assets/Floatzel_lose.png" id="6_k3nym"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_drsw1"]
 size = Vector2(392, 665)

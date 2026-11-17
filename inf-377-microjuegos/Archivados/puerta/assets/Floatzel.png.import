@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1773f7pg2kyu"
-path="res://.godot/imported/Floatzel_lose.png-b8b29df41b0af9afa871fe1fcd97eb54.ctex"
+uid="uid://ddwssrloediol"
+path="res://.godot/imported/Floatzel.png-70c3b5fae4e5606e5f03aa30fda8fe3a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Microgames/puerta/assets/Floatzel_lose.png"
-dest_files=["res://.godot/imported/Floatzel_lose.png-b8b29df41b0af9afa871fe1fcd97eb54.ctex"]
+source_file="res://Archivados/puerta/assets/Floatzel.png"
+dest_files=["res://.godot/imported/Floatzel.png-70c3b5fae4e5606e5f03aa30fda8fe3a.ctex"]
 
 [params]
 

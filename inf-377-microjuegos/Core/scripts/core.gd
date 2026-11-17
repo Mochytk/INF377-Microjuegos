@@ -55,11 +55,10 @@ const ICON_ARR := preload("res://Core/assets/controles/flecha_up.png")
 const ICON_ABA := preload("res://Core/assets/controles/flecha_down.png")
 
 # Orden igual al de los iconos del carrusel.
-var game_names: Array[String] = ["Simón dice", "Puerta", "Lluvia de notas", "Microondas", "Enviar tarea", "Bandeja", "Impresora", "Wi-Fi", "No te duermas", "Copiar el pizarrón", "Firma la lista", "Fila del casino", "Despertador", "Micro llena", "Bicicletero", "Toma de ramos", "Trabajo en grupo", "Fotocopia a tiempo", "Paraguas", "Cargar el celular", "Calienta el almuerzo", "Calculadora en el certamen", "Chat a escondidas", "Corre a la micro", "Máquina de snacks", "El proyector", "Borra la pizarra", "Recicla en el campus", "Papel al basurero", "¿De quién es el celular?", "Arma el completo", "Hoja de respuestas", "Arma el horario", "Ordena el informe", "¡Presente!"]
+var game_names: Array[String] = ["Simón dice", "Lluvia de notas", "Microondas", "Enviar tarea", "Bandeja", "Impresora", "Wi-Fi", "No te duermas", "Copiar el pizarrón", "Firma la lista", "Fila del casino", "Despertador", "Micro llena", "Bicicletero", "Toma de ramos", "Trabajo en grupo", "Fotocopia a tiempo", "Paraguas", "Cargar el celular", "Calienta el almuerzo", "Calculadora en el certamen", "Chat a escondidas", "Corre a la micro", "Máquina de snacks", "El proyector", "Borra la pizarra", "Recicla en el campus", "Papel al basurero", "¿De quién es el celular?", "Arma el completo", "Hoja de respuestas", "Arma el horario", "Ordena el informe", "¡Presente!"]
 # Controles de cada juego (mismo orden): iconos y texto que se muestran en "¡PREPÁRATE!".
 var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_MOUSE], "text": "Memoriza los colores que dice el profesor y haz clic en ellos"},
-	{"icons": [ICON_MOUSE], "text": "Haz clic cuando pases frente a la sala indicada"},
 	{"icons": [ICON_IZQ, ICON_DER], "text": "Muévete con las flechas o A y D (W o Espacio salta)"},
 	{"icons": [ICON_ARR, ICON_ABA, ICON_IZQ, ICON_DER], "text": "Presiona las flechas (o WASD) para llegar primero al microondas"},
 	{"icons": [ICON_MOUSE], "text": "Haz clic en el botón antes de que escape"},
@@ -96,7 +95,6 @@ var game_controls: Array[Dictionary] = [
 ]
 var microgames: Array[String] = [
 	"res://Microgames/simon_says/scenes/simon_says.tscn",
-	"res://Microgames/puerta/scenes/puerta.tscn",
 	"res://Microgames/lluvia_de_notas/scenes/lluvia_de_notas.tscn",
 	"res://Microgames/microondas/scenes/microondas.tscn",
 	"res://Microgames/enviar_tarea/scenes/enviar_tarea.tscn",

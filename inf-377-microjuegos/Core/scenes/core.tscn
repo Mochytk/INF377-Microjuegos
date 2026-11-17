@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dwvnjtviw0hc" path="res://Core/scripts/core.gd" id="1_7wmpk"]
 [ext_resource type="Texture2D" uid="uid://diiwkbqft2t4w" path="res://Core/assets/icon_simon.png" id="2_1oq05"]
-[ext_resource type="Texture2D" uid="uid://cunccjwm8yas" path="res://Microgames/puerta/assets/Dor_sprite.jpg" id="3_aa113"]
 [ext_resource type="Texture2D" uid="uid://cim7amyjk0sr1" path="res://Core/assets/icon_lluvia.png" id="3_tjgqf"]
 [ext_resource type="Script" path="res://Core/scripts/carrusel.gd" id="6_carrusel"]
 [ext_resource type="Theme" path="res://Core/core_theme.tres" id="9_theme"]
@@ -137,17 +136,6 @@ offset_right = 200.0
 offset_bottom = 200.0
 pivot_offset = Vector2(100, 100)
 texture = ExtResource("2_1oq05")
-expand_mode = 1
-stretch_mode = 5
-flip_h = true
-
-[node name="IconPuerta" type="TextureRect" parent="TransitionUI/Carrusel"]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 0
-offset_right = 200.0
-offset_bottom = 200.0
-pivot_offset = Vector2(100, 100)
-texture = ExtResource("3_aa113")
 expand_mode = 1
 stretch_mode = 5
 flip_h = true
@@ -704,7 +692,7 @@ horizontal_alignment = 1
 
 [node name="Texto" type="Label" parent="CreditosUI/Center/VBox"]
 layout_mode = 2
-text = "ReMechón!  ·  INF377 - Microjuegos\n\nSergio Rojas\nCore, Simón dice, Impresora, Fila del casino, Toma de ramos, Paraguas, El proyector, Recicla en el campus, Papel al basurero\n\nIsidora Sarmiento\nLluvia de notas, Enviar tarea, Bandeja, Despertador, Trabajo en grupo, Calculadora en el certamen, Borra la pizarra, Hoja de respuestas, Arma el horario\n\nCristobal Pino\nMicroondas, No te duermas, Firma la lista, Bicicletero, Fotocopia a tiempo, Calienta el almuerzo, Máquina de snacks, ¿De quién es el celular?, Arma el completo\n\nBenjamin Ponce\nPuerta, Wi-Fi, Copiar el pizarrón, Micro llena, Cargar el celular, Chat a escondidas, Corre a la micro, Ordena el informe, ¡Presente!"
+text = "ReMechón!  ·  INF377 - Microjuegos\n\nSergio Rojas\nCore, Simón dice, Impresora, Fila del casino, Toma de ramos, Paraguas, El proyector, Recicla en el campus, Papel al basurero\n\nIsidora Sarmiento\nLluvia de notas, Enviar tarea, Bandeja, Despertador, Trabajo en grupo, Calculadora en el certamen, Borra la pizarra, Hoja de respuestas, Arma el horario\n\nCristobal Pino\nMicroondas, No te duermas, Firma la lista, Bicicletero, Fotocopia a tiempo, Calienta el almuerzo, Máquina de snacks, ¿De quién es el celular?, Arma el completo\n\nBenjamin Ponce\nWi-Fi, Copiar el pizarrón, Micro llena, Cargar el celular, Chat a escondidas, Corre a la micro, Ordena el informe, ¡Presente!"
 label_settings = SubResource("LabelSettings_creditos")
 horizontal_alignment = 1
 
