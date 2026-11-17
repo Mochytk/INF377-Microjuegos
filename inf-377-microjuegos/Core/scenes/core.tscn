@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" path="res://Core/assets/icon_papel_basurero.png" id="33_iconpapelbasurero"]
 [ext_resource type="Texture2D" path="res://Core/assets/icon_celular_certamen.png" id="34_iconcelularcertamen"]
 [ext_resource type="Texture2D" path="res://Core/assets/icon_arma_completo.png" id="35_iconarmacompleto"]
+[ext_resource type="Texture2D" path="res://Core/assets/icon_hoja_respuestas.png" id="36_iconhojarespuestas"]
 [ext_resource type="Texture2D" uid="uid://d0ngubotgugdu" path="res://Core/assets/icon_microondas.png" id="5_aa113"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p1uti"]
@@ -438,6 +439,16 @@ texture = ExtResource("35_iconarmacompleto")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="IconHojaRespuestas" type="TextureRect" parent="TransitionUI/Carrusel"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("36_iconhojarespuestas")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="Controles" type="VBoxContainer" parent="TransitionUI"]
 visible = false
 layout_mode = 1
@@ -654,7 +665,7 @@ horizontal_alignment = 1
 
 [node name="Texto" type="Label" parent="CreditosUI/Center/VBox"]
 layout_mode = 2
-text = "ReMechón!  ·  INF377 - Microjuegos\n\nSergio Rojas\nCore, Simón dice, Impresora, Fila del casino, Toma de ramos, Paraguas, El proyector, Recicla en el campus, Papel al basurero\n\nIsidora Sarmiento\nLluvia de notas, Enviar tarea, Bandeja, Despertador, Trabajo en grupo, Calculadora en el certamen, Borra la pizarra\n\nCristobal Pino\nMicroondas, No te duermas, Firma la lista, Bicicletero, Fotocopia a tiempo, Calienta el almuerzo, Máquina de snacks, ¿De quién es el celular?, Arma el completo\n\nBenjamin Ponce\nPuerta, Wi-Fi, Copiar el pizarrón, Micro llena, Cargar el celular, Chat a escondidas, Corre a la micro"
+text = "ReMechón!  ·  INF377 - Microjuegos\n\nSergio Rojas\nCore, Simón dice, Impresora, Fila del casino, Toma de ramos, Paraguas, El proyector, Recicla en el campus, Papel al basurero\n\nIsidora Sarmiento\nLluvia de notas, Enviar tarea, Bandeja, Despertador, Trabajo en grupo, Calculadora en el certamen, Borra la pizarra, Hoja de respuestas\n\nCristobal Pino\nMicroondas, No te duermas, Firma la lista, Bicicletero, Fotocopia a tiempo, Calienta el almuerzo, Máquina de snacks, ¿De quién es el celular?, Arma el completo\n\nBenjamin Ponce\nPuerta, Wi-Fi, Copiar el pizarrón, Micro llena, Cargar el celular, Chat a escondidas, Corre a la micro"
 label_settings = SubResource("LabelSettings_creditos")
 horizontal_alignment = 1
 
