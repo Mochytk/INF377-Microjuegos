@@ -8,7 +8,7 @@ const CENTER_SCALE := 1.3
 const SIDE_SCALE := 0.85
 
 # Iconos de todos los juegos, en el mismo orden que `microgames` en core.gd
-@onready var icons: Array[Control] = [$IconSimon, $IconPuerta, $IconLluvia, $IconMicroondas, $IconEnviarTarea, $IconBandeja, $IconImpresora, $IconWifi, $IconNoTeDuermas, $IconPizarron, $IconFirmaLista, $IconFilaCasino, $IconDespertador, $IconMicroLleno, $IconBicicletero, $IconTomaRamos, $IconTrabajoGrupo, $IconFotocopia, $IconParaguas, $IconCargarCelular, $IconCalientaAlmuerzo, $IconCalculadora, $IconChatEscondidas, $IconCorreMicro, $IconMaquinaSnacks, $IconProyector, $IconBorraPizarra, $IconRecicla, $IconPapelBasurero, $IconCelularCertamen, $IconArmaCompleto, $IconHojaRespuestas, $IconArmaHorario, $IconOrdenaInforme, $IconPresente]
+@onready var icons: Array[Control] = [$IconSimon, $IconLluvia, $IconMicroondas, $IconEnviarTarea, $IconBandeja, $IconImpresora, $IconWifi, $IconNoTeDuermas, $IconPizarron, $IconFirmaLista, $IconFilaCasino, $IconDespertador, $IconMicroLleno, $IconBicicletero, $IconTomaRamos, $IconTrabajoGrupo, $IconFotocopia, $IconParaguas, $IconCargarCelular, $IconCalientaAlmuerzo, $IconCalculadora, $IconChatEscondidas, $IconCorreMicro, $IconMaquinaSnacks, $IconProyector, $IconBorraPizarra, $IconRecicla, $IconPapelBasurero, $IconCelularCertamen, $IconArmaCompleto, $IconHojaRespuestas, $IconArmaHorario, $IconOrdenaInforme, $IconPresente]
 @onready var marco: Control = $Marco
 
 var slots: Array[int] = []   # juegos que están en el carrusel (índice de juego por puesto)
