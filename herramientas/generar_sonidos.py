@@ -7,8 +7,19 @@ correr:
     python3 herramientas/generar_sonidos.py
 
 Los .wav quedan en inf-377-microjuegos/Core/assets/sonidos/. Solo necesita numpy.
+
+Algunos sonidos realistas (explosión, golpe, tecla, campanita, viento, paso, tic, mano) se toman del
+banco de efectos de earshot (https://github.com/Leonxlnx/earshot, licencia MIT), que también son
+sonidos generados por código. Si earshot está instalado (comando `earshot` o variable EARSHOT con su
+ruta) se vuelven a renderizar; si no, se mantienen los .wav que ya están en el repositorio. También
+se necesita ffmpeg para convertirlos.
+
+Cada sonido se revisó con earshot (`earshot match`) contra una descripción de lo que debe ser.
 """
 import os
+import shutil
+import subprocess
+import tempfile
 import wave
 
 import numpy as np
@@ -74,6 +85,25 @@ def paso_bajo(x, corte):
     return y
 
 
+def banda(x, lo, hi):
+    """filtro pasa banda simple: lo que queda entre lo y hi Hz"""
+    return paso_bajo(x, hi) - paso_bajo(x, lo)
+
+
+def vidrio(dur=0.45, n=40):
+    """vidrio que se quiebra: golpe seco y muchos "tin" agudos al azar"""
+    out = np.zeros(int(SR * dur))
+    for _ in range(n):
+        i = int(rng.uniform(0, 0.25) * SR)
+        f = rng.uniform(2500, 9000)
+        d = rng.uniform(0.03, 0.18)
+        s = seno(f, d) * env(int(SR * d), ataque=0.0005, caida=d * 0.7) * rng.uniform(0.2, 1.0)
+        out[i:i + len(s)] += s[: len(out) - i]
+    golpe = banda(ruido(0.04), 2000, 9000) * env(int(SR * 0.04), ataque=0.0005, caida=0.02) * 2.0
+    out[: len(golpe)] += golpe
+    return out
+
+
 def env(n, ataque=0.005, caida=None, sostenido=1.0):
     """envolvente: ataque lineal y caída exponencial (caida = segundos hasta ~5 %)"""
     e = np.ones(n) * sostenido
@@ -133,7 +163,6 @@ def guardar(nombre, x, vol=0.8):
 
 def core():
     guardar("clic", cuadrada(1250, 0.035, 0.25) * env(int(SR * 0.035), caida=0.03), 0.5)
-    guardar("tic", cuadrada(1900, 0.018, 0.5) * env(int(SR * 0.018), caida=0.015), 0.35)
     guardar("ruleta_fin", mezclar(nota("E6", 0.35, vol=0.5, caida=0.3), unir(silencio(0.06), nota("B6", 0.4, vol=0.4, caida=0.35))), 0.6)
     guardar("preparate", unir(nota("C5", 0.08, duty=0.25), nota("E5", 0.08, duty=0.25), nota("G5", 0.08, duty=0.25), nota("C6", 0.3, duty=0.25, caida=0.28)), 0.6)
     guardar("victoria", unir(*[nota(n, 0.07, duty=0.25) for n in ("C5", "E5", "G5", "C6", "E6")],
@@ -144,11 +173,14 @@ def core():
     # "wa wa waaa" descendente con vibrato al final
     ultima = cuadrada(freq_de("E4") * (1 + 0.03 * np.sin(2 * np.pi * 7 * t_(0.6))), 0.6, 0.5) * env(int(SR * 0.6), caida=0.55) * 0.5
     guardar("derrota", unir(nota("G4", 0.18, caida=0.17), nota("F#4", 0.18, caida=0.17), nota("F4", 0.18, caida=0.17), ultima), 0.55)
-    crack = paso_bajo(ruido(0.07), 6000) * env(int(SR * 0.07), caida=0.05)
-    golpe = seno(barrido(180, 60, 0.25), 0.25) * env(int(SR * 0.25), caida=0.2)
-    guardar("corazon_roto", unir(crack, mezclar(golpe, crack * 0.5)), 0.7)
-    guardar("game_over", unir(*[nota(n, 0.28, onda=triangular, vol=0.6, caida=0.26) for n in ("A4", "F4", "D4")],
-                              nota("A3", 0.8, onda=triangular, vol=0.6, caida=0.75)), 0.7)
+    # el corazón se quiebra como vidrio: muchos "tin" agudos sobre un golpe seco
+    # (earshot: "a glass shattering", plausible z +2.7; antes sonaba a portazo)
+    guardar("corazon_roto", vidrio(), 0.7)
+    # trombón triste grave: tres notas que bajan, una larga con vibrato y una caída final de tono
+    # (earshot: "a sad descending ... fail sound", strong z +5.6; la versión anterior sonaba alegre)
+    ultima = cuadrada(freq_de("E3") * (1 + 0.035 * np.sin(2 * np.pi * 6 * t_(0.6))), 0.6) * env(int(SR * 0.6), caida=1.15) * 0.5
+    caer = paso_bajo(cuadrada(barrido(165, 60, 0.9), 0.9), 900) * env(int(SR * 0.9), caida=0.85) * 0.5
+    guardar("game_over", unir(nota("G3", 0.32, caida=0.3), nota("F#3", 0.32, caida=0.3), nota("F3", 0.32, caida=0.3), ultima, caer), 0.6)
     guardar("record", unir(nota("G5", 0.1, duty=0.25), nota("G5", 0.1, duty=0.25), nota("G5", 0.1, duty=0.25),
                            mezclar(nota("C6", 0.45, duty=0.25, caida=0.4), nota("E5", 0.45, onda=triangular, vol=0.5, caida=0.4))), 0.6)
     guardar("suma", cuadrada(980, 0.02, 0.25) * env(int(SR * 0.02), caida=0.018), 0.3)
@@ -159,44 +191,43 @@ def core():
 
 def genericos():
     guardar("acierto", unir(nota("B5", 0.06, duty=0.25), nota("E6", 0.16, duty=0.25, caida=0.14)), 0.55)
-    zumbido = cuadrada(barrido(150, 95, 0.28), 0.28, 0.5) * env(int(SR * 0.28), caida=0.26)
-    guardar("error", paso_bajo(zumbido, 1800), 0.6)
+    # zumbador de concurso: cuadrada grave con trémolo (earshot: "an error buzz", strong z +3.2)
+    t = t_(0.45)
+    zumbido = cuadrada(92, 0.45) * (0.65 + 0.35 * np.sign(np.sin(2 * np.pi * 18 * t))) * env(len(t), ataque=0.004, sostenido=1.0)
+    guardar("error", paso_bajo(zumbido, 2200), 0.6)
     guardar("pop", seno(barrido(700, 260, 0.08), 0.08) * env(int(SR * 0.08), caida=0.07), 0.6)
     w = ruido(0.28)
     guardar("whoosh", paso_bajo(w, barrido(500, 4500, 0.28)) * np.sin(np.linspace(0, np.pi, len(w))), 0.5)
-    guardar("tecla", paso_bajo(ruido(0.02), 5000) * env(int(SR * 0.02), caida=0.015), 0.4)
 
 
 # ---------- sonidos de juegos específicos ----------
 
 def especificos():
-    # explosión: ruido grave que se apaga + retumbe
-    n = ruido(0.9)
-    exp = paso_bajo(n, barrido(3000, 150, 0.9)) * env(len(n), ataque=0.002, caida=0.75)
-    retumbe = seno(barrido(90, 35, 0.9), 0.9) * env(int(SR * 0.9), caida=0.7) * 0.7
-    guardar("explosion", mezclar(exp, retumbe), 0.85)
     # celular vibrando: zumbido grave a pulsos
     t = t_(0.6)
     vib = cuadrada(145, 0.6, 0.5) * (0.6 + 0.4 * (np.sin(2 * np.pi * 9 * t) > 0))
     guardar("vibracion", paso_bajo(vib, 700) * env(len(t), ataque=0.01, sostenido=1.0), 0.5)
-    # golpe seco (máquina de snacks)
-    golpe = mezclar(seno(barrido(110, 45, 0.18), 0.18) * env(int(SR * 0.18), caida=0.15),
-                    paso_bajo(ruido(0.04), 2500) * env(int(SR * 0.04), caida=0.03) * 0.6)
-    guardar("golpe", golpe, 0.8)
     guardar("alarma", unir(*[nota(n, 0.12, duty=0.5, vol=0.5, caida=0.5) for n in ("A5", "E5") * 3]), 0.5)
-    sp = ruido(0.2)
-    guardar("splat", paso_bajo(sp, barrido(2500, 200, 0.2)) * env(len(sp), caida=0.15), 0.6)
-    papel = paso_bajo(ruido(0.22), 7000) - paso_bajo(ruido(0.22), 1200)
-    guardar("papel", papel * env(int(SR * 0.22), caida=0.18) * (0.6 + 0.4 * np.sin(2 * np.pi * 30 * t_(0.22))), 0.45)
-    vi = ruido(1.4)
-    guardar("viento", paso_bajo(vi, 600 + 400 * np.sin(np.linspace(0, 3 * np.pi, len(vi)))) * np.sin(np.linspace(0, np.pi, len(vi))), 0.5)
-    guardar("campanita", mezclar(seno(freq_de("G6"), 0.7) * env(int(SR * 0.7), caida=0.6),
-                                 seno(freq_de("D7"), 0.7) * env(int(SR * 0.7), caida=0.4) * 0.4), 0.55)
+    # splat: golpe blando + burbujeo húmedo (earshot: "a wet splat", plausible z +3.0; antes "a slap")
+    imp = paso_bajo(ruido(0.12), barrido(2500, 400, 0.12)) * env(int(SR * 0.12), ataque=0.001, caida=0.07)
+    sp = np.zeros(int(SR * 0.35))
+    sp[: len(imp)] += imp
+    for _ in range(14):
+        i = int(rng.uniform(0.01, 0.22) * SR)
+        d = rng.uniform(0.015, 0.04)
+        b = seno(barrido(rng.uniform(250, 600), rng.uniform(700, 1500), d), d) * env(int(SR * d), caida=d) * rng.uniform(0.15, 0.5)
+        sp[i:i + len(b)] += b
+    guardar("splat", sp, 0.6)
+    # papel arrugándose: muchos crujidos muy cortos (earshot: "paper crumpling", strong z +3.2)
+    papel = np.zeros(int(SR * 0.45))
+    for _ in range(55):
+        i = int(rng.uniform(0, 0.43) * SR)
+        d = rng.uniform(0.002, 0.012)
+        papel[i:i + int(SR * d)] += banda(ruido(d), 1500, 9000) * rng.uniform(0.2, 1.0)
+    guardar("papel", papel * np.sin(np.linspace(0, np.pi, len(papel))) ** 0.5, 0.5)
     guardar("borrador", paso_bajo(ruido(0.09), 2200) * env(int(SR * 0.09), ataque=0.02, caida=0.06), 0.35)
     guardar("enceste", unir(seno(barrido(500, 220, 0.09), 0.09) * env(int(SR * 0.09), caida=0.08), nota("C6", 0.06, duty=0.25), nota("G6", 0.14, duty=0.25, caida=0.12)), 0.55)
     guardar("bocina", mezclar(cuadrada(392, 0.4, 0.5), cuadrada(494, 0.4, 0.5) * 0.7) * env(int(SR * 0.4), ataque=0.01, sostenido=1.0) * 0.5, 0.45)
-    guardar("paso", paso_bajo(ruido(0.05), 900) * env(int(SR * 0.05), caida=0.04), 0.4)
-    guardar("mano", unir(seno(barrido(300, 600, 0.06), 0.06) * env(int(SR * 0.06), caida=0.05)), 0.4)
 
 
 # ---------- música (loops cortos) ----------
@@ -265,10 +296,44 @@ def musica():
     guardar("musica_ruleta", ruleta, 0.55)
 
 
+# ---------- sonidos tomados del banco de earshot ----------
+
+# nombre: (id en el banco, duración en s (None = la del banco), volumen); al lado, lo que dijo earshot match
+DEL_BANCO = {
+    "explosion": ("impact/blast", 1.6, 0.85),      # "an explosion": strong (antes sonaba a tambor)
+    "golpe": ("impact/punch", 0.4, 0.8),           # golpe a la máquina: strong
+    "tecla": ("fit/key/medium", None, 0.45),       # "a single keyboard key press": strong
+    "campanita": ("fit/bell/small_bell", None, 0.55),  # campanita del microondas: plausible
+    "viento": ("whoosh_big/gust", None, 0.5),      # >99 % "a gust of wind" frente a "ocean waves"
+    "paso": ("knock/wood", None, 0.45),            # "a footstep on a wooden floor": strong
+    "tic": ("click/tink", None, 0.35),             # tic del carrusel: clic suave en vez de zumbido
+    "mano": ("swish/soft", 0.35, 0.4),             # mano que se levanta: whoosh corto
+}
+
+
+def banco_earshot():
+    exe = os.environ.get("EARSHOT") or shutil.which("earshot")
+    if not exe or not shutil.which("ffmpeg"):
+        print("earshot o ffmpeg no están instalados: se mantienen los .wav del banco que ya existen")
+        return
+    for nombre, (sid, dur, vol) in DEL_BANCO.items():
+        with tempfile.TemporaryDirectory() as tmp:
+            crudo = os.path.join(tmp, "crudo.wav")
+            mono = os.path.join(tmp, "mono.wav")
+            extra = ["--dur", str(dur)] if dur else []
+            subprocess.run([exe, "sfx", "render", sid, "-o", crudo, "--seed", "1", *extra], check=True, capture_output=True)
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", crudo, "-ac", "1", "-ar", str(SR),
+                            "-sample_fmt", "s16", mono], check=True)
+            with wave.open(mono) as w:
+                x = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16) / 32768.0
+        guardar(nombre, x.copy(), vol)
+
+
 if __name__ == "__main__":
     os.makedirs(DESTINO, exist_ok=True)
     core()
     genericos()
     especificos()
+    banco_earshot()
     musica()
     print("Sonidos generados en", os.path.abspath(DESTINO))
