@@ -306,8 +306,8 @@ DEL_BANCO = {
     "campanita": ("fit/bell/small_bell", None, 0.55),  # campanita del microondas: plausible
     "viento": ("whoosh_big/gust", None, 0.5),      # >99 % "a gust of wind" frente a "ocean waves"
     "paso": ("knock/wood", None, 0.45),            # "a footstep on a wooden floor": strong
-    "tic": ("click/tink", None, 0.35),             # tic del carrusel: clic suave en vez de zumbido
-    "mano": ("swish/soft", 0.35, 0.4),             # mano que se levanta: whoosh corto
+    "tic": ("hover_tick/mid", None, 0.35),         # tic del carrusel: 96 % "tick de ruleta" (otros clics sonaban a zumbido)
+    "mano": ("whoosh_fast/tight", None, 0.4),      # mano que se levanta: "a quick swoosh", strong
 }
 
 
