@@ -1,0 +1,94 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/arma_horario/scripts/arma_horario.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/arma_horario/assets/diario_mural.png" id="fondo"]
+
+[sub_resource type="LabelSettings" id="LS_msg"]
+font_size = 28
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_titulo"]
+font_size = 26
+font_color = Color(0.15, 0.15, 0.2, 1)
+
+[sub_resource type="LabelSettings" id="LS_fin"]
+font_size = 44
+font_color = Color(1, 0.85, 0.2, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[node name="ArmaHorario" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Fondo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("fondo")
+expand_mode = 1
+
+[node name="TituloRamos" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 92.0
+offset_right = 320.0
+offset_bottom = 126.0
+text = "Mis ramos"
+label_settings = SubResource("LS_titulo")
+horizontal_alignment = 1
+
+[node name="Grilla" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="Vista" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="Tarjetas" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 24.0
+offset_bottom = 64.0
+grow_horizontal = 2
+text = "¡Arrastra tus ramos al horario sin que choquen!"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
+
+[node name="Fin" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_top = 290.0
+offset_right = 1152.0
+offset_bottom = 360.0
+label_settings = SubResource("LS_fin")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 14.0
+grow_horizontal = 2
+mouse_filter = 2
+show_percentage = false
