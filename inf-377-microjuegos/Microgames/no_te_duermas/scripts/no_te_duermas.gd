@@ -62,6 +62,7 @@ func _process(delta: float) -> void:
 	apertura -= cierre * (1.0 + 0.3 * t / DURACION) * delta
 	if Input.is_action_just_pressed("ui_accept"):
 		apertura = minf(1.0, apertura + ABRIR)
+		Sonido.play("pop", -10.0, 1.4)
 	apertura = maxf(0.0, apertura)
 	if apertura >= BIEN_ABIERTOS:
 		tiempo_atento += delta
@@ -99,6 +100,7 @@ func _set_estado(nuevo: String) -> void:
 	profe.flip_h = false
 	if nuevo == "aviso":
 		mensaje.text = "¡El profe se va a dar vuelta!"
+		Sonido.play("alarma", -12.0, 1.4)
 	elif nuevo == "mira":
 		mensaje.text = "¡Ojos abiertos!"
 	else:

@@ -65,6 +65,7 @@ func _process(delta: float) -> void:
 	if cambia_lado and t >= WALK_TIME * 0.5:
 		cambia_lado = false
 		lado = -lado
+		Sonido.play("viento")
 	lado_actual = lerpf(lado_actual, lado, clampf(2.5 * delta, 0.0, 1.0))
 	viento = clampf(lado_actual * 0.55 + amplitud * 0.5 * (0.7 * sin(0.9 * rapidez * t + fase1) + 0.45 * sin(2.1 * rapidez * t + fase2)), -1.0, 1.0)
 	lluvia.dir = viento
@@ -93,6 +94,7 @@ func _splash(delta: float) -> void:
 	if gota_clock < 0.07:
 		return
 	gota_clock = 0.0
+	Sonido.play("splat", -18.0, 1.8, 0.3)
 	var g := Sprite2D.new()
 	g.texture = TEX_GOTA
 	g.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST

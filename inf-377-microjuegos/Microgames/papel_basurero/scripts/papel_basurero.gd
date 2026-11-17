@@ -92,6 +92,7 @@ func _nueva_bola() -> void:
 		if viento < 0.0:
 			flechas = flechas.replace("→", "←")
 		viento_label.text = "Viento %s" % flechas
+		Sonido.play("viento", -14.0 + 8.0 * absf(viento))
 
 func _process(delta: float) -> void:
 	anim += delta
@@ -158,6 +159,7 @@ func _limpiar_mira() -> void:
 		c.queue_free()
 
 func _lanzar(v: Vector2) -> void:
+	Sonido.play("whoosh", -4.0)
 	listo = false
 	volando = true
 	lanzamientos += 1
@@ -186,6 +188,7 @@ func _volar(delta: float) -> void:
 				vel = Vector2(lado * maxf(120.0, absf(vel.x) * 0.5), -absf(vel.y) * 0.4)
 				pos.y = borde_y - 1.0
 				mensaje.text = "¡Pegó en el borde!"
+				Sonido.play("golpe", -4.0, 1.8)
 		# choca con el costado del basurero
 		if pos.y > borde_y and pos.x > izq - RADIO and pos.x < der + RADIO and not (antes.x > izq - RADIO and antes.x < der + RADIO):
 			vel.x = -vel.x * 0.4
@@ -199,6 +202,7 @@ func _volar(delta: float) -> void:
 func _adentro() -> void:
 	volando = false
 	encestes += 1
+	Sonido.play("enceste")
 	_actualizar_contador()
 	mensaje.text = "¡Adentro!"
 	var t := create_tween()
@@ -217,6 +221,7 @@ func _adentro() -> void:
 			_nueva_bola()
 
 func _afuera() -> void:
+	Sonido.play("papel")
 	volando = false
 	mensaje.text = "¡Afuera! Prueba de nuevo"
 	pos.y = minf(pos.y, PISO - RADIO)

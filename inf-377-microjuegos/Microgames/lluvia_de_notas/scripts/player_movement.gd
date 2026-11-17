@@ -12,6 +12,7 @@ func _physics_process(delta: float) -> void:
 	# Salto
 	if (Input.is_action_just_pressed("ui_accept") or Input.is_key_pressed(KEY_W)) and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		Sonido.play("whoosh", -10.0, 1.6)
 	
 	# Movimiento horizontal
 	var direction := Input.get_axis("ui_left", "ui_right")

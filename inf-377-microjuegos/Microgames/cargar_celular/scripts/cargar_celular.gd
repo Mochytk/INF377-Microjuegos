@@ -85,6 +85,7 @@ func _input(event: InputEvent) -> void:
 		# un clic cerca del cargador lo toma; desde ahí sigue al mouse sin mantener apretado
 		if playing and not agarrado and not volviendo and mouse.distance_to(enchufe.position) < 70.0:
 			agarrado = true
+			Sonido.play("pop")
 			mensaje.text = "¡Llévalo al enchufe sin tocar los pupitres!"
 
 func _blocked(p: Vector2) -> bool:
@@ -133,6 +134,7 @@ func _process(delta: float) -> void:
 # El cable tocó un pupitre: se suelta y vuelve al inicio
 func _tangle() -> void:
 	tropiezos += 1
+	Sonido.play("error")
 	agarrado = false
 	volviendo = true
 	mensaje.text = "¡Se enredó el cable! Haz clic en el cargador de nuevo"

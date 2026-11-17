@@ -154,8 +154,10 @@ func _on_row_input(event: InputEvent, i: int) -> void:
 		return
 	if i == mi_fila:
 		_finish(true)
+		Sonido.play("acierto")
 	else:
 		elapsed += PENALIZACION
+		Sonido.play("error")
 		filas[i].modulate = Color(1, 0.6, 0.6)
 		error_label.show()
 		error_label.modulate.a = 1.0

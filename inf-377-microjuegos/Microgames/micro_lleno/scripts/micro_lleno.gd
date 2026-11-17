@@ -85,6 +85,7 @@ func _on_passenger_input(event: InputEvent, p: TextureRect) -> void:
 	if not (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
 		return
 	toques[p] -= 1
+	Sonido.play("pop", -4.0, 1.25 if toques[p] > 0 else 0.9)
 	_say(p, "¡Permiso!" if toques[p] <= 0 else "¡Ya voy!")
 	if toques[p] > 0:
 		# le falta un clic: se queja y tiembla
@@ -97,6 +98,7 @@ func _on_passenger_input(event: InputEvent, p: TextureRect) -> void:
 	toques.erase(p)
 	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	quedan -= 1
+	Sonido.play("whoosh", -8.0)
 	# se corre hacia adentro, por el lado más cercano
 	var lado := -1.0 if p.position.x + p.size.x / 2.0 < 576.0 else 1.0
 	var tw := create_tween()

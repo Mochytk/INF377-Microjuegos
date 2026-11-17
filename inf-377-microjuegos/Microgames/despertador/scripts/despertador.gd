@@ -53,6 +53,7 @@ func _style(color: Color) -> StyleBoxFlat:
 	return s
 
 func _next_alarm() -> void:
+	Sonido.play("alarma", -6.0)
 	for b in botones.get_children():
 		b.queue_free()
 	alarma_label.text = "ALARMA %d de %d" % [apagadas + 1, total]
@@ -105,6 +106,7 @@ func _on_button(es_apagar: bool) -> void:
 		return
 	if es_apagar:
 		apagadas += 1
+		Sonido.play("acierto")
 		if apagadas >= total:
 			_finish(true)
 		else:
@@ -113,6 +115,7 @@ func _on_button(es_apagar: bool) -> void:
 		# Pospuso: pierde tiempo, puntaje y la alarma vuelve a sonar
 		pospuestas += 1
 		elapsed += PENALIZACION
+		Sonido.play("error")
 		error_label.show()
 		error_label.modulate.a = 1.0
 		var tw := create_tween()

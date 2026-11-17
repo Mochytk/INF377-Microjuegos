@@ -127,6 +127,7 @@ func _reload_page() -> void:
 	for i in range(orden.size()):
 		grid.move_child(orden[i], i)
 	aviso.text = "La página se actualizó..."
+	Sonido.play("whoosh", -8.0)
 	var tw := create_tween()
 	tw.tween_interval(1.0)
 	tw.tween_callback(func(): if playing: aviso.text = "")
@@ -138,8 +139,10 @@ func _on_card_input(event: InputEvent, card: Dictionary) -> void:
 		return
 	if card["es_objetivo"]:
 		_finish(true, card)
+		Sonido.play("acierto")
 		return
 	elapsed += PENALIZACION
+	Sonido.play("error")
 	aviso.text = "¡Ese no es tu ramo! (%s)" % card["ramo"][0]
 	card["panel"].add_theme_stylebox_override("panel", _card_style(Color(1, 0.8, 0.8)))
 	var tw := create_tween()

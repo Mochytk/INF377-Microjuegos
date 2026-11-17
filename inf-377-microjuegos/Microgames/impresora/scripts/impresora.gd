@@ -105,6 +105,7 @@ func _on_part_input(event: InputEvent, part: TextureRect) -> void:
 	var nombre := _part_name(part)
 	if nombre == pasos[paso][0]:
 		_apply(nombre)
+		Sonido.play("pop", -2.0, 0.9 + 0.08 * paso)
 		paso += 1
 		_build_list()
 		if paso >= pasos.size():
@@ -151,6 +152,7 @@ func _apply(nombre: String) -> void:
 		hoja.show()
 
 func _wrong() -> void:
+	Sonido.play("error")
 	elapsed += PENALIZACION
 	error_label.show()
 	error_label.modulate.a = 1.0

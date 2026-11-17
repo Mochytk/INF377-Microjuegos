@@ -87,6 +87,7 @@ func _siguiente_nombre() -> void:
 	desde_nombre = 0.0
 	respondido = false
 	nombre_label.text = "¿%s?" % lista[actual]
+	Sonido.play("pop", -10.0, randf_range(0.85, 1.15))
 	globo.scale = Vector2(0.85, 0.85)
 	create_tween().tween_property(globo, "scale", Vector2.ONE, 0.1)
 
@@ -117,11 +118,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		_finish(true, "")
 	else:
 		errores += 1
+		Sonido.play("error")
 		mensaje.text = "¡Ese no eres tú! Era %s" % lista[actual]
 		if errores >= MAX_ERRORES:
 			_finish(false, "¡El profe te retó por desordenado!")
 
 func _levantar_mano() -> void:
+	Sonido.play("mano")
 	var t := create_tween()
 	t.tween_property(brazo, "position:y", 430.0, 0.1).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	t.tween_interval(0.25)

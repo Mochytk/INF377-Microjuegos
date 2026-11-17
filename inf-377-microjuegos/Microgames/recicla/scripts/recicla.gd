@@ -119,6 +119,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 # El residuo vuela en arco hasta el contenedor elegido y la tapa se abre
 func _lanzar(destino: int) -> void:
+	Sonido.play("whoosh", -6.0)
 	cayendo = false
 	suma_reaccion += caida
 	nombre_residuo.modulate.a = 0.0
@@ -140,6 +141,7 @@ func _lanzar(destino: int) -> void:
 		return
 	if bien:
 		hechos += 1
+		Sonido.play("acierto")
 		var b := create_tween()
 		b.tween_property(bin, "scale", Vector2(1.08, 0.92), 0.06)
 		b.tween_property(bin, "scale", Vector2.ONE, 0.1)
@@ -158,6 +160,7 @@ func _lanzar(destino: int) -> void:
 
 # Nadie lo clasificó: rebota en la tapa del medio y queda en el suelo
 func _al_suelo() -> void:
+	Sonido.play("splat")
 	cayendo = false
 	nombre_residuo.modulate.a = 0.0
 	_error("¡Quedó en el suelo!")
@@ -173,6 +176,7 @@ func _al_suelo() -> void:
 
 func _error(texto: String) -> void:
 	errores += 1
+	Sonido.play("error")
 	mensaje.text = texto
 	if errores >= max_errores:
 		_finish(false)

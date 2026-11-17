@@ -109,6 +109,8 @@ func _process(delta: float) -> void:
 	var m: TextureRect = mochilas[correcta]
 	var vibra := _vibrando()
 	if vibra:
+		Sonido.play("vibracion", -8.0, 1.0, 0.55)
+	if vibra:
 		m.position = bases[correcta] + Vector2(sin(elapsed * 75.0) * amplitud, cos(elapsed * 57.0) * amplitud * 0.4)
 		m.rotation = sin(elapsed * 63.0) * 0.06
 	else:
@@ -150,6 +152,7 @@ func _on_mochila(event: InputEvent, i: int) -> void:
 		return
 	m.modulate = Color(0.55, 0.55, 0.55)
 	elapsed += PENALIZACION
+	Sonido.play("error")
 	mensaje.text = "¡Esa no es! El profe se está dando cuenta..."
 
 func _finish(won: bool) -> void:
@@ -169,6 +172,7 @@ func _finish(won: bool) -> void:
 		duda.text = ""
 		# el celular sale de la mochila
 		celular.show()
+		Sonido.play("acierto")
 		celular.position = m.position + Vector2(8, -10)
 		celular.scale = Vector2(0.3, 0.3)
 		var t := create_tween().set_parallel()

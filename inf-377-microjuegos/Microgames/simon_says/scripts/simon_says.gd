@@ -153,6 +153,7 @@ func show_sequence() -> void:
 		var chip := _make_chip(idx)
 		fila.add_child(chip)
 		_pop(chip)
+		Sonido.play("pop", -2.0, 0.85 + 0.12 * idx)
 		await get_tree().create_timer(show_time).timeout
 	talking = false
 	await get_tree().create_timer(1.0).timeout
@@ -182,6 +183,7 @@ func _on_button_pressed(index: int) -> void:
 		_set_chip(slots[player_step], index)   # la casilla muestra el color acertado
 		_pop(slots[player_step])
 		player_step += 1
+		Sonido.play("pop", -2.0, 0.85 + 0.12 * index)
 		if player_step >= sequence.size():
 			win_game()
 	else:
@@ -204,6 +206,7 @@ func lose_game() -> void:
 	if finished:
 		return
 	finished = true
+	Sonido.play("error")
 	is_player_turn = false
 	talking = false
 	texto.text = "¡Ups! Esa no era..."

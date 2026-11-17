@@ -103,6 +103,7 @@ func _on_hoja(event: InputEvent, k: int) -> void:
 	accept_event()
 	if k == siguiente:
 		siguiente += 1
+		Sonido.play("papel")
 		h.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		hojas_nodo.move_child(h, -1)
 		var t := create_tween().set_parallel()
@@ -114,6 +115,7 @@ func _on_hoja(event: InputEvent, k: int) -> void:
 			_finish(true)
 	else:
 		errores += 1
+		Sonido.play("error")
 		elapsed += PENALIZACION
 		mensaje.text = "¡Esa es la %d! Busca la hoja %d" % [k + 1, siguiente + 1]
 		var x := h.position.x

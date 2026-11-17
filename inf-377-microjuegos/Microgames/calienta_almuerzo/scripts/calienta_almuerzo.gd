@@ -80,6 +80,7 @@ func _steam() -> void:
 
 func _stop() -> void:
 	var dist := absf(p - centro)
+	Sonido.play("campanita" if dist <= ancho / 2.0 else "error")
 	if dist <= ancho / 2.0:
 		_finish(true, "")
 	elif p < centro:
@@ -119,6 +120,7 @@ func _finish(won: bool, motivo: String) -> void:
 
 # El pote se infla temblando, explota con un destello y la comida queda pegada en el vidrio
 func _explode() -> void:
+	Sonido.play("explosion")
 	var base := pote.position
 	var infla := create_tween().set_parallel(true)
 	infla.tween_property(pote, "scale", Vector2(5.3, 5.3), 0.35).set_ease(Tween.EASE_IN)

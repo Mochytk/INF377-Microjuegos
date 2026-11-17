@@ -91,6 +91,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if pressed_action == sequence[index]:
 		flechas.get_child(index).modulate.a = 0.2
 		index += 1
+		Sonido.play("paso")
 		_move_player()
 		if index >= sequence.size():
 			_finish(true)
@@ -98,6 +99,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_mark_current()
 	else:
 		# Error: se reinicia la secuencia y el jugador vuelve a la salida
+		Sonido.play("error")
 		index = 0
 		for f in flechas.get_children():
 			f.modulate.a = 1.0
@@ -156,6 +158,7 @@ func _finish(won: bool) -> void:
 # Abre el microondas, mete el pote y lo enciende
 func _put_food_in(who: Sprite2D) -> void:
 	microondas.texture = MW_OPEN
+	Sonido.play("campanita")
 	var pop := create_tween()
 	pop.tween_property(microondas, "scale", Vector2(4.3, 4.3), 0.08)
 	pop.tween_property(microondas, "scale", Vector2(4, 4), 0.08)
