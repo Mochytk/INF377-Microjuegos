@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Fuentes="*res://Core/scripts/fuentes.gd"
 Sonido="*res://Core/scripts/sonido.gd"
 
 [display]
