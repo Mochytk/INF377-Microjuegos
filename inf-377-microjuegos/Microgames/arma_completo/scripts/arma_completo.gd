@@ -7,8 +7,8 @@ const A := "res://Microgames/arma_completo/assets/"
 const INGREDIENTES := ["tomate", "palta", "mayo"]
 const NOMBRES := ["Tomate", "Palta", "Mayo"]
 const CENTRO_X := 576.0          # donde cae el ingrediente
-const PAN_MIN_X := 120.0         # borde izquierdo del pan en sus extremos
-const PAN_MAX_X := 860.0
+const PAN_MIN_X := 220.0         # borde izquierdo del pan en sus extremos
+const PAN_MAX_X := 760.0
 const ANCHO_PAN := 176.0
 const PAN_Y := 388.0
 const PORCION_Y := 136.0
@@ -43,6 +43,7 @@ var cambiando := false           # el completo listo se va y llega otro pan
 var vel_caida := 0.0
 var capas: Array = []
 var texturas := {}
+var ideal := 4.0                 # tiempo de alguien que suelta bien en cada pasada
 
 func _ready() -> void:
 	# Nivel 1: el pan va lento, hay una guía que marca dónde cae y basta un italiano. Al subir:
@@ -53,13 +54,14 @@ func _ready() -> void:
 	level = clampf(d - 1.0, 0.0, 6.0)
 	# Sobre el nivel 7 la dificultad sigue creciendo sin tope: cada nivel extra apura todo un 8 % más
 	var apuro := 1.0 + 0.08 * maxf(0.0, d - 7.0)
-	vel_base = (280.0 + 35.0 * level) * apuro
+	vel_base = (320.0 + 35.0 * level) * apuro
 	velocidad = vel_base
 	tolerancia = 64.0 - 5.0 * level
 	completos = 1 if level < 3.0 else 2
 	max_errores = 3 if level < 3.0 else 2
 	guia.visible = level < 2.0
 	var pasada := (PAN_MAX_X - PAN_MIN_X) / vel_base
+	ideal = 3 * completos * pasada * 0.55 + (completos - 1) * 0.8
 	time_limit = 3 * completos * (pasada * 0.6 + 0.7) + 2.5 + (completos - 1) * 1.2
 	timer_bar.max_value = time_limit
 	timer_bar.value = time_limit
@@ -223,9 +225,10 @@ func _finish(won: bool) -> void:
 	if won:
 		fin.text = "¡Italiano listo!" if completos == 1 else "¡Dos italianos listos!"
 		mensaje.text = "¡Buen provecho!"
-		var used_ratio := clampf(elapsed / time_limit, 0.0, 1.0)
+		# el ritmo lo pone el pan: se compara con el tiempo de alguien que acierta en cada pasada
+		var perf := 1.25 - 0.5 * elapsed / ideal - 0.12 * errores
 		await get_tree().create_timer(1.0).timeout
-		core.end_microgame(true, clampf(core.time_performance(used_ratio) - 0.1 * errores, 0.25, 1.0))
+		core.end_microgame(true, clampf(perf, 0.25, 1.0))
 	else:
 		fin.text = "¡Quedó todo en el mesón!" if errores >= max_errores else "¡Se acabó el tiempo!"
 		fin.label_settings = fin.label_settings.duplicate()
