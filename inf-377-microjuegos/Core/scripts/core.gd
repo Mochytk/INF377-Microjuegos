@@ -55,7 +55,7 @@ const ICON_ARR := preload("res://Core/assets/controles/flecha_up.png")
 const ICON_ABA := preload("res://Core/assets/controles/flecha_down.png")
 
 # Orden igual al de los iconos del carrusel.
-var game_names: Array[String] = ["Simón dice", "Puerta", "Lluvia de notas", "Microondas", "Enviar tarea", "Bandeja", "Impresora", "Wi-Fi", "No te duermas", "Copiar el pizarrón", "Firma la lista", "Fila del casino", "Despertador", "Micro llena", "Bicicletero", "Toma de ramos", "Trabajo en grupo", "Fotocopia a tiempo", "Paraguas", "Cargar el celular", "Calienta el almuerzo", "Calculadora en el certamen", "Chat a escondidas", "Corre a la micro", "Máquina de snacks", "El proyector", "Borra la pizarra"]
+var game_names: Array[String] = ["Simón dice", "Puerta", "Lluvia de notas", "Microondas", "Enviar tarea", "Bandeja", "Impresora", "Wi-Fi", "No te duermas", "Copiar el pizarrón", "Firma la lista", "Fila del casino", "Despertador", "Micro llena", "Bicicletero", "Toma de ramos", "Trabajo en grupo", "Fotocopia a tiempo", "Paraguas", "Cargar el celular", "Calienta el almuerzo", "Calculadora en el certamen", "Chat a escondidas", "Corre a la micro", "Máquina de snacks", "El proyector", "Borra la pizarra", "Recicla en el campus", "Papel al basurero"]
 # Controles de cada juego (mismo orden): iconos y texto que se muestran en "¡PREPÁRATE!".
 var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_MOUSE], "text": "Memoriza los colores que dice el profesor y haz clic en ellos"},
@@ -85,6 +85,8 @@ var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_MOUSE], "text": "Haz clic en la máquina para soltar el snack, ¡pero no muy seguido!"},
 	{"icons": [ICON_MOUSE], "text": "Sigue el cable AMARILLO y haz clic en su entrada HDMI"},
 	{"icons": [ICON_MOUSE], "text": "Mantén el clic y frota la pizarra hasta dejarla limpia"},
+	{"icons": [ICON_IZQ, ICON_ABA, ICON_DER], "text": "Manda cada residuo a su contenedor: ← papel, ↓ plástico, → orgánico"},
+	{"icons": [ICON_MOUSE], "text": "Arrastra hacia atrás y suelta para lanzar el papel. ¡Ojo con el viento!"},
 ]
 var microgames: Array[String] = [
 	"res://Microgames/simon_says/scenes/simon_says.tscn",
@@ -114,6 +116,8 @@ var microgames: Array[String] = [
 	"res://Microgames/maquina_snacks/scenes/maquina_snacks.tscn",
 	"res://Microgames/proyector/scenes/proyector.tscn",
 	"res://Microgames/borra_pizarra/scenes/borra_pizarra.tscn",
+	"res://Microgames/recicla/scenes/recicla.tscn",
+	"res://Microgames/papel_basurero/scenes/papel_basurero.tscn",
 ]
 
 var bag: Array[int] = []         # juegos que están en el carrusel, por puesto

@@ -1,0 +1,148 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/papel_basurero/scripts/papel_basurero.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/papel_basurero/assets/sala.png" id="fondo"]
+[ext_resource type="Texture2D" path="res://Microgames/papel_basurero/assets/cortina.png" id="cortina"]
+[ext_resource type="Texture2D" path="res://Microgames/papel_basurero/assets/basurero.png" id="basurero"]
+[ext_resource type="Texture2D" path="res://Microgames/papel_basurero/assets/bola.png" id="bola"]
+
+[sub_resource type="LabelSettings" id="LS_msg"]
+font_size = 28
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_info"]
+font_size = 24
+font_color = Color(1, 1, 1, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_fin"]
+font_size = 44
+font_color = Color(1, 0.85, 0.2, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[node name="PapelBasurero" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Fondo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("fondo")
+expand_mode = 1
+
+[node name="CortinaIzq" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 336.0
+offset_top = 64.0
+offset_right = 408.0
+offset_bottom = 296.0
+pivot_offset = Vector2(36, 0)
+mouse_filter = 2
+texture = ExtResource("cortina")
+expand_mode = 1
+
+[node name="CortinaDer" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 680.0
+offset_top = 64.0
+offset_right = 752.0
+offset_bottom = 296.0
+pivot_offset = Vector2(36, 0)
+mouse_filter = 2
+texture = ExtResource("cortina")
+expand_mode = 1
+
+[node name="Viento" type="Label" parent="."]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 312.0
+offset_right = 704.0
+offset_bottom = 346.0
+text = "Sin viento"
+label_settings = SubResource("LS_info")
+horizontal_alignment = 1
+
+[node name="Basurero" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 760.0
+offset_top = 464.0
+offset_right = 888.0
+offset_bottom = 600.0
+pivot_offset = Vector2(64, 136)
+mouse_filter = 2
+texture = ExtResource("basurero")
+expand_mode = 1
+
+[node name="Trayectoria" type="Node2D" parent="."]
+
+[node name="Flecha" type="Line2D" parent="."]
+width = 8.0
+default_color = Color(1, 0.85, 0.2, 1)
+
+[node name="Bola" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 208.0
+offset_top = 404.0
+offset_right = 248.0
+offset_bottom = 444.0
+pivot_offset = Vector2(20, 20)
+mouse_filter = 2
+texture = ExtResource("bola")
+expand_mode = 1
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 8.0
+offset_bottom = 48.0
+grow_horizontal = 2
+text = "Arrastra hacia atrás y suelta para lanzar el papel"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
+
+[node name="Contador" type="Label" parent="."]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 56.0
+offset_right = 1140.0
+offset_bottom = 92.0
+text = "Encestes: 0 / 1"
+label_settings = SubResource("LS_info")
+horizontal_alignment = 2
+
+[node name="Fin" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_top = 200.0
+offset_right = 1152.0
+offset_bottom = 270.0
+label_settings = SubResource("LS_fin")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+mouse_filter = 2
+show_percentage = false
