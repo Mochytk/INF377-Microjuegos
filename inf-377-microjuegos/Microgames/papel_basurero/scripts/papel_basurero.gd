@@ -61,7 +61,8 @@ func _ready() -> void:
 	borde_y = basurero.position.y + 12.0
 	preview = 0.9 if level < 2.0 else (0.45 if level < 4.0 else 0.25)
 	preview_con_viento = level < 2.0
-	time_limit = (5.0 + 3.2 * (necesarios - 1) + 0.25 * level) / apuro
+	# tiempo para apuntar con calma y fallar un par de veces
+	time_limit = (7.0 + 3.5 * (necesarios - 1) + 0.2 * level) / apuro
 	timer_bar.max_value = time_limit
 	timer_bar.value = time_limit
 	_actualizar_contador()
