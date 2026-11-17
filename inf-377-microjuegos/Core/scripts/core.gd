@@ -85,8 +85,8 @@ var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_MOUSE], "text": "Haz clic en la máquina para soltar el snack, ¡pero no muy seguido!"},
 	{"icons": [ICON_MOUSE], "text": "Sigue el cable AMARILLO y haz clic en su entrada HDMI"},
 	{"icons": [ICON_MOUSE], "text": "Mantén el clic y frota la pizarra hasta dejarla limpia"},
-	{"icons": [ICON_IZQ, ICON_ABA, ICON_DER], "text": "Manda cada residuo a su contenedor: ← papel, ↓ plástico, → orgánico"},
-	{"icons": [ICON_MOUSE], "text": "Arrastra hacia atrás y suelta para lanzar el papel. ¡Ojo con el viento!"},
+	{"icons": [ICON_IZQ, ICON_ABA, ICON_DER], "text": "Recicla: ← papel, ↓ plástico, → orgánico"},
+	{"icons": [ICON_MOUSE], "text": "Arrastra hacia atrás y suelta. ¡Ojo con el viento!"},
 ]
 var microgames: Array[String] = [
 	"res://Microgames/simon_says/scenes/simon_says.tscn",
