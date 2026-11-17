@@ -1,0 +1,330 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/recicla/scripts/recicla.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/recicla/assets/patio.png" id="fondo"]
+[ext_resource type="Texture2D" path="res://Microgames/recicla/assets/contenedor_papel.png" id="c_papel"]
+[ext_resource type="Texture2D" path="res://Microgames/recicla/assets/tapa_papel.png" id="t_papel"]
+[ext_resource type="Texture2D" path="res://Core/assets/controles/flecha_left.png" id="f_left"]
+[ext_resource type="Texture2D" path="res://Microgames/recicla/assets/contenedor_plastico.png" id="c_plastico"]
+[ext_resource type="Texture2D" path="res://Microgames/recicla/assets/tapa_plastico.png" id="t_plastico"]
+[ext_resource type="Texture2D" path="res://Core/assets/controles/flecha_down.png" id="f_down"]
+[ext_resource type="Texture2D" path="res://Microgames/recicla/assets/contenedor_organico.png" id="c_organico"]
+[ext_resource type="Texture2D" path="res://Microgames/recicla/assets/tapa_organico.png" id="t_organico"]
+[ext_resource type="Texture2D" path="res://Core/assets/controles/flecha_right.png" id="f_right"]
+
+[sub_resource type="LabelSettings" id="LS_msg"]
+font_size = 28
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_bin"]
+font_size = 26
+font_color = Color(1, 1, 1, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_cartel"]
+font_size = 26
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LS_item"]
+font_size = 22
+font_color = Color(1, 1, 1, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_fin"]
+font_size = 44
+font_color = Color(1, 0.85, 0.2, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Recicla" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Fondo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("fondo")
+expand_mode = 1
+
+[node name="Cartel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 122.0
+offset_right = 740.0
+offset_bottom = 178.0
+text = "PUNTO LIMPIO"
+label_settings = SubResource("LS_cartel")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Contenedores" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="Papel" type="Control" parent="Contenedores"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 256.0
+offset_top = 424.0
+offset_right = 448.0
+offset_bottom = 624.0
+pivot_offset = Vector2(96, 200)
+mouse_filter = 2
+
+[node name="Cuerpo" type="TextureRect" parent="Contenedores/Papel"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 200.0
+mouse_filter = 2
+texture = ExtResource("c_papel")
+expand_mode = 1
+
+[node name="FondoFlecha" type="ColorRect" parent="Contenedores/Papel"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 26.0
+offset_right = 136.0
+offset_bottom = 106.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="Flecha" type="TextureRect" parent="Contenedores/Papel"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 64.0
+offset_top = 34.0
+offset_right = 128.0
+offset_bottom = 98.0
+mouse_filter = 2
+texture = ExtResource("f_left")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Nombre" type="Label" parent="Contenedores/Papel"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = 112.0
+offset_right = 202.0
+offset_bottom = 150.0
+text = "PAPEL"
+label_settings = SubResource("LS_bin")
+horizontal_alignment = 1
+
+[node name="Tapa" type="TextureRect" parent="Contenedores/Papel"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 200.0
+offset_bottom = 16.0
+pivot_offset = Vector2(4, 28)
+mouse_filter = 2
+texture = ExtResource("t_papel")
+expand_mode = 1
+
+[node name="Plastico" type="Control" parent="Contenedores"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 480.0
+offset_top = 424.0
+offset_right = 672.0
+offset_bottom = 624.0
+pivot_offset = Vector2(96, 200)
+mouse_filter = 2
+
+[node name="Cuerpo" type="TextureRect" parent="Contenedores/Plastico"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 200.0
+mouse_filter = 2
+texture = ExtResource("c_plastico")
+expand_mode = 1
+
+[node name="FondoFlecha" type="ColorRect" parent="Contenedores/Plastico"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 26.0
+offset_right = 136.0
+offset_bottom = 106.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="Flecha" type="TextureRect" parent="Contenedores/Plastico"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 64.0
+offset_top = 34.0
+offset_right = 128.0
+offset_bottom = 98.0
+mouse_filter = 2
+texture = ExtResource("f_down")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Nombre" type="Label" parent="Contenedores/Plastico"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = 112.0
+offset_right = 202.0
+offset_bottom = 150.0
+text = "PLÁSTICO"
+label_settings = SubResource("LS_bin")
+horizontal_alignment = 1
+
+[node name="Tapa" type="TextureRect" parent="Contenedores/Plastico"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 200.0
+offset_bottom = 16.0
+pivot_offset = Vector2(4, 28)
+mouse_filter = 2
+texture = ExtResource("t_plastico")
+expand_mode = 1
+
+[node name="Organico" type="Control" parent="Contenedores"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 704.0
+offset_top = 424.0
+offset_right = 896.0
+offset_bottom = 624.0
+pivot_offset = Vector2(96, 200)
+mouse_filter = 2
+
+[node name="Cuerpo" type="TextureRect" parent="Contenedores/Organico"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 200.0
+mouse_filter = 2
+texture = ExtResource("c_organico")
+expand_mode = 1
+
+[node name="FondoFlecha" type="ColorRect" parent="Contenedores/Organico"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 26.0
+offset_right = 136.0
+offset_bottom = 106.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="Flecha" type="TextureRect" parent="Contenedores/Organico"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 64.0
+offset_top = 34.0
+offset_right = 128.0
+offset_bottom = 98.0
+mouse_filter = 2
+texture = ExtResource("f_right")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Nombre" type="Label" parent="Contenedores/Organico"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = 112.0
+offset_right = 202.0
+offset_bottom = 150.0
+text = "ORGÁNICO"
+label_settings = SubResource("LS_bin")
+horizontal_alignment = 1
+
+[node name="Tapa" type="TextureRect" parent="Contenedores/Organico"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 200.0
+offset_bottom = 16.0
+pivot_offset = Vector2(4, 28)
+mouse_filter = 2
+texture = ExtResource("t_organico")
+expand_mode = 1
+
+[node name="Residuo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 536.0
+offset_top = 190.0
+offset_right = 616.0
+offset_bottom = 270.0
+pivot_offset = Vector2(40, 40)
+mouse_filter = 2
+expand_mode = 1
+
+[node name="NombreResiduo" type="Label" parent="."]
+layout_mode = 0
+offset_left = 628.0
+offset_top = 214.0
+offset_right = 928.0
+offset_bottom = 246.0
+label_settings = SubResource("LS_item")
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 8.0
+offset_bottom = 48.0
+grow_horizontal = 2
+text = "¡Manda cada residuo a su contenedor con ← ↓ →!"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
+
+[node name="Contador" type="Label" parent="."]
+layout_mode = 0
+offset_left = 880.0
+offset_top = 56.0
+offset_right = 1140.0
+offset_bottom = 96.0
+text = "Residuos: 0 / 5"
+label_settings = SubResource("LS_item")
+horizontal_alignment = 2
+
+[node name="Errores" type="Label" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 56.0
+offset_right = 300.0
+offset_bottom = 96.0
+text = "Errores: 0 / 3"
+label_settings = SubResource("LS_item")
+
+[node name="Fin" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_top = 250.0
+offset_right = 1152.0
+offset_bottom = 320.0
+label_settings = SubResource("LS_fin")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+mouse_filter = 2
+show_percentage = false
