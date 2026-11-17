@@ -626,6 +626,12 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Créditos"
 
+[node name="BtnSonido" type="Button" parent="LandingUI/Center/VBox"]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Sonido: Sí"
+
 [node name="TablaUI" type="ColorRect" parent="."]
 visible = false
 layout_mode = 1

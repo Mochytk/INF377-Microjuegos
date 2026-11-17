@@ -59,6 +59,7 @@ func replace_game(slot: int, new_game: int) -> void:
 	nuevo.show()
 	_layout(0.0)
 	nuevo.scale = Vector2(0.1, 0.1)
+	Sonido.play("whoosh", -4.0)
 	var entra := create_tween()
 	entra.tween_property(nuevo, "scale", Vector2(CENTER_SCALE, CENTER_SCALE), 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	await entra.finished
@@ -73,12 +74,14 @@ func spin_to(slot: int) -> void:
 		var tween := create_tween()
 		tween.tween_method(_layout, 0.0, 1.0, step_time)
 		await tween.finished
+		Sonido.play("tic", -3.0, 1.0 + 0.002 * s)
 		current = (current + 1) % n
 		_layout(0.0)
 		step_time += 0.32 / steps # va frenando poco a poco
 	await _flash_marco()
 
 func _flash_marco() -> void:
+	Sonido.play("ruleta_fin")
 	for i in range(3):
 		marco.modulate.a = 0.0
 		await get_tree().create_timer(0.1).timeout
