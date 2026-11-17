@@ -53,6 +53,7 @@ func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int
 	var is_click: bool = event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT
 	if move and not ended and is_click:
 		click = true
+		Sonido.play("acierto")
 		_finish(true)
 
 func _on_timer_timeout() -> void:

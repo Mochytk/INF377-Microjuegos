@@ -61,6 +61,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		create_tween().tween_property(flecha, "scale", Vector2.ONE, 0.1)
 		return
 	pasos += 1
+	Sonido.play("paso", 0.0, randf_range(0.9, 1.15))
 	siguiente = "ui_right" if accion == "ui_left" else "ui_left"
 	jugador.position.x = minf(PUERTA_X, jugador.position.x + paso)
 	jugador.texture = TEX_JUGADOR[pasos % 2]

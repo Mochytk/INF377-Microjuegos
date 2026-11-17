@@ -157,6 +157,14 @@ func _ready() -> void:
 	btn_guardar.pressed.connect(save_initials)
 	iniciales.text_changed.connect(_on_initials_changed)
 	iniciales.text_submitted.connect(func(_t): save_initials())
+	var btn_sonido: Button = $LandingUI/Center/VBox/BtnSonido
+	btn_sonido.pressed.connect(func():
+		Sonido.alternar_silencio()
+		_texto_sonido(btn_sonido))
+	_texto_sonido(btn_sonido)
+	# todos los botones del Core suenan al apretarlos
+	for b in find_children("*", "Button", true, false):
+		b.pressed.connect(Sonido.play.bind("clic"))
 	show_landing()
 
 # ---------- Menús ----------
@@ -167,6 +175,10 @@ func _show_only(panel: Control) -> void:
 
 func show_landing() -> void:
 	_show_only(landing_ui)
+	Sonido.musica("musica_menu")
+
+func _texto_sonido(b: Button) -> void:
+	b.text = "Sonido: No" if Sonido.silenciado else "Sonido: Sí"
 
 func show_scores() -> void:
 	var lines: Array[String] = []
@@ -218,6 +230,7 @@ func _draw_game(jugado: int) -> int:
 
 func start_roulette() -> void:
 	_show_only(transition_ui)
+	Sonido.musica("musica_ruleta")
 	instruction_label.text = "ReMechón!"
 	_update_hud()
 	nombre_label.text = ""
@@ -229,6 +242,7 @@ func start_roulette() -> void:
 		var slot_viejo := played_slot
 		played_slot = -1
 		nombre_label.text = "¡Nuevo: %s!" % game_names[bag[slot_viejo]]
+		Sonido.play("pop")
 		await carrusel.replace_game(slot_viejo, bag[slot_viejo])
 		nombre_label.text = ""
 
@@ -240,12 +254,15 @@ func start_roulette() -> void:
 	nombre_label.text = game_names[target]
 
 	instruction_label.text = "¡PREPÁRATE!"
+	Sonido.play("preparate")
 	_show_controls(target)
 	await get_tree().create_timer(PREPARE_TIME).timeout
 	controles.hide()
 	carrusel.show()
 
 	transition_ui.hide()
+	# durante el microjuego solo suenan sus efectos
+	Sonido.parar_musica()
 	current_game_instance = load(microgames[target]).instantiate()
 	add_child(current_game_instance)
 
@@ -344,9 +361,11 @@ func show_result(won: bool, points: float, perfect: bool) -> void:
 	_update_hud()
 	if won:
 		instruction_label.text = "¡PERFECTO!" if perfect else "¡BIEN HECHO!"
+		Sonido.play("perfecto" if perfect else "victoria")
 		await _anim_win(points)
 	else:
 		instruction_label.text = "¡FALLASTE!"
+		Sonido.play("derrota")
 		await _anim_lose()
 	await get_tree().create_timer(0.5).timeout
 
@@ -369,6 +388,7 @@ func _anim_win(points: float) -> void:
 		if mult >= STREAK_MAX:
 			texto += " (máx.)"
 		racha = _result_label(texto, 44, Color(1, 0.55, 0.15))
+		Sonido.play("racha")
 		racha.position = Vector2(center.x - racha.size.x / 2.0, lbl.position.y + lbl.size.y + 6)
 		_pop_node(racha, 1.3)
 	await get_tree().create_timer(0.8 if racha else 0.6).timeout
@@ -388,6 +408,8 @@ func _anim_win(points: float) -> void:
 	var from := shown_score
 	var count := create_tween()
 	count.tween_method(_set_shown_score, from, score, 0.6)
+	for k in range(6):
+		count.parallel().tween_callback(Sonido.play.bind("suma", -4.0, 1.0 + 0.08 * k)).set_delay(0.1 * k)
 	_pop_node(puntaje_hud, 1.2)
 	await count.finished
 	shown_score = score
@@ -417,6 +439,7 @@ func _anim_lose() -> void:
 	shake.tween_property(heart, "position:x", pos.x, 0.05)
 	await shake.finished
 	heart.queue_free()
+	Sonido.play("corazon_roto")
 
 	var left: TextureRect = make.call(HEART_LEFT)
 	var right: TextureRect = make.call(HEART_RIGHT)
@@ -459,6 +482,8 @@ func time_performance(used_ratio: float) -> float:
 # ---------- Game over y tabla de posiciones ----------
 
 func show_game_over() -> void:
+	Sonido.parar_musica()
+	Sonido.play("game_over")
 	puntaje_label.text = "Puntaje: " + _fmt(score)
 	iniciales.text = ""
 	btn_guardar.disabled = true
@@ -487,7 +512,9 @@ func save_initials() -> void:
 	if f:
 		f.store_string(JSON.stringify(scores))
 		f.close() # cerrar antes de volver a leer el archivo
+	Sonido.play("record")
 	show_scores()
+	Sonido.musica("musica_menu")
 
 func load_scores() -> Array:
 	if not FileAccess.file_exists(SCORES_PATH):

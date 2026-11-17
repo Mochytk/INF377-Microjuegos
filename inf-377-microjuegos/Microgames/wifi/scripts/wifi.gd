@@ -139,11 +139,13 @@ func _process(delta: float) -> void:
 		_wifi_down()
 	if progreso >= 1.0:
 		_finish(true)
+		Sonido.play("acierto")
 	elif elapsed >= time_limit:
 		_finish(false)
 
 # El Wi-Fi se cae y aparece en otro lugar del campus
 func _wifi_down() -> void:
+	Sonido.play("error")
 	hotspot = _pick_spot(320.0)
 	mensaje.text = "¡Se cayó el Wi-Fi! Busca señal de nuevo"
 	mensaje.modulate = Color(1, 0.45, 0.4)

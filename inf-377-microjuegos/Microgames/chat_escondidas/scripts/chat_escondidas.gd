@@ -80,6 +80,7 @@ func _process(delta: float) -> void:
 	celular.position.y = lerpf(celular.position.y, objetivo, clampf(delta * 18.0, 0.0, 1.0))
 	if escribiendo:
 		escrito = minf(mensaje.length(), escrito + LETRAS_POR_SEG * delta)
+		Sonido.play("tecla", -8.0, randf_range(0.9, 1.3), 0.09)
 	_update_text()
 
 	estado_t += delta
@@ -110,6 +111,8 @@ func _set_estado(nuevo: String) -> void:
 	estado = nuevo
 	estado_t = 0.0
 	alerta.visible = nuevo == "aviso"
+	if nuevo == "aviso":
+		Sonido.play("alarma", -12.0, 1.4)
 	if nuevo == "aviso":
 		mensaje_label.text = "¡El profe se va a dar vuelta! Suelta ESPACIO"
 	elif nuevo == "mira":

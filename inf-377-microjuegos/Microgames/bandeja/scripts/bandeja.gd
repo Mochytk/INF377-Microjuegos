@@ -100,6 +100,7 @@ func _input(event: InputEvent) -> void:
 		mouse_x = event.position.x
 
 func _chocar(x: float) -> void:
+	Sonido.play("golpe", -6.0, 1.4)
 	empujon_obj += 14.0 * (1.0 if randf() < 0.5 else -1.0)
 	permiso.position = Vector2(x - 60.0, 196.0)
 	permiso.show()
@@ -116,6 +117,7 @@ func _soltar_gotas(delta: float, exceso: float) -> void:
 	if gota_clock < maxf(0.03, 0.12 - exceso * 0.01):
 		return
 	gota_clock = 0.0
+	Sonido.play("splat", -16.0, 1.8, 0.25)
 	var g := Sprite2D.new()
 	g.texture = TEX_GOTA
 	g.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST

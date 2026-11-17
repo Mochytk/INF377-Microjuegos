@@ -102,6 +102,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	var w: String = palabras[actual]
 	if ch == w[letra]:
 		letra += 1
+		Sonido.play("tecla", -2.0, randf_range(0.9, 1.2))
 		_draw_word()
 		if letra >= w.length():
 			_word_done(true)
@@ -118,10 +119,12 @@ func _word_done(ok: bool) -> void:
 	resultados.append(ok)
 	if ok:
 		aciertos += 1
+		Sonido.play("acierto")
 		# Palabra copiada con 40% o más del tiempo de sobra vale 1; justo al final vale 0.5
 		puntos += lerpf(0.5, 1.0, clampf(restante / tiempo_palabra / 0.4, 0.0, 1.0))
 	else:
 		fallos += 1
+		Sonido.play("borrador", 0.0, 0.8)
 		mensaje.text = "¡El profe la borró!"
 		create_tween().tween_property(palabra_label, "modulate:a", 0.0, 0.3)   # se borra
 	_draw_notebook()

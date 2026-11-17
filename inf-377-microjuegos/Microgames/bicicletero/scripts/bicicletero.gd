@@ -159,6 +159,7 @@ func _move_player(delta: float) -> void:
 			return
 
 func _crash(rebote: Vector2, texto: String) -> void:
+	Sonido.play("golpe", -2.0, 1.3)
 	choques += 1
 	aturdido = ATURDIDO
 	inmune = 0.9

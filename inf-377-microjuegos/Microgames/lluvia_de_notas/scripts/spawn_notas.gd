@@ -49,9 +49,11 @@ func spawn():
 		await get_tree().create_timer(spawn_interval).timeout
 
 func _on_cien_colision_cien() -> void:
+	Sonido.play("acierto")
 	get_parent().add_cien()
 
 func _on_cero_colision_cero() -> void:
+	Sonido.play("error")
 	valid = false
 	print("perdiste")
 	game_ended = false

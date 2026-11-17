@@ -39,8 +39,10 @@ func try_enter_room():
 	
 	if door.door_number == correct_door:
 		main.win_game()
+		Sonido.play("acierto")
 	else:
 		main.lose_game()
+		Sonido.play("error")
 
 func show_win_sprite():
 	$Sprite2D.texture = win_sprite

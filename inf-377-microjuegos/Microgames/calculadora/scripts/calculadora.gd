@@ -122,9 +122,11 @@ func _on_answer(b: Button, valor: int) -> void:
 		b.add_theme_stylebox_override("normal", _style(Color(0.55, 0.95, 0.6)))
 		b.add_theme_stylebox_override("hover", _style(Color(0.55, 0.95, 0.6)))
 		_finish(true)
+		Sonido.play("acierto")
 	else:
 		b.disabled = true
 		elapsed += PENALIZACION
+		Sonido.play("error")
 		mensaje.text = "¡%d no es! Revisa la cuenta" % valor
 
 func _finish(won: bool) -> void:

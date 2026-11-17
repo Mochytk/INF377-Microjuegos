@@ -96,6 +96,7 @@ func _launch() -> void:
 func _caught(h: Dictionary) -> void:
 	hojas.erase(h)
 	atrapadas += 1
+	Sonido.play("papel")
 	_update_count()
 	var nodo: Sprite2D = h["nodo"]
 	var tw := create_tween().set_parallel(true)
@@ -109,6 +110,7 @@ func _caught(h: Dictionary) -> void:
 func _missed(h: Dictionary) -> void:
 	hojas.erase(h)
 	perdidas += 1
+	Sonido.play("error", -6.0)
 	_update_count()
 	var nodo: Sprite2D = h["nodo"]
 	nodo.reparent(piso)

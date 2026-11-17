@@ -120,6 +120,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") and not event.is_echo():
 		get_viewport().set_input_as_handled()
 		cayendo = true
+		Sonido.play("whoosh", -8.0, 1.4)
 		vel_caida = 0.0
 		var t := create_tween()
 		t.tween_property(cuchara, "rotation", 0.5, 0.06)
@@ -142,6 +143,7 @@ func _caer(delta: float) -> void:
 			_manchar()
 
 func _agregar_capa() -> void:
+	Sonido.play("pop")
 	cayendo = false
 	porcion.modulate.a = 0.0
 	var c := TextureRect.new()
@@ -167,6 +169,7 @@ func _agregar_capa() -> void:
 
 func _completo_listo() -> void:
 	hechos += 1
+	Sonido.play("acierto")
 	paso = 0
 	if hechos >= completos:
 		_actualizar_textos()
@@ -206,6 +209,7 @@ func _manchar() -> void:
 	manchas.add_child(m)
 	porcion.modulate.a = 0.0
 	errores += 1
+	Sonido.play("splat")
 	mensaje.text = "¡Cayó al mesón! Espera que pase el pan"
 	_actualizar_textos()
 	if errores >= max_errores:

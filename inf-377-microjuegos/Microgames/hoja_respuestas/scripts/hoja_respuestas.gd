@@ -129,6 +129,7 @@ func _on_burbuja(i: int, c: int, b: Button) -> void:
 		return
 	if c == respuestas[i]:
 		marcadas[i] = true
+		Sonido.play("tecla", 0.0, 0.8)
 		for otra in burbujas[i]:
 			otra.disabled = true
 		_pintar(b, "llena")
@@ -137,6 +138,7 @@ func _on_burbuja(i: int, c: int, b: Button) -> void:
 			_finish(true)
 	else:
 		errores += 1
+		Sonido.play("error")
 		elapsed += PENALIZACION
 		mensaje.text = "¡La %d no era %s! Revisa el borrador" % [i + 1, LETRAS[c]]
 		_pintar(b, "mal")

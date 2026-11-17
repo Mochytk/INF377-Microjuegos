@@ -138,6 +138,7 @@ func _process(delta: float) -> void:
 		lanes[player_lane].erase(player)
 		_reposition(player_lane)
 		player_lane = destino
+		Sonido.play("whoosh", -8.0, 1.3)
 		lanes[player_lane].append(player)
 		_reposition(player_lane)
 
@@ -178,6 +179,7 @@ func _process(delta: float) -> void:
 
 # Atiende al primero de la fila. Devuelve true si era el jugador.
 func _serve(i: int) -> bool:
+	Sonido.play("tic", -12.0, 0.8)
 	var s: Sprite2D = lanes[i].pop_front()
 	if s == player:
 		_finish(true)

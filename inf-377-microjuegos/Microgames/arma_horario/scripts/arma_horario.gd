@@ -209,6 +209,7 @@ func _tomar(pos: Vector2) -> void:
 				t.position = pos - TARJETA / 2.0
 				t.show()
 			arrastrando = i
+			Sonido.play("pop", -6.0)
 			agarre = pos - t.position
 			tarjetas_nodo.move_child(t, -1)
 			t.scale = Vector2(1.05, 1.05)
@@ -245,11 +246,13 @@ func _soltar(pos: Vector2) -> void:
 	var con := _choque(i, fila)
 	if con != "":
 		errores += 1
+		Sonido.play("error")
 		elapsed += PENALIZACION
 		mensaje.text = "¡Tope de horario con %s!" % con
 		_volver(i)
 		return
 	_poner(i, fila)
+	Sonido.play("acierto")
 	mensaje.text = "¡%s inscrito!" % ramos[i]["nombre"]
 	for r in ramos:
 		if r["fila"] < 0:

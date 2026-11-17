@@ -80,6 +80,7 @@ func _process(delta: float) -> void:
 		_finish(false)
 
 func _new_message() -> void:
+	Sonido.play("pop", -10.0, 1.3)
 	# al menos una tarea cada 3 mensajes, y nunca dos seguidas imposibles de distinguir
 	var es_tarea := sin_tarea >= 2 or randf() < 0.5
 	if tareas_restantes.is_empty():
@@ -148,6 +149,7 @@ func _on_bubble_input(event: InputEvent, m: Dictionary) -> void:
 	var burbuja: PanelContainer = m["nodo"]
 	if m["es_tarea"]:
 		anotadas += 1
+		Sonido.play("acierto")
 		burbuja.add_theme_stylebox_override("panel", _bubble_style(Color(0.82, 0.97, 0.78)))
 		var ok := Label.new()
 		ok.text = "✓ Anotado"
@@ -159,6 +161,7 @@ func _on_bubble_input(event: InputEvent, m: Dictionary) -> void:
 			_finish(true)
 	else:
 		errores += 1
+		Sonido.play("error")
 		elapsed += PENALIZACION
 		burbuja.add_theme_stylebox_override("panel", _bubble_style(Color(1.0, 0.8, 0.8)))
 		error_label.show()

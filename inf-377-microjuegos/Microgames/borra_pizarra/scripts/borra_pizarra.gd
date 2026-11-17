@@ -142,6 +142,7 @@ func _frotar(a: Vector2, b: Vector2) -> void:
 				img.set_pixel(x, y, c)
 	if quitado > 0.0:
 		restante -= quitado
+		Sonido.play("borrador", -6.0, randf_range(0.9, 1.2), 0.07)
 		cambio = true
 		if polvo_cd <= 0.0:
 			polvo_cd = 0.05

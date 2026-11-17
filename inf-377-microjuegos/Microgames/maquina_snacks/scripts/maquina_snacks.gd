@@ -89,12 +89,14 @@ func _on_machine_input(event: InputEvent) -> void:
 		# golpe demasiado seguido: alarma
 		luces[alarmas].texture = TEX_LUZ_ON
 		alarmas += 1
+		Sonido.play("alarma", -4.0)
 		rojo.color.a = 0.35
 		mensaje.text = "¡Muy rápido! ¡Bip bip bip!"
 		if alarmas >= max_alarmas:
 			_finish(false, "alarma")
 		return
 	golpes += 1
+	Sonido.play("golpe")
 	tambaleo = calma
 	mensaje.text = "¡PAF!"
 	# el snack se suelta de a poco: baja y se inclina

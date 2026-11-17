@@ -146,9 +146,11 @@ func _on_port(j: int, b: Button) -> void:
 		return
 	if j == correcto:
 		_finish(true)
+		Sonido.play("acierto")
 	else:
 		b.disabled = true
 		elapsed += PENALIZACION
+		Sonido.play("error")
 		mensaje.text = "¡HDMI %d no es! Sigue el cable amarillo" % (j + 1)
 
 func _finish(won: bool) -> void:
