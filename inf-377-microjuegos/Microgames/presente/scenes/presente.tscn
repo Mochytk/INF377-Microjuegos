@@ -1,0 +1,144 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Microgames/presente/scripts/presente.gd" id="s"]
+[ext_resource type="Texture2D" path="res://Microgames/presente/assets/sala.png" id="fondo"]
+[ext_resource type="Texture2D" path="res://Microgames/presente/assets/profe_0.png" id="profe"]
+[ext_resource type="Texture2D" path="res://Microgames/presente/assets/brazo.png" id="brazo"]
+
+[sub_resource type="LabelSettings" id="LS_msg"]
+font_size = 28
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_nombre"]
+font_size = 38
+font_color = Color(0.1, 0.1, 0.15, 1)
+
+[sub_resource type="LabelSettings" id="LS_tu"]
+font_size = 30
+font_color = Color(1, 1, 1, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_fin"]
+font_size = 44
+font_color = Color(1, 0.85, 0.2, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="SB_globo"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.08, 0.08, 0.1, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[node name="Presente" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("s")
+
+[node name="Fondo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("fondo")
+expand_mode = 1
+
+[node name="Profe" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 640.0
+offset_top = 116.0
+offset_right = 752.0
+offset_bottom = 300.0
+mouse_filter = 2
+texture = ExtResource("profe")
+expand_mode = 1
+
+[node name="Globo" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 80.0
+offset_right = 620.0
+offset_bottom = 180.0
+pivot_offset = Vector2(564, 50)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_globo")
+
+[node name="Cola" type="Polygon2D" parent="Globo"]
+color = Color(1, 1, 1, 1)
+polygon = PackedVector2Array(534, 60, 584, 80, 540, 92)
+
+[node name="Nombre" type="Label" parent="Globo"]
+layout_mode = 0
+offset_right = 564.0
+offset_bottom = 100.0
+text = "¿...?"
+label_settings = SubResource("LS_nombre")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tu" type="Label" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 568.0
+offset_right = 852.0
+offset_bottom = 610.0
+text = "Tú eres: ROJAS SOTO"
+label_settings = SubResource("LS_tu")
+horizontal_alignment = 1
+
+[node name="Brazo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 900.0
+offset_top = 660.0
+offset_right = 964.0
+offset_bottom = 836.0
+mouse_filter = 2
+texture = ExtResource("brazo")
+expand_mode = 1
+
+[node name="Mensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 24.0
+offset_bottom = 64.0
+grow_horizontal = 2
+text = "¡Aprieta ESPACIO solo cuando digan tu nombre!"
+label_settings = SubResource("LS_msg")
+horizontal_alignment = 1
+
+[node name="Fin" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_top = 330.0
+offset_right = 1152.0
+offset_bottom = 400.0
+label_settings = SubResource("LS_fin")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 14.0
+grow_horizontal = 2
+mouse_filter = 2
+show_percentage = false

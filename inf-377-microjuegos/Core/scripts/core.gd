@@ -55,7 +55,7 @@ const ICON_ARR := preload("res://Core/assets/controles/flecha_up.png")
 const ICON_ABA := preload("res://Core/assets/controles/flecha_down.png")
 
 # Orden igual al de los iconos del carrusel.
-var game_names: Array[String] = ["Simón dice", "Puerta", "Lluvia de notas", "Microondas", "Enviar tarea", "Bandeja", "Impresora", "Wi-Fi", "No te duermas", "Copiar el pizarrón", "Firma la lista", "Fila del casino", "Despertador", "Micro llena", "Bicicletero", "Toma de ramos", "Trabajo en grupo", "Fotocopia a tiempo", "Paraguas", "Cargar el celular", "Calienta el almuerzo", "Calculadora en el certamen", "Chat a escondidas", "Corre a la micro", "Máquina de snacks", "El proyector", "Borra la pizarra", "Recicla en el campus", "Papel al basurero", "¿De quién es el celular?", "Arma el completo", "Hoja de respuestas", "Arma el horario"]
+var game_names: Array[String] = ["Simón dice", "Puerta", "Lluvia de notas", "Microondas", "Enviar tarea", "Bandeja", "Impresora", "Wi-Fi", "No te duermas", "Copiar el pizarrón", "Firma la lista", "Fila del casino", "Despertador", "Micro llena", "Bicicletero", "Toma de ramos", "Trabajo en grupo", "Fotocopia a tiempo", "Paraguas", "Cargar el celular", "Calienta el almuerzo", "Calculadora en el certamen", "Chat a escondidas", "Corre a la micro", "Máquina de snacks", "El proyector", "Borra la pizarra", "Recicla en el campus", "Papel al basurero", "¿De quién es el celular?", "Arma el completo", "Hoja de respuestas", "Arma el horario", "Ordena el informe", "¡Presente!"]
 # Controles de cada juego (mismo orden): iconos y texto que se muestran en "¡PREPÁRATE!".
 var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_MOUSE], "text": "Memoriza los colores que dice el profesor y haz clic en ellos"},
@@ -91,6 +91,8 @@ var game_controls: Array[Dictionary] = [
 	{"icons": [ICON_ESPACIO], "text": "Aprieta ESPACIO para soltar tomate, palta y mayo sobre el pan"},
 	{"icons": [ICON_MOUSE], "text": "Rellena en la hoja la alternativa que anotaste en el borrador"},
 	{"icons": [ICON_MOUSE], "text": "Arrastra cada ramo a un bloque donde no tenga tope"},
+	{"icons": [ICON_MOUSE], "text": "Haz clic en las hojas en orden: 1, 2, 3..."},
+	{"icons": [ICON_ESPACIO], "text": "Aprieta ESPACIO solo cuando el profe diga tu nombre"},
 ]
 var microgames: Array[String] = [
 	"res://Microgames/simon_says/scenes/simon_says.tscn",
@@ -126,6 +128,8 @@ var microgames: Array[String] = [
 	"res://Microgames/arma_completo/scenes/arma_completo.tscn",
 	"res://Microgames/hoja_respuestas/scenes/hoja_respuestas.tscn",
 	"res://Microgames/arma_horario/scenes/arma_horario.tscn",
+	"res://Microgames/ordena_informe/scenes/ordena_informe.tscn",
+	"res://Microgames/presente/scenes/presente.tscn",
 ]
 
 var bag: Array[int] = []         # juegos que están en el carrusel, por puesto
