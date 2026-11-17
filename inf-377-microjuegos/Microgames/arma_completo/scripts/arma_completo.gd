@@ -61,7 +61,7 @@ func _ready() -> void:
 	max_errores = 3 if level < 3.0 else 2
 	guia.visible = level < 2.0
 	var pasada := (PAN_MAX_X - PAN_MIN_X) / vel_base
-	ideal = 3 * completos * pasada * 0.55 + (completos - 1) * 0.8
+	ideal = 3 * completos * pasada * 0.85 + (completos - 1) * 0.8
 	time_limit = 3 * completos * (pasada * 0.6 + 0.7) + 2.5 + (completos - 1) * 1.2
 	timer_bar.max_value = time_limit
 	timer_bar.value = time_limit
