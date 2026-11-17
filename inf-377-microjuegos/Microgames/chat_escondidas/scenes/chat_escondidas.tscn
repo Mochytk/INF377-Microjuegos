@@ -124,7 +124,7 @@ layout_mode = 0
 offset_left = 12.0
 offset_right = 330.0
 offset_bottom = 42.0
-text = "Los del fondo 🤫"
+text = "Los del fondo (shh)"
 label_settings = SubResource("LS_grupo")
 vertical_alignment = 1
 
