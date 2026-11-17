@@ -7,3 +7,5 @@ Builds/**/.godot/
 Builds/**/export-*
 Builds/**/*.import
 Builds/**/*.exe
+__pycache__/
+*.pyc
