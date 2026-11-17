@@ -29,8 +29,7 @@ func _ready() -> void:
 	timer.one_shot = true
 	timer.timeout.connect(_on_timer_timeout)
 	label.text = str(timer.wait_time)
-	# Un segundo para ubicar el botón antes de que empiece a moverse
-	await get_tree().create_timer(1.0).timeout
+	# El botón se mueve y el tiempo corre desde el primer momento
 	move = true
 	timer.start()
 
